@@ -1,0 +1,127 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry} % Standard margin setup
+\usepackage{amsmath, amsfonts, amssymb} % For math
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{graphicx} % For images
+\usepackage{hyperref} % For hyperlinks
+\usepackage{enumitem} % For better list control
+\usepackage{abstract} % For abstract formatting
+\usepackage{titlesec} % For title formatting
+\usepackage{cite}
+
+% Title formatting
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection}{1em}{}
+
+% Spacing
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0em}
+
+% Abstract spacing
+\setlength{\absleftindent}{0mm}
+\setlength{\absrightindent}{0mm}
+
+% Title and author information
+\title{\vspace{-2cm}\textbf{Research Proposal: Exploring Chiral Topologies for Enhanced Gradient Descent}}
+\author{\textbf{Paul Lowndes} \\ \texttt{ZeroTrust@NSHkr.com}}
+\date{\small December 4, 2024} % Smaller date formatting
+
+\begin{document}
+
+\maketitle
+\vspace{-1.5em} % Adjust spacing after title
+
+\begin{abstract}
+This research proposal outlines a novel approach to gradient descent optimization, termed Chiral Gradient Descent (CGD), which incorporates topological information and rotational dynamics inspired by chirality in biological systems. The proposed methodology will investigate how chiral structures within neural networks can be leveraged to improve exploration of the parameter space, potentially leading to more robust and efficient training. The research will involve developing a mathematical framework for CGD, implementing the algorithm in a deep learning framework, and conducting experiments on benchmark datasets to evaluate CGD's performance compared to standard gradient descent methods. The expected outcomes include a refined mathematical formulation of CGD, an open-source implementation, and experimental results demonstrating the potential benefits of CGD for various machine learning tasks.
+\end{abstract}
+
+\section{Introduction}
+
+Gradient descent is widely used for optimizing machine learning models, but its susceptibility to local minima remains a challenge. Chiral gradient descent (CGD) presents a novel approach, drawing inspiration from the concept of chirality. CGD aims to enhance standard gradient descent by introducing asymmetry into the update process, motivated by the observation that many biological systems, including neural networks in the brain, exhibit chiral structures. We hypothesize this could lead to more efficient exploration of the parameter space and faster, more stable convergence.
+
+Despite the widespread use of gradient descent, its limitations in navigating complex, non-convex landscapes have prompted the exploration of alternative methods. Chiral Gradient Descent (CGD) introduces a novel mechanism by leveraging chiral asymmetry, inspired by natural systems where chirality plays a crucial role in dynamic interactions. By incorporating topological information and rotational dynamics, CGD aims to enhance the exploration capabilities of traditional gradient descent, potentially leading to faster and more robust convergence.  This builds on previous work exploring various gradient descent variants \cite{induraj2023variants}.
+
+\section{Chiral Gradient Descent}
+
+Chiral Gradient Descent (CGD) modifies the gradient update rule by incorporating chiral vectors, which introduce rotational dynamics into the optimization process. This approach is inspired by natural asymmetry observed in biological systems. The chiral term, incorporating a sigmoid function, allows for dynamic adjustments based on topological distances within the network, potentially enhancing exploration of the parameter space and leading to more robust convergence. This sigmoid function modulates the influence of each chiral pair based on the topological distance between neurons, allowing for local chiral effects to dominate while diminishing the impact of distant pairs. The mathematical formulation of CGD involves the cross product of the gradient with a chiral vector, adding a layer of complexity and potential to the optimization process.
+
+
+\section{Applying Chiral Topologies}
+
+We represent a neural network's topology as a graph \(G = (V, E)\). A chiral pair of neurons \((v_i, v_j)\) is defined based on topological asymmetry, such as differences in shortest path lengths from a common ancestor. For each chiral pair, a chiral vector \(\mathbf{c}_{ij}\) is defined, reflecting their topological relationship. Measures such as differences in path lengths, or other metrics relating to properties of chiral topologies will determine a numerical representation for relative asymmetry and help refine our distance metric between them. These metrics could involve other topological or information-theoretic properties like local or global curvature or the orientation or density of node or edge data.
+
+\section{Mathematical Formulation}
+
+The core innovation of CGD lies in its updated gradient calculation which incorporates chiral vectors:
+
+\begin{equation} \label{eq:cgd_sigmoid}
+\boldsymbol{\theta}_{t+1} = \boldsymbol{\theta}_t - \alpha \nabla L(\boldsymbol{\theta}_t) + \beta \sum_{i,j \in C} s(w_{ij}, \mathbf{c}_{ij}) (\nabla L(\boldsymbol{\theta}_t) \times \mathbf{c}_{ij})
+\end{equation}
+
+Where:
+\begin{itemize}
+    \item \(\boldsymbol{\theta}_t\) represents the parameter vector at iteration \(t\).
+    \item \(\alpha\) denotes the learning rate.
+    \item \(\nabla L(\boldsymbol{\theta}_t)\) is the gradient of the loss function at iteration \(t\).
+    \item \(\beta\) represents the chirality parameter, which modulates the influence of the chiral vectors.
+    \item \(C\) denotes the set of chiral pairs being considered during the update step, which may vary at each iteration depending on the method or constraints being used by the researcher.
+    \item \(w_{ij}\) represents a weight associated with the chiral pair \((i,j)\), and may reflect asymmetry measures related to properties of their chiral topologies.
+    \item \(\mathbf{c}_{ij}\) represents the chiral vector for the chiral pair \((i, j)\).
+    \item \(\times\) represents the cross-product.
+    \item \(s(w_{ij},\mathbf{c}_{ij})\) is a function designed to blend the chiral vector's influence with considerations based on a weight \(w_{ij}\).
+\end{itemize}
+
+\section{Training Intuition and Higher Dimensions}
+Understanding chirality in higher dimensions can begin with visualizing simple cases (2D and 3D), followed by mathematical generalization to 4D, 5D, and beyond. Training involves visualization, representation with vectors and matrices, implementing simple transformations, and generalizing to higher dimensions.
+
+Understanding the role of chirality in higher dimensions requires a shift in perspective, as traditional geometric intuitions may not directly apply. By visualizing lower-dimensional cases and gradually extending these insights to higher dimensions, researchers can develop a deeper intuition for the impact of chiral dynamics on learning. The use of vector and matrix representations allows for the implementation of simple transformations that can be generalized, providing a framework for exploring the effects of chirality across various dimensional spaces.
+
+\section{Towards CGD: A Synthesis}
+
+The central idea of Chiral Gradient Descent (CGD) is to enhance standard gradient descent by introducing chirality, a property of asymmetry, into the update process.  This is motivated by the prevalence of chiral structures and behaviors in many biological systems.  A refined CGD equation, incorporating a sigmoid function for enhanced adaptability is presented below:
+
+\begin{equation} \label{eq:cgd_sigmoid_final}
+\boldsymbol{\theta}_{t+1} = \boldsymbol{\theta}_t - \alpha \nabla L(\boldsymbol{\theta}_t) + \beta \sum_{i,j \in C(\boldsymbol{\theta}_t)}  \frac{\| \mathbf{c}_{ij} \|}{1 + e^{-\gamma d_{ij}}} (\nabla L(\boldsymbol{\theta}_t) \times \mathbf{c}_{ij})
+\end{equation}
+
+Where:
+
+\begin{itemize}
+    \item \(\boldsymbol{\theta}_t\): Parameter vector at time \(t\).
+    \item \(\alpha\): Learning rate.
+    \item \(\nabla L(\boldsymbol{\theta}_t)\): Gradient of the loss function.
+    \item \(\beta\): Global chirality parameter.
+    \item \(C(\boldsymbol{\theta}_t)\): Set of relevant chiral pairs, potentially changing dynamically during training.
+    \item \(\mathbf{c}_{ij}\): Chiral vector for pair (i, j), calculated based on topology.
+    \item \(d_{ij}\): Topological distance between \(i\) and \(j\) based on features like difference in path lengths, curvature measures, node or edge distribution densities, etc.
+    \item \(\gamma\): Scaling parameter for the sigmoid function, influencing the impact of \(d_{ij}\).
+\end{itemize}
+
+\begin{algorithm}
+\caption{Chiral Gradient Descent (CGD)}
+\label{alg:cgd}
+\begin{algorithmic}
+\Require Learning rate \(\alpha\), chirality parameter \(\beta\), scaling parameter \(\gamma\), initial parameters \(\boldsymbol{\theta}_0\)
+\While{not converged}
+    \State Compute gradient: \(\nabla L(\boldsymbol{\theta}_t)\)
+    \State Determine relevant chiral pairs: \(C(\boldsymbol{\theta}_t)\)
+    \State Calculate chiral vectors \(\mathbf{c}_{ij}\) and distances \(d_{ij}\) for \((i, j) \in C(\boldsymbol{\theta}_t)\)
+    \State \(\Delta \boldsymbol{\theta} =  \beta \sum_{i,j \in C(\boldsymbol{\theta}_t)} \frac{\| \mathbf{c}_{ij} \|}{1 + e^{-\gamma d_{ij}}} (\nabla L(\boldsymbol{\theta}_t) \times \mathbf{c}_{ij})\)
+    \State Update parameters: \(\boldsymbol{\theta}_{t+1} = \boldsymbol{\theta}_t - \alpha \nabla L(\boldsymbol{\theta}_t) + \Delta \boldsymbol{\theta}\)
+    \State \(t \gets t + 1\)
+\EndWhile
+\end{algorithmic}
+\end{algorithm}
+
+This refined CGD algorithm uses a sigmoid function to modulate the influence of each chiral pair based on the topological distance \(d_{ij}\) between neurons. Chiral pairs that are topologically "closer" (smaller \(d_{ij}\)) have a stronger influence on the update. The magnitude of the chiral vector \(\| \mathbf{c}_{ij} \|\) also contributes, allowing pairs with greater asymmetry to exert more influence. The parameter \(\beta\) controls the global effect of chirality, while \(\gamma\) modulates the sigmoid's steepness, providing control over the sensitivity to topological distances \(d_{ij}\).
+
+
+\section{Conclusion}
+This research proposal presents a novel approach to gradient descent optimization that holds significant promise. By leveraging the power of chiral topologies and incorporating biologically plausible mechanisms into the optimization process, this research has the potential to overcome the limitations of traditional gradient descent and usher in a new era of more efficient and effective deep learning models. The research plan detailed above, if successfully executed, will provide valuable insight into the use of chiral gradient descent and pave the way for its deployment in real-world applications. The next steps will involve developing and testing the CGD algorithm, conducting rigorous experiments, and analyzing the findings to validate its performance and contribute to the advancement of deep learning methodologies.
+
+\bibliographystyle{plain}
+\bibliography{references} % Create a separate references.bib file for this
+
+\end{document}
