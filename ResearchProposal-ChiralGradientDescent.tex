@@ -80,7 +80,7 @@ Understanding the role of chirality in higher dimensions requires a shift in per
 
 \section{Towards CGD: A Synthesis}
 
-The central idea of Chiral Gradient Descent (CGD) is to enhance standard gradient descent by introducing chirality, a property of asymmetry, into the update process.  This is motivated by the prevalence of chiral structures and behaviors in many biological systems.  A refined CGD equation, incorporating a sigmoid function for enhanced adaptability is presented below:
+The central idea of Chiral Gradient Descent (CGD) is to enhance standard gradient descent by introducing chirality, a property of asymmetry, into the update process.  This is motivated by the prevalence of chiral structures and behaviors in many biological systems.  A CGD equation, incorporating a sigmoid function is presented below:
 
 \begin{equation} \label{eq:cgd_sigmoid_final}
 \boldsymbol{\theta}_{t+1} = \boldsymbol{\theta}_t - \alpha \nabla L(\boldsymbol{\theta}_t) + \beta \sum_{i,j \in C(\boldsymbol{\theta}_t)}  \frac{\| \mathbf{c}_{ij} \|}{1 + e^{-\gamma d_{ij}}} (\nabla L(\boldsymbol{\theta}_t) \times \mathbf{c}_{ij})
