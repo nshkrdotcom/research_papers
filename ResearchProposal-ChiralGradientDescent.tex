@@ -82,6 +82,73 @@ Understanding the role of chirality in higher dimensions requires a shift in per
 
 The central idea of Chiral Gradient Descent (CGD) is to enhance standard gradient descent by introducing chirality, a property of asymmetry, into the update process.  This is motivated by the prevalence of chiral structures and behaviors in many biological systems.  A CGD equation, incorporating a sigmoid function is presented below:
 
+
+
+Here's a new section for your research paper, incorporating the method from the provided paper ("Machine Learning Topological Invariants with Neural Networks") for identifying chiral pairs and adapting it to your needs.  This will form Phase 1 of your system.
+
+
+\section{Identifying Chiral Pairs: A Topologically-Informed Approach}
+
+This section details a novel method for identifying chiral pairs within complex networks, extending the approach described in Zhang et al. \cite{zhang2018machine} for identifying topological invariants.  Instead of directly predicting topological invariants, we adapt their convolutional neural network (CNN) architecture to identify pairs of nodes exhibiting chiral topological features, focusing on asymmetries within the network's structure and information flow.  This will form Phase 1 of our system for identifying chiral pairs to be used in subsequent phases to implement chiral gradient descent.
+
+\subsection{Network Representation}
+
+As in the previous sections, we represent networks as directed graphs $G = (V, E)$, where $V$ is the set of nodes and $E$ is the set of directed edges. Each edge $e_{ij} \in E$ connecting node $v_i$ to node $v_{j}$ has an associated weight $w_{ij}$ representing the strength of the connection (e.g., correlation between node activations, information flow, or interaction strength). We extend the graph representation by including additional node attributes that might influence the identification of chiral pairs, such as node centrality, community membership, and other topological measures that could prove useful in identifying pairs in the network.  This extended representation is richer and more nuanced compared to simple directed graphs and is necessary to capture the more complex relationships between nodes in the network.
+
+
+As in the previous sections, we represent networks as directed graphs $G = (V, E)$, where $V$ is the set of nodes and $E$ is the set of directed edges.  Each edge $e_{ij} \in E$ connecting node $v_{i}$ to node $v$.
+
+\subsection{Adapting the Convolutional Neural Network}
+
+We adapt the CNN architecture proposed in Zhang et al. \cite{zhang2018machine}  (see Figure 1 in the original paper) to learn local topological features related to chirality. The input to the CNN will be a matrix representation of the local neighborhood around each node in the graph.  This representation will be constructed by including several elements:
+
+Node Attributes:  Include node attributes such as centrality and community membership in the input matrix.
+Edge Weights:  The edge weights from the node to its neighbors are added to the input matrix.
+Shortest Path Lengths:  Compute the shortest path lengths between each pair of neighbors, which will inform the computation of the chiral vector in the subsequent phases.
+
+This extended input representation captures both local topology and more global network features. This information is crucial for accurately identifying chiral pairs, unlike the approach in the original paper which only focused on computing the winding number.
+
+\subsection{Chiral Pair Identification}
+
+The output of the CNN is a vector that represents a topological feature embedding of the local neighborhood for each node.  We define a chiral pair as a pair of nodes whose topological feature embeddings show a high degree of asymmetry or anti-correlation. This asymmetry or anti-correlation is evaluated using a distance metric, such as cosine similarity. We select the top pairs that maximize the asymmetry as the chiral pairs relevant to performing CGD in subsequent phases.  The selection process could be made more complex to filter out pairs with specific traits or incorporate more data to reduce computational cost or improve performance.
+
+
+\subsection{Hierarchical Application}
+
+To handle hierarchical structures, we apply the method recursively to sub-graphs within the network. This hierarchical application identifies chiral pairs at different scales, allowing for a more granular analysis of asymmetry in multi-level structures, which mirrors the multi-scale nature of hierarchical structures in narratives and social networks.
+
+
+\subsection{Algorithm}
+
+
+\begin{algorithm}[H]
+\caption{Chiral Pair Identification}
+\begin{algorithmic}[1]
+\Require Graph $G=(V,E)$, CNN model, asymmetry threshold $\tau$
+\State Initialize empty set of chiral pairs $C$
+\For{each node $v_i \in V$}
+    \State Construct input matrix $M_i$ for $v_i$'s neighborhood
+    \State Obtain feature embedding vector $F_i$ from CNN($M_i$)
+\EndFor
+\For{each pair of nodes $(v_i, v_j) \in V \times V$}
+    \State Compute asymmetry score $A_{ij} = d(F_i, F_j)$ (e.g., using cosine distance)
+    \If{$A_{ij} > \tau$}
+        \State Add $(v_i, v_j)$ to $C$
+    \EndIf
+\EndFor
+\State \Return Set of chiral pairs $C$
+\end{algorithmic}
+\end{algorithm}
+
+
+\subsection{Discussion}
+
+This method builds upon the success of CNNs in learning complex patterns from local data and provides a rigorous approach to identify chiral pairs.  By incorporating topological features and hierarchical application, it addresses the complexities of analyzing asymmetries in real-world systems.  The choice of CNN architecture and asymmetry threshold requires careful evaluation and tuning for specific applications and datasets.  We will compare this approach with alternative methods for measuring graph similarity and asymmetry in our validation experiments.
+
+ 
+
+
+
 \begin{equation} \label{eq:cgd_sigmoid_final}
 \boldsymbol{\theta}_{t+1} = \boldsymbol{\theta}_t - \alpha \nabla L(\boldsymbol{\theta}_t) + \beta \sum_{i,j \in C(\boldsymbol{\theta}_t)}  \frac{\| \mathbf{c}_{ij} \|}{1 + e^{-\gamma d_{ij}}} (\nabla L(\boldsymbol{\theta}_t) \times \mathbf{c}_{ij})
 \end{equation}
@@ -118,10 +185,99 @@ Where:
 This refined CGD algorithm uses a sigmoid function to modulate the influence of each chiral pair based on the topological distance \(d_{ij}\) between neurons. Chiral pairs that are topologically "closer" (smaller \(d_{ij}\)) have a stronger influence on the update. The magnitude of the chiral vector \(\| \mathbf{c}_{ij} \|\) also contributes, allowing pairs with greater asymmetry to exert more influence. The parameter \(\beta\) controls the global effect of chirality, while \(\gamma\) modulates the sigmoid's steepness, providing control over the sensitivity to topological distances \(d_{ij}\).
 
 
+
+
+
+\section{Identifying Chiral Pairs: A Topologically-Informed Approach}
+
+This section details a method for identifying chiral pairs, building upon Zhang \textit{et al.} [1] but incorporating novel elements to capture asymmetry relevant to narrative structures and social networks. This forms Phase 1 of our system, providing the foundation for chiral gradient descent.
+
+\subsection{Network Representation (Enhanced)}
+
+We represent networks as directed graphs $G = (V, E)$ with weighted edges $w_{ij}$. Crucially, we augment this with \textbf{relative path information}. For each node $v_i$, we pre-compute:
+
+\begin{itemize}
+    \item \textbf{Shortest Path Lengths:} The shortest path length from $v_i$ to every other node $v_j$ (denoted $d(v_i, v_j)$).
+    \item \textbf{Common Ancestors and Path Differences:} For each pair of nodes ($v_i, v_j$), we identify their common ancestors and calculate the \textit{difference} in path lengths from each common ancestor to $v_i$ and $v_j$. This captures the asymmetry in how $v_i$ and $v_j$ relate to their shared history or context.
+\end{itemize}
+
+This richer representation goes beyond simple connectivity, encoding structural asymmetries relevant to narratives (e.g., how different characters relate to key events) and social networks (e.g., differing perspectives on shared information).
+
+\subsection{Convolutional Neural Network (Adapted)}
+
+We adapt the CNN architecture from Zhang \textit{et al.} [1] to learn chiral features. The input to the CNN for node $v_i$ now includes:
+
+\begin{itemize}
+    \item \textbf{Local Neighborhood Structure:} Edge weights $w_{ij}$ for $v_j$ in $v_i$'s neighborhood.
+    \item \textbf{Relative Path Information:} For each neighbor $v_j$, include the shortest path length $d(v_i, v_j)$ and the differences in path lengths from common ancestors.
+\end{itemize}
+
+This combined input allows the CNN to learn features sensitive to both local connectivity and global topological asymmetries.
+
+\subsection{Chiral Pair Identification (Refined)}
+
+Instead of simply using cosine distance, we define a more nuanced chirality score:
+
+\begin{equation}
+\text{ChiralScore}(v_i, v_j) = \text{Asymmetry}(F_i, F_j) \times \text{PathDifference}(v_i, v_j)
+\end{equation}
+
+Where:
+
+\begin{itemize}
+    \item $F_i, F_j$ are the feature embeddings from the CNN for nodes $v_i$ and $v_j$.
+    \item $\text{Asymmetry}(F_i, F_j)$ measures the asymmetry between the embeddings (e.g., using cosine distance or a learned metric).
+    \item $\text{PathDifference}(v_i, v_j)$ is a weighted average of the path length differences from common ancestors, emphasizing structural asymmetry.
+\end{itemize}
+
+Pairs with high $\text{ChiralScore}$ are identified as chiral pairs. This combined score captures both feature-level and structural asymmetry.
+
+\subsection{Hierarchical Application (Maintained)}
+
+The hierarchical application from the previous version is maintained, applying the method recursively to identify chiral pairs at different scales.
+
+\subsection{Algorithm (Refined LaTeX)}
+
+\begin{algorithm}[H]
+\caption{Chiral Pair Identification (Refined)}
+\begin{algorithmic}[1]
+\Require Graph $G=(V,E)$, CNN model, chirality threshold $\tau$
+\State Pre-compute shortest path lengths and path differences for all node pairs
+\State Initialize empty set of chiral pairs $C$
+\For{each node $v_i \in V$}
+    \State Construct input matrix $M_i$ (neighborhood, paths)
+    \State $F_i \gets$ CNN($M_i$)
+\EndFor
+\For{each pair of nodes $(v_i, v_j) \in V \times V$}
+    \State $S_{ij} \gets \text{ChiralScore}(v_i, v_j)$
+    \If{$S_{ij} > \tau$}
+        \State $C \gets C \cup \{(v_i, v_j)\}$
+    \EndIf
+\EndFor
+\Return $C$
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Discussion (Expanded)}
+
+This refined method directly addresses the challenge of defining and detecting chirality relevant to narrative and social network analysis. By incorporating relative path information and a combined chirality score, it captures more nuanced asymmetries than simply comparing feature embeddings. The use of common ancestor paths adds a "historical" or "contextual" dimension to the chirality measure, which is particularly relevant for understanding how information and relationships evolve in narratives and social networks. The hierarchical application and the flexibility in defining the \textit{Asymmetry} and \textit{PathDifference} functions provide adaptability for various applications.
+
+
+
+
 \section{Conclusion}
 This research proposal presents a novel approach to gradient descent optimization that holds significant promise. By leveraging the power of chiral topologies and incorporating biologically plausible mechanisms into the optimization process, this research has the potential to overcome the limitations of traditional gradient descent and usher in a new era of more efficient and effective deep learning models. The research plan detailed above, if successfully executed, will provide valuable insight into the use of chiral gradient descent and pave the way for its deployment in real-world applications. The next steps will involve developing and testing the CGD algorithm, conducting rigorous experiments, and analyzing the findings to validate its performance and contribute to the advancement of deep learning methodologies.
 
 \bibliographystyle{plain}
 \bibliography{references} % Create a separate references.bib file for this
 
+
+
+
 \end{document}
+
+
+
+
+
+
