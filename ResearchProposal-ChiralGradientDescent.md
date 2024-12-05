@@ -12,20 +12,7 @@
 
 
 
-
-
-To debug your LaTeX document, focus on these areas:
-
-1.  **Missing `references.bib`:** You're citing a source (`induraj2023variants`), but you haven't created a `references.bib` file containing the bibliographic information. Create this file (a BibTeX file) with the details of the cited work.  For example:
-
-    ```bibtex
-    @misc{induraj2023variants,
-        title={Different Variants of Gradient Descent},
-        author={Induraj},
-        year={2023},
-        howpublished={\url{https://induraj2020.medium.com/different-variants-of-gradient-descent-6854d3118c4c}}
-    }
-    ```
+ 
 
 2.  **Undefined Terms:** In your mathematical formulation, you haven't defined \(\mathbf{c}_{ij}\), \(w_{ij}\), or \(s(w_{ij}, \mathbf{c}_{ij})\).  These are crucial for understanding your algorithm.  Add a subsection *before* the mathematical formulation to define these terms precisely. For example:
 
@@ -38,10 +25,6 @@ To debug your LaTeX document, focus on these areas:
     \end{itemize}
     ```
 
-3.  **Clarify `C`:** In your algorithm, you haven't clearly defined how the set of chiral pairs, C, is selected. Will you use all pairs? Will the selection process change dynamically during training?  You need to add a sentence describing your approach and any considerations for choosing these pairs, as suggested in the previous response.
-
-4.  **Expand "Applying Chiral Topologies":** This section is too brief. Provide details on how you will compute the chiral vectors \(\mathbf{c}_{ij}\) and weights \(w_{ij}\) based on topological properties of the network.  Be specific:  How will you measure topological asymmetry?  How will you map this to the chiral vectors?
-
-5.  **Improve Introduction:** The introduction could be more concise and impactful. Start with a compelling statement about the limitations of standard gradient descent, and then directly state the novel approach your work proposes.
+ 
 
 6.  
