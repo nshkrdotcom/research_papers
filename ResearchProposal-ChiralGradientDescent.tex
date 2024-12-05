@@ -54,7 +54,7 @@ We represent a neural network's topology as a graph \(G = (V, E)\). A chiral pai
 
 \section{Mathematical Formulation}
 
-The core innovation of CGD lies in its updated gradient calculation which incorporates chiral vectors:
+The core innovation of CGD lies in its gradient calculation which incorporates chiral vectors:
 
 \begin{equation} \label{eq:cgd_sigmoid}
 \boldsymbol{\theta}_{t+1} = \boldsymbol{\theta}_t - \alpha \nabla L(\boldsymbol{\theta}_t) + \beta \sum_{i,j \in C} s(w_{ij}, \mathbf{c}_{ij}) (\nabla L(\boldsymbol{\theta}_t) \times \mathbf{c}_{ij})
