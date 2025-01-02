@@ -43,13 +43,13 @@
 
 
 \begin{abstract}
-This paper presents the Dynamic Adversarial Narrative Network (DANN) framework, a novel approach to modeling the evolution and propagation of narratives in online spaces. We introduce mathematical formulations for analyzing narrative dynamics, incorporating veracity assessment, influence measurement, and reputational impact. The framework specifically addresses scenarios involving targeted manipulation by powerful actors and coordinated disinformation campaigns. Through real-world case studies, we demonstrate how DANN can help identify and potentially mitigate harmful narrative patterns. We conclude by discussing ethical implications and safeguards against potential misuse of this technology. This work builds upon the foundation of Large Concept Models (LCMs), leveraging their ability to capture nuanced relationships between concepts. We acknowledge the limitations of LCMs, such as potential biases, and propose mitigation strategies within the DANN framework, such as source reliability and contextual analysis functions.
+This paper presents the Dynamic Adversarial Narrative Network (DANN) framework, a novel approach to modeling the evolution and propagation of narratives in online spaces. We introduce mathematical formulations for analyzing narrative dynamics, incorporating veracity assessment, influence measurement, and reputational impact. The framework specifically addresses scenarios involving targeted manipulation by powerful actors and coordinated disinformation campaigns. Through real-world case studies, we demonstrate how DANN can help identify and potentially mitigate harmful narrative patterns. We conclude by discussing ethical implications and safeguards against potential misuse of this technology. This work is deeply integrated with Large Concept Models (LCMs), leveraging their ability to capture nuanced relationships between concepts at the sentence level. We use sentence embeddings from models like SONAR to refine the ground truth function. We acknowledge the limitations of LCMs, such as potential biases, and propose mitigation strategies within the DANN framework, such as source reliability and contextual analysis functions.
 \end{abstract}
 
 
 \section{Introduction}
 \subsection{Background}
-The proliferation of online platforms has created unprecedented opportunities for narrative manipulation and targeted harassment campaigns. Traditional Multi-Agent Reinforcement Learning (MARL) approaches fail to capture the complex dynamics of these interactions, particularly when powerful actors leverage platform mechanics to amplify harmful narratives. This paper builds upon the work of Large Concept Models (LCMs) \cite{lcm_paper}, which provide the foundation for the concept embeddings used in our veracity function. LCMs offer the benefit of capturing nuanced relationships between concepts and handling large-scale data, but also present limitations such as potential biases.
+The proliferation of online platforms has created unprecedented opportunities for narrative manipulation and targeted harassment campaigns. Traditional Multi-Agent Reinforcement Learning (MARL) approaches fail to capture the complex dynamics of these interactions, particularly when powerful actors leverage platform mechanics to amplify harmful narratives. This paper builds upon the work of Large Concept Models (LCMs) \cite{lcm_paper}, which provide the foundation for the concept embeddings used in our veracity function. LCMs offer the benefit of capturing nuanced relationships between concepts and handling large-scale data, but also present limitations such as potential biases. We integrate LCM's approach to handling concepts at a sentence level rather than token level, enhancing the veracity function by considering linguistic and semantic context more deeply.
 
 \subsection{Contributions}
 This paper makes the following contributions:
@@ -91,10 +91,10 @@ where $p_K$ and $p_B$ are probability functions for knowledge and belief respect
 We extend the basic veracity function to include temporal dynamics and uncertainty:
 
 \begin{equation}
-V(e, T(t), a_i, C, t) = \sum_{k=0}^t \lambda^{t-k} [w_1(k) \cdot d(e, T_k) + w_2(k) \cdot S_R(e,k) + w_3(k) \cdot C_A(e, C_k, k) + w_4(k) \cdot D_R(e, a_i, k)]
+V(e, T(t), a_i, C, t) = \sum_{k=0}^t \lambda^{t-k} [w_1(t,k) \cdot d(e, T_k) + w_2(t,k) \cdot S_R(e,k) + w_3(t,k) \cdot C_A(e, C_k, k) + w_4(t,k) \cdot D_R(e, a_i, k)]
 \end{equation}
 
-where $\lambda$ is a decay factor, $T(t)$ represents the evolving ground truth as a probability distribution or confidence level, and $C_A$ now includes a time parameter. The concept of "ground truth" ($T$) is often ambiguous, especially in complex and evolving narratives. Instead of a binary true/false, we represent $T$ as a region with associated probabilities or confidence levels to reflect uncertainty. We also incorporate temporal dynamics, where truth can change over time.
+where $\lambda$ is a decay factor, $T(t)$ represents the evolving ground truth as a probability distribution or confidence level, and $C_A$ now includes a time parameter. The concept of "ground truth" ($T$) is often ambiguous, especially in complex and evolving narratives. Instead of a binary true/false, we represent $T$ as a region with associated probabilities or confidence levels to reflect uncertainty. We also incorporate temporal dynamics, where truth can change over time. The weights $w_1, w_2, w_3, w_4$ are now functions of both time $t$ and $k$, allowing for dynamic adjustment based on the context.
 
 \subsection{Source Reliability Decomposition}
 The source reliability function incorporates reputation, network effects, bias detection, and expertise modeling:
