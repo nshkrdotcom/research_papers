@@ -32,7 +32,7 @@
 \setlength{\absleftindent}{0mm}
 \setlength{\absrightindent}{0mm}
 
-\title{\vspace{-2cm}\textbf{Decentralized Autonomous Narrative Networks (DANN): \\ A Multi-Model Approach to Reinforcement Learning}}
+\title{\vspace{-2cm}\textbf{Decentralized Autonomous Narrative Networks (DANN) \\ A Multi-Model Framework for Reinforcement Learning with Veracity, Influence, and Reputation}}
 \author{\textbf{Paul Lowndes} \\ \href{mailto:ZeroTrust@NSHkr.com}{\texttt{ZeroTrust@NSHkr.com}}}
 \date{\small January 1, 2025}
 
@@ -138,6 +138,118 @@ where:
     \item $\lambda$ balances exploitation vs. exploration
     \item $\text{Context}_t$ includes environmental and social factors
 \end{itemize}
+
+
+
+
+
+
+\section{Alternative Methods}
+
+\subsection{Veracity Function}
+
+
+\begin{equation}
+V(e, T, a_i, C) = w_1 \cdot \left(1 - \frac{d(e, T)}{\max_{x \in E_G} d(x, T)}\right) + w_2 \cdot S_R(\text{Source}(e)) + w_3 \cdot C_A(e, C) + w_4 \cdot D_R(e, a_i)
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
+& \text{where:} \\
+& S_R(e) = \alpha \cdot H(\text{Source}(e)) + \beta \cdot E(\text{Source}(e)) + \gamma \cdot (1 - B(\text{Source}(e))) + \delta \cdot \text{Corroboration}(e) \\
+& H(s) = \text{historical accuracy of source } s \\
+& E(s) = \text{expertise level of source } s \\
+& B(s) = \text{detected biases of source } s \\
+& C_A(e, C) = \text{consistency and coherence of } e \text{ within context } C \\
+& D_R(e, a_i) = \text{assessed defamation risk of } e \text{ towards agent } a_i \\
+& \text{Corroboration}(e) = \text{measure of agreement with independent sources}
+\end{aligned}
+\end{equation}
+
+
+\subsection{Narrative Divergence}
+
+
+\begin{equation}
+D(N_{i,t}, N_{j,t}) = \sum_{k=1}^{T} w(c_{i,k}) \cdot d(c_{i,k}, c_{j,k})
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
+& \text{where:} \\
+& w(c) = \frac{1}{1 + e^{-V(c, T, a_i, C)}} \quad \text{(sigmoid function applied to veracity)}
+\end{aligned}
+\end{equation}
+
+
+This uses a sigmoid function to transform the veracity score into a weight, emphasizing embeddings with higher veracity.
+
+\subsection{Influence Weighting}
+
+
+\begin{equation}
+\alpha_{ij}(t) = \sigma(\beta_1 \cdot N_{ij} + \beta_2 \cdot \text{Rep}_j(t) + \beta_3 \cdot E_j + \beta_4 \cdot P_j)
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
+& \text{where:} \\
+& N_{ij} = \text{strength of network connection between } a_i \text{ and } a_j \\
+& \text{Rep}_j(t) = \text{reputation score of agent } a_j \text{ at time } t \\
+& E_j = \text{domain expertise of agent } a_j \\
+& P_j = \text{platform-specific influence metrics for agent } a_j \\
+& \sigma = \text{sigmoid function} \\
+& \beta_1, \beta_2, \beta_3, \beta_4 \text{ are learned parameters}
+\end{aligned}
+\end{equation}
+
+This formula models the influence weight as a function of network connections, historical reliability (reputation), expertise, and platform-specific factors, all combined through a sigmoid function to produce a value between 0 and 1.
+
+\subsection{Narrative-Based Reward Function}
+
+
+\begin{equation}
+R_i(s_t, a_t, s_{t+1}) = \alpha \cdot R_{\text{env}}(s_t, a_t, s_{t+1}) + \beta \cdot Q(N_{i,t+1})
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
+& \text{where:} \\
+& Q(N_{i,t}) = \gamma_1 \cdot C(N_{i,t}) + \gamma_2 \cdot \frac{1}{|N_{i,t}|} \sum_{c \in N_{i,t}} V(c, T, a_i, C_t) + \gamma_3 \cdot \sum_{j \neq i} \alpha_{ji}(t) \cdot (1 - D(N_{i,t}, N_{j,t}))
+\end{aligned}
+\end{equation}
+
+$C(N_{i,t})$: Coherence of the narrative $N_{i,t}$ (to be defined further, potentially based on average distance between embeddings or logical consistency).
+$V_{avg}(N_{i,t})$: Average veracity of concept embeddings in the narrative.
+$I(N_{i,t})$: Influence of the narrative, here modeled as a function of how much it reduces divergence with other agents' narratives, weighted by their influence. This could be further refined to include, for example, how much closer an agent's narrative moves toward the "ground truth" after receiving input from another agent.
+
+\subsection{Agent Switching}
+
+
+\begin{equation}
+S_i(t) = \argmax_{j \in \{1, \dots, k\}} \{Q(M_{i,j}, N_{i,t}, \text{Context}_t) + \lambda \cdot H(j)\}
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
+& \text{where:} \\
+& H(j) = -\sum_{t'=1}^{t-1} p(j|t') \log p(j|t') \quad \text{(entropy of model selection history)} \\
+& p(j|t') = \text{probability of selecting model } j \text{ at time } t' \\
+& \lambda = \text{exploration coefficient}
+\end{aligned}
+\end{equation}
+
+This formulation of $H(j)$ encourages exploration by favoring models that haven't been selected as often in the past, based on the selection history up to the current time step. This would encourage the system to explore its options more thoroughly, even potentially selecting a model that does not maximize performance but is useful for other reasons, such as for gathering more information, if applicable.
+
+
+
+
+
+
+
+
+
+
 
 \section{Discussion and Future Work}
 [This section would discuss implications, limitations, and future research directions]
