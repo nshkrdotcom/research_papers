@@ -249,6 +249,16 @@ The framework raises several ethical concerns:
     \item \( \gamma(t) \): Decay function.
     \item \( T \):  Total time steps (duration) for narrative evolution.
     \item \( p(j|t') \): Probability of selecting model \( j \) at time \( t' \).
+
+ \item \( R_{env}: S \times A \times S \rightarrow \mathbb{R} \): Environmental reward function mapping state-action-state transitions to rewards
+    \item \( w_i: \mathbb{N} \rightarrow [0,1] \): Weight functions for veracity components, where \( i \in \{1,2,3,4\} \)
+    \item \( P_{max} \): Maximum allowable pleasure/pain signal intensity, typically normalized to 1
+    \item \( P_{min} \): Minimum allowable pleasure/pain signal intensity, typically normalized to -1
+    \item \( f: \mathcal{A} \times \mathcal{N} \times \mathcal{C} \rightarrow [-1,1] \): Mapping function from actions, narratives, and context to pleasure/pain signals
+    \item \( \omega_j \in [0,1] \): Corroboration weights for independent sources, where \( \sum_{j \in J} \omega_j = 1 \)
+    \item \( Q: \mathcal{M} \times \mathcal{N} \times \mathcal{C} \rightarrow \mathbb{R} \): Quality function mapping model, narrative, and context to quality score
+    \item \( \text{Context}_t \equiv C_t \): Context at time t (standardizing notation)
+ 
 \end{itemize}
 
 \section{Veracity Function}
@@ -310,5 +320,37 @@ S_i(t) = \argmax_{j \in \{1, \dots, k\}} \{Q(M_{i,j}, N_{i,t}, \text{Context}_t)
 \begin{equation}
 H(j) = -\sum_{t'=1}^{t-1} p(j|t') \log p(j|t')
 \end{equation}
+
+\section{Quality Function Specification}
+
+\begin{equation}
+Q(M_{i,j}, N_{i,t}, C_t) = \alpha_Q \cdot V_{avg}(N_{i,t}) + \beta_Q \cdot C(N_{i,t}) + \gamma_Q \cdot I(N_{i,t})
+\end{equation}
+
+where \( \alpha_Q, \beta_Q, \gamma_Q \in [0,1] \) and \( \alpha_Q + \beta_Q + \gamma_Q = 1 \)
+
+\section{Weight Functions}
+
+\begin{equation}
+w_i(k) = \frac{1}{1 + e^{-\mu_i(k-k_0^i)}} \quad \text{for } i \in \{1,2,3,4\}
+\end{equation}
+
+where \( \mu_i \) is the steepness parameter and \( k_0^i \) is the midpoint for weight function \( i \)
+
+\section{Pleasure/Pain Mapping Function}
+
+\begin{equation}
+f(\text{Actions}(a_i, t), N_{i,t}, C_t) = \tanh(\eta \cdot [w_a \cdot A_{score} + w_n \cdot N_{score} + w_c \cdot C_{score}])
+\end{equation}
+
+where:
+\begin{itemize}
+    \item \( \eta \): Scaling factor
+    \item \( A_{score} \): Action score based on \( \text{Actions}(a_i, t) \)
+    \item \( N_{score} \): Narrative score based on \( N_{i,t} \)
+    \item \( C_{score} \): Context score based on \( C_t \)
+    \item \( w_a, w_n, w_c \): Component weights where \( w_a + w_n + w_c = 1 \)
+\end{itemize}
+
 
 \end{document}
