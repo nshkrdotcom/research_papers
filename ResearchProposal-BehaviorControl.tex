@@ -71,7 +71,7 @@ This paper makes the following contributions:
     \item Formalizes the concept of behavior control through narrative manipulation using LCMs. We accomplish this by taking into consideration not just the potential of this technology, but its actual implementation in real-world scenarios.
     \item Integrates a nuanced reward system based on pain/pleasure feedback into the DANN framework.
     \item Analyzes the ethical implications of such a system, considering both positive and negative use cases.
-    \item Proposes a research agenda for developing and deploying this technology responsibly
+    \item Proposes a research agenda for developing and deploying this technology responsibly.
 \end{itemize}
 
 \section{Theoretical Framework: DANN with LCMs and Pain/Pleasure Feedback}
@@ -251,15 +251,15 @@ The framework raises several ethical concerns:
   
 
 
-  \item \( R_{env}: S \times A \times S \rightarrow \mathbb{R} \): Environmental reward function mapping state-action-state transitions to rewards
-    \item \( w_i: \mathbb{N} \rightarrow [0,1] \): Weight functions for veracity components, where \( i \in \{1,2,3,4\} \)
-    \item \( P_{max} \): Maximum allowable pleasure/pain signal intensity, typically normalized to 1
-    \item \( P_{min} \): Minimum allowable pleasure/pain signal intensity, typically normalized to -1
-    \item \( f: \mathcal{A} \times \mathcal{N} \times \mathcal{C} \rightarrow [-1,1] \): Mapping function from actions, narratives, and context to pleasure/pain signals
-    \item \( \omega_j \in [0,1] \): Corroboration weights for independent sources, where \( \sum_{j \in J} \omega_j = 1 \)
-    \item \( Q: \mathcal{M} \times \mathcal{N} \times \mathcal{C} \rightarrow \mathbb{R} \): Quality function mapping model, narrative, and context to quality score
-    \item \( \text{Context}_t \equiv C_t \): Context at time $t$ (standardizing notation)
-    \item \( \text{Output}_i \): The output space of $LCM_i$, defined as \( \text{Output}_i \subset E_i \)
+  \item \( R_{env}: S \times A \times S \rightarrow \mathbb{R} \): Environmental reward function mapping state-action-state transitions to rewards.
+    \item \( w_i: \mathbb{N} \rightarrow [0,1] \): Weight functions for veracity components, where \( i \in \{1,2,3,4\} \).
+    \item \( P_{max} \): Maximum allowable pleasure/pain signal intensity, typically normalized to 1.
+    \item \( P_{min} \): Minimum allowable pleasure/pain signal intensity, typically normalized to -1.
+    \item \( f: \mathcal{A} \times \mathcal{N} \times \mathcal{C} \rightarrow [-1,1] \): Mapping function from actions, narratives, and context to pleasure/pain signals.
+    \item \( \omega_j \in [0,1] \): Corroboration weights for independent sources, where \( \sum_{j \in J} \omega_j = 1 \).
+    \item \( Q: \mathcal{M} \times \mathcal{N} \times \mathcal{C} \rightarrow \mathbb{R} \): Quality function mapping model, narrative, and context to quality score.
+    \item \( \text{Context}_t \equiv C_t \): Context at time $t$ (standardizing notation).
+    \item \( \text{Output}_i \): The output space of $LCM_i$, defined as \( \text{Output}_i \subset E_i \).
 
 
 \end{itemize}
