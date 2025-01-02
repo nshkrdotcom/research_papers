@@ -43,7 +43,7 @@ An AI Gardening Approach Using Human-Generated and Synthetic Data}}
 \vspace{-1.5em}
 
 \begin{abstract}
-This paper introduces the concept of "AI Gardening" within the Decentralized Autonomous Narrative Networks (DANN) framework, exploring a novel approach to training AI agents. This method leverages a "fertilizer" composed of both low-quality human-generated data and AI-produced synthetic content. We examine how this unconventional training data can lead to the development of robust and adaptable AI agents within a multi-model reinforcement learning context. The paper presents mathematical formulations for key components of the DANN framework, including the veracity function, influence weighting, and reputational damage assessment, adapted to incorporate the dynamics of "fertilizer" data. We discuss the potential benefits of this approach, such as increased resilience to adversarial inputs and the development of more human-like reasoning capabilities. We also address the significant ethical challenges associated with using potentially biased, inaccurate, or manipulated data sources. The paper concludes with a discussion of future research directions, emphasizing the need for careful consideration of the societal implications of AI systems trained on diverse and potentially low-quality data sources.
+This paper introduces the concept of "AI Gardening" within the Decentralized Autonomous Narrative Networks (DANN) framework, exploring a novel approach to training AI agents. This method leverages a "fertilizer" \cite{tunguz2025tweet} composed of both low-quality human-generated data and AI-produced synthetic content. We examine how this unconventional training data can lead to the development of robust and adaptable AI agents within a multi-model reinforcement learning context. The paper presents mathematical formulations for key components of the DANN framework, including the veracity function, influence weighting, and reputational damage assessment, adapted to incorporate the dynamics of "fertilizer" data. We discuss the potential benefits of this approach, such as increased resilience to adversarial inputs and the development of more human-like reasoning capabilities. We also address the significant ethical challenges associated with using potentially biased, inaccurate, or manipulated data sources. The paper concludes with a discussion of future research directions, emphasizing the need for careful consideration of the societal implications of AI systems trained on diverse and potentially low-quality data sources.
 \end{abstract}
 
 \section{Introduction}
@@ -107,7 +107,11 @@ Let \(F\) represent the set of fertilizer data, where each element \(f \in F\) c
 The veracity function $V$ is adapted to handle fertilizer data:
 
 \begin{equation}
-V(e, T, a_i, C, t, F) = \sum_{k=0}^t \lambda^{t-k} \left[ w_1(k) \cdot d(e, T_k) + w_2(k) \cdot S_R(e,k) + w_3(k) \cdot C_A(e, C_k) + w_4(k) \cdot D_R(e, a_i, k) + w_5(k) \cdot F_A(e, f_k) \right]
+\begin{split}
+V(e, T, a_i, C, t, F) = \sum_{k=0}^t \lambda^{t-k} \left[ \right. & w_1(k) \cdot d(e, T_k) + w_2(k) \cdot S_R(e,k)  \\
+ & \left. + w_3(k) \cdot C_A(e, C_k) + w_4(k) \cdot D_R(e, a_i, k)  \right. \\
+ & \left. + w_5(k) \cdot F_A(e, f_k) \right]
+\end{split}
 \end{equation}
 
 where:
@@ -214,5 +218,17 @@ where:
 
 \section{Conclusion}
 The DANN framework, enhanced with the concept of "AI Gardening" and the use of "fertilizer" data, provides a structured approach to understanding and potentially mitigating online narrative manipulation. While powerful, it must be developed and deployed with careful consideration of ethical implications and potential misuse. Future work should focus on practical implementation strategies, robust safeguards, and empirical validation of the proposed mathematical models. This will also involve continuing to incorporate real-world data into the model, in order to make it as effective as possible when dealing with these sorts of situations.
+
+\begin{thebibliography}{9} % The '9' here is just a placeholder for the widest label you expect
+
+\bibitem{tunguz2025tweet}
+Bojan Tunguz.
+{Tweet regarding the need for local models}.
+X (formerly Twitter),
+Jan 2, 2025, 8:15 AM HST.
+\href{https://x.com/tunguz/status/1874882110227697937}{https://x.com/tunguz/status/1874882110227697937}.
+@tunguz.
+
+\end{thebibliography}
 
 \end{document}
