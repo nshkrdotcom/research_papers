@@ -261,6 +261,14 @@ The framework raises several ethical concerns:
     \item \( \text{Context}_t \equiv C_t \): Context at time $t$ (standardizing notation).
     \item \( \text{Output}_i \): The output space of $LCM_i$, defined as \( \text{Output}_i \subset E_i \).
 
+  \item \( \text{Source}: E_G \rightarrow \mathcal{S} \): Function mapping embeddings to. their sources
+    \item \( \mathcal{S} \): Set of all possible sources.
+    \item \( J \subset \mathbb{N} \): Set of indices for independent corroborating sources.
+    \item \( A_{score}: \mathcal{A} \rightarrow [-1,1] \): Function scoring agent actions.
+    \item \( N_{score}: \mathcal{N} \rightarrow [-1,1] \): Function scoring narratives.
+    \item \( C_{score}: \mathcal{C} \rightarrow [-1,1] \): Function scoring context.
+    \item \( \alpha_Q, \beta_Q, \gamma_Q \): Quality function weighting parameters.
+
 
 \end{itemize}
 
