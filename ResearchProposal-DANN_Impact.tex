@@ -1,6 +1,4 @@
-\documentclass[12pt, a4paper]{article}
-\usepackage[utf8]{inputenc}
-\usepackage[margin=0.5in]{geometry}
+\documentclass{article}
 \usepackage{amsmath, amsfonts, amssymb, amsthm}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
@@ -32,7 +30,8 @@
 \setlength{\absleftindent}{0mm}
 \setlength{\absrightindent}{0mm}
 
-\title{\vspace{-2cm}\textbf{Beyond Veracity: A Dynamic Framework for Modeling Adversarial Narratives in the Age of Misinformation}}
+\title{\vspace{-2cm}\textbf{Analysis of the Dynamic Adversarial Narrative Network (DANN) Framework: \\
+Modeling Online Narrative Manipulation and Mitigation Strategies}}
 \author{\textbf{Paul Lowndes} \\ \href{mailto:ZeroTrust@NSHkr.com}{\texttt{ZeroTrust@NSHkr.com}}}
 \date{\small January 1, 2025}
 
@@ -41,15 +40,12 @@
 \maketitle
 \vspace{-1.5em}
 
-
 \begin{abstract}
-This paper presents the Dynamic Adversarial Narrative Network (DANN) framework, a novel approach to modeling the evolution and propagation of narratives in online spaces. We introduce mathematical formulations for analyzing narrative dynamics, incorporating veracity assessment, influence measurement, and reputational impact. The framework specifically addresses scenarios involving targeted manipulation by powerful actors and coordinated disinformation campaigns. Through real-world case studies, we demonstrate how DANN can help identify and potentially mitigate harmful narrative patterns. We conclude by discussing ethical implications and safeguards against potential misuse of this technology. This work is deeply integrated with Large Concept Models (LCMs), leveraging their ability to capture nuanced relationships between concepts at the sentence level. We use sentence embeddings from models like SONAR to refine the ground truth function. We acknowledge the limitations of LCMs, such as potential biases, and propose mitigation strategies within the DANN framework, such as source reliability and contextual analysis functions.
+This paper presents the Dynamic Adversarial Narrative Network (DANN) framework, a novel approach to modeling the evolution and propagation of narratives in online spaces. We introduce mathematical formulations for analyzing narrative dynamics, incorporating veracity assessment, influence measurement, and reputational impact. The framework specifically addresses scenarios involving targeted manipulation by powerful actors and coordinated disinformation campaigns. Through real-world case studies, we demonstrate how DANN can help identify and potentially mitigate harmful narrative patterns. We conclude by discussing ethical implications and safeguards against potential misuse of this technology.
 \end{abstract}
 
-
 \section{Introduction}
-\subsection{Background}
-The proliferation of online platforms has created unprecedented opportunities for narrative manipulation and targeted harassment campaigns. Traditional Multi-Agent Reinforcement Learning (MARL) approaches fail to capture the complex dynamics of these interactions, particularly when powerful actors leverage platform mechanics to amplify harmful narratives. This paper builds upon the work of Large Concept Models (LCMs) \cite{lcm_paper}, which provide the foundation for the concept embeddings used in our veracity function. LCMs offer the benefit of capturing nuanced relationships between concepts and handling large-scale data, but also present limitations such as potential biases. We integrate LCM's approach to handling concepts at a sentence level rather than token level, enhancing the veracity function by considering linguistic and semantic context more deeply.
+The proliferation of artificial intelligence systems and their increasing role in shaping information flows has created new challenges in understanding and managing narrative dynamics in digital spaces. Traditional Multi-Agent Reinforcement Learning (MARL) approaches fail to capture the nuanced interplay between agents' beliefs, knowledge, and the narratives they construct and propagate. This paper introduces Decentralized Autonomous Narrative Networks (DANN), a framework that explicitly models these dynamics through a combination of embedding spaces, belief systems, and narrative evolution mechanisms.
 
 \subsection{Contributions}
 This paper makes the following contributions:
@@ -86,71 +82,75 @@ B_i(t) = \{\mathbf{e} \in \mathcal{E}_i : p_B(\mathbf{e}, t) > \tau_B\}
 
 where $p_K$ and $p_B$ are probability functions for knowledge and belief respectively.
 
-\section{Enhanced Veracity Function}
-\subsection{Temporal Veracity Assessment}
-We extend the basic veracity function to include temporal dynamics and uncertainty:
+\section{Mathematical Framework}
 
+\subsection{Veracity Function Properties}
+The veracity function $V: E_G \rightarrow [0,1]$ satisfies:
+
+\begin{property}[Veracity Axioms]
+For all $x,y \in E_G$:
+\begin{itemize}
+    \item $V(x) = 1 \iff x \in T$ (truth region)
+    \item $\|x-y\| \leq \epsilon \implies |V(x) - V(y)| \leq \delta$ (continuity)
+    \item $V(x) = 0 \implies x$ is maximally inconsistent with truth
+\end{itemize}
+\end{property}
+
+\subsection{Narrative Dynamics}
+
+\begin{definition}[Narrative Divergence]
+The divergence $D$ between narratives satisfies:
 \begin{equation}
-V(e, T(t), a_i, C, t) = \sum_{k=0}^t \lambda^{t-k} [w_1(t,k) \cdot d(e, T_k) + w_2(t,k) \cdot S_R(e,k) + w_3(t,k) \cdot C_A(e, C_k, k) + w_4(t,k) \cdot D_R(e, a_i, k)]
+    D(N_{i,t}, N_{j,t}) = \sum_{k=1}^T w(c_{i,k}) \cdot d(c_{i,k}, c_{j,k})
 \end{equation}
+where $w(c) = f(V(c))$ for some monotonic function $f:[0,1] \rightarrow [0,1]$.
+\end{definition}
 
-where $\lambda$ is a decay factor, $T(t)$ represents the evolving ground truth as a probability distribution or confidence level, and $C_A$ now includes a time parameter. The concept of "ground truth" ($T$) is often ambiguous, especially in complex and evolving narratives. Instead of a binary true/false, we represent $T$ as a region with associated probabilities or confidence levels to reflect uncertainty. We also incorporate temporal dynamics, where truth can change over time. The weights $w_1, w_2, w_3, w_4$ are now functions of both time $t$ and $k$, allowing for dynamic adjustment based on the context.
+\subsection{Agent Interaction Mechanisms}
 
-\subsection{Source Reliability Decomposition}
-The source reliability function incorporates reputation, network effects, bias detection, and expertise modeling:
-
+\subsubsection{Knowledge Propagation}
+Knowledge updates follow:
 \begin{equation}
-S_R(e,t) = \alpha H(s,t) + \beta E(s) + \gamma(1-B(s,t)) + \delta \sum_{j \in J} \omega_j C_j(e,t)
+    K_{i,t+1} = K_{i,t} \cup \{e \in E_i \mid V(e, T) > \tau_K \land \exists j: e \in K_{j,t}\}
 \end{equation}
+where $\tau_K$ is the knowledge acceptance threshold.
 
-where $C_j$ represents corroboration from independent source $j$ with weight $\omega_j$. We enhance source reliability by incorporating network analysis to assess source credibility based on the reliability of connected sources. We also develop a more sophisticated method for detecting bias ($B(s)$) beyond simply labeling a source as biased, leveraging techniques like sentiment analysis or topic modeling to identify potential biases in a source's content. Expertise ($E(s)$) is determined based on a combination of self-declared credentials and inferred from content analysis.
-
-\subsection{Contextual Analysis}
-Contextual analysis ($C_A$) is performed using techniques such as natural language processing (NLP), sentiment analysis, and topic modeling. We also incorporate a time parameter to capture the dynamic aspect of context.
-
-\subsection{Defamation Risk}
-Defamation risk ($D_R$) is operationalized by referring to specific legal definitions of defamation in relevant jurisdictions. We use predictive modeling to assess the likelihood of a statement being considered defamatory, analyzing the content of the statement, the reputation of the target, and the potential for harm.
-
-\subsection{Weighting Parameters}
-The weights ($w_i$) are dynamically adjusted based on the context, learned from data, and set manually based on expert knowledge.
-
-\section{Narrative Evolution Dynamics}
-\subsection{Belief Update Mechanism}
-The belief update process incorporates confirmation bias and social influence:
-
+\subsubsection{Belief Evolution}
+Belief updates incorporate both knowledge and social influence:
 \begin{equation}
-B_i(t+1) = f_B(B_i(t), K_i(t), \sum_{j \neq i} \alpha_{ij}(t)N_j(t), \theta_i)
+    B_{i,t+1} = f_B(B_{i,t}, K_{i,t+1}, \sum_{j \neq i} \alpha_{ij}(t)B_{j,t})
 \end{equation}
+where $\alpha_{ij}$ represents the influence weight of agent $j$ on agent $i$.
 
-where $\theta_i$ represents agent-specific bias parameters.
+\section{Learning Mechanisms}
 
-\subsection{Influence Propagation}
-The influence weight evolution follows:
-
+\subsection{Narrative-Based Reward}
+The reward function combines environmental and narrative quality:
 \begin{equation}
-\alpha_{ij}(t+1) = \frac{\exp(g(N_{ij}, H_j, E_j, P_j))}{\sum_{k \neq i} \exp(g(N_{ik}, H_k, E_k, P_k))}
+    R_i(s_t, a_t, s_{t+1}) = \alpha \cdot R_{\text{env}}(s_t, a_t, s_{t+1}) + \beta \cdot Q(N_{i,t+1})
 \end{equation}
+where:
+\begin{itemize}
+    \item $Q(N) = \gamma_1 C(N) + \gamma_2 V_{\text{avg}}(N) + \gamma_3 I(N)$
+    \item $C(N)$ measures narrative coherence
+    \item $V_{\text{avg}}(N)$ is the average veracity
+    \item $I(N)$ measures narrative influence
+\end{itemize}
 
-Influence is not always a direct, pairwise interaction. We incorporate group dynamics and the influence of communities. We also account for negative influence or attempts to discredit information. Platform factors ($P_j$) include metrics such as reach, engagement, verification status, and platform-specific reputation scores. Influence weights are updated based on the outcomes of past interactions, incorporating feedback loops.
-
-\section{Reputational Impact Model}
-\subsection{Dynamic Reputation Evolution}
-The reputation score evolves according to:
-
+\subsection{Agent-Switching Mechanism}
+The switching function is defined as:
 \begin{equation}
-Rep_i(t+1) = Rep_i(t) + \eta \sum_{j \neq i} \alpha_{ji}(t)[V(N_j(t)) \cdot I_{ij}(t)]
+    S_i(t) = \argmax_{j} \{Q(M_{i,j}, N_{i,t}, \text{Context}_t) + \lambda H(j)\}
 \end{equation}
+where:
+\begin{itemize}
+    \item $H(j)$ is an entropy term promoting exploration
+    \item $\lambda$ balances exploitation vs. exploration
+    \item $\text{Context}_t$ includes environmental and social factors
+\end{itemize}
 
-where $I_{ij}(t)$ represents the impact of agent $j$'s narrative on agent $i$'s reputation.
-
-\subsection{Cumulative Damage Assessment}
-Long-term reputational damage is modeled as:
-
-\begin{equation}
-D_i(T) = \int_0^T \gamma(t) \cdot \max(0, Rep_i(0) - Rep_i(t)) dt
-\end{equation}
-
-Reputation is modeled with granularity across different domains or topics. We also incorporate mechanisms for reputation recovery. The multiplicative approach to compound influence is replaced with more sophisticated ways to model the complex interplay of influence in networks, using graph theory or other network analysis techniques.
+\section{Discussion and Future Work}
+[This section would discuss implications, limitations, and future research directions]
 
 \section{Implementation and Safeguards}
 \subsection{Detection Mechanisms}
@@ -171,49 +171,12 @@ We implement the following detection algorithms:
 The system operates under the following constraints:
 
 \begin{equation}
-\forall a_i, t: Actions(a_i, t) \in \mathcal{L} \cap \mathcal{E} \cap \mathcal{P}
+\forall a_i, t: \text{Actions}(a_i, t) \in \mathcal{L} \cap \mathcal{E} \cap \mathcal{P}
 \end{equation}
 
-where $\mathcal{P}$ represents privacy preservation constraints. The legal constraints ($\mathcal{L}$) include specific laws such as GDPR and CCPA. The ethical principles ($\mathcal{E}$) include fairness, transparency, and accountability. We also discuss specific strategies to mitigate bias in the system's algorithms and decision-making processes. Enforcement mechanisms are also considered.
-
-\section{Dataset and Evaluation}
-We plan to use a combination of publicly available datasets and synthetic data for training and evaluation. We will measure the performance of our model using the following metrics:
-\begin{itemize}
-    \item Accuracy of the Veracity Function: How well does it identify true/false/uncertain information?
-    \item Precision and Recall of Defamation Risk: How well does it identify potentially defamatory statements?
-    \item Correlation between predicted and actual reputational damage.
-\end{itemize}
-
-\section{Algorithmic Details}
-The algorithms used for each component will be detailed in this section. For source reliability estimation, we will employ machine learning models such as logistic regression or support vector machines. For contextual analysis, we will use NLP techniques such as sentiment analysis and topic modeling. Network analysis will be performed using graph theory algorithms.
-
-\section{Limitations}
-\begin{itemize}
-    \item Computational complexity of full network analysis
-    \item Challenges in ground truth determination
-    \item Potential for system manipulation
-    \item Privacy preservation concerns
-    \item Dependence on the quality of Large Concept Models
-\end{itemize}
-
-\section{Discussion and Future Work}
-\subsection{Future Directions}
-\begin{itemize}
-    \item Integration with platform-specific monitoring tools
-    \item Development of early warning systems
-    \item Enhanced privacy-preserving mechanisms
-    \item Improved temporal modeling capabilities
-    \item Exploration of more sophisticated influence models
-\end{itemize}
+where $\mathcal{P}$ represents privacy preservation constraints.
 
 \section{Conclusion}
 The DANN framework provides a structured approach to understanding and potentially mitigating online narrative manipulation. While powerful, it must be developed and deployed with careful consideration of ethical implications and potential misuse. Future work should focus on practical implementation strategies and robust safeguards.
-
-\begin{thebibliography}{9}
-    \bibitem{lcm_paper} 
-    Large Concept Model. 
-    \href{https://ai.meta.com/research/publications/large-concept-models-language-modeling-in-a-sentence-representation-space/}{https://ai.meta.com/research/publications/large-concept-models-language-modeling-in-a-sentence-representation-space/}
-
-\end{thebibliography}
 
 \end{document}
