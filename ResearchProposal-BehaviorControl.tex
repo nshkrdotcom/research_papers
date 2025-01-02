@@ -192,20 +192,63 @@ The framework raises several ethical concerns:
 \section{Definitions}
 
 \begin{itemize}
-    \item \( E \): Global embedding space
-    \item \( a_i \): Agent \( i \)
-    \item \( M_i \): Internal model of agent \( a_i \) (LCM)
-    \item \( K_{i,t} \subset E \): Knowledge set of agent \( a_i \) at time \( t \)
-    \item \( B_{i,t} \subset E \): Belief set of agent \( a_i \) at time \( t \)
-    \item \( N_{i,t} = (c_{i,1}, c_{i,2}, \dots, c_{i,T}) \): Narrative of agent \( a_i \) at time \( t \) (sequence of concept embeddings)
-    \item \( \Delta(a_i, a_j, t) \): Asymmetry threshold between agents \( a_i \) and \( a_j \) at time \( t \)
-    \item \( D(N_{i,t}, N_{j,t}) \): Narrative divergence between narratives \( N_{i,t} \) and \( N_{j,t} \)
-    \item \( V(c) \): Veracity function assigning a score to concept \( c \)
-    \item \( T \subset E \): "Ground truth" region in the embedding space
-    \item \( P(a_i, t) \): Pleasure/pain reward for agent \( a_i \) at time \( t \)
-    \item \( R_i(s_t, a_t, s_{t+1}) \): Reward function for agent \( a_i \)
-    \item \( BCI_i \): Bi-directional Brain-Computer Interface for agent \( a_i \)
-    \item \( Translator_i \): Code translator for agent \( a_i \) (between LCM embeddings and BCI signals)
+    \item \( E_G \): Global embedding space, a metric space equipped with a distance function \( d: E_G \times E_G \rightarrow \mathbb{R}_{\geq 0} \).
+    \item \( E_i \): Embedding space for agent \( a_i \), where \( E_i \subseteq E_G \).
+    \item \( \phi_i: \mathcal{E}_i \rightarrow \mathcal{E}_G \): Mapping function from agent \( a_i \)'s local embedding space to the global embedding space.
+    \item \( a_i \): Agent \( i \), where \( a_i \in A = \{a_1, a_2, \dots, a_n\} \).
+    \item \( M_i \): Internal Large Concept Model (LCM) of agent \( a_i \).
+    \item \( M_{i,j} \): Model \(j\) from the model pool \(P_i\) of agent \( a_i \).
+    \item \( K_{i,t} \subset E_i \): Knowledge set of agent \( a_i \) at time \( t \), represented as embeddings.
+    \item \( B_{i,t} \subset E_i \): Belief set of agent \( a_i \) at time \( t \), represented as embeddings.
+    \item \( c \): A concept embedding in the embedding space.
+    \item \( N_{i,t} = (c_{i,1}, c_{i,2}, \dots, c_{i,T}) \): Narrative of agent \( a_i \) at time \( t \), a sequence of concept embeddings.
+    \item \( N \): A general narrative, which can be a set or sequence of propositions.
+    \item \( T \subset E_G \): "Ground truth" region in the global embedding space.
+    \item \( T_k \): Representation of "ground truth" at time step `k`.
+    \item \( V(c, T, a_i, C, t) \): Veracity function assigning a score in \([0, 1]\) to concept \( c \) at time \(t\), given ground truth region \( T \), agent \( a_i \), and context \( C \).
+    \item \( V_{avg}(N) \): Average veracity of a narrative \( N \).
+    \item \( S_R(e,t) \): Source reliability function for the source of embedding \(e\) at time \(t\).
+    \item \( C(N) \): Narrative coherence function, measuring the coherence of narrative \( N \).
+    \item \( C_A(e, C) \): Contextual analysis function, evaluating consistency and coherence of \( e \) within context \( C \).
+    \item \( D_R(e, a_i) \): Defamation risk function, assessing the potential for \( e \) to be defamatory towards agent \( a_i \).
+    \item \( d(x, y) \): Distance function in the embedding space, where \( x, y \) are embeddings or sets of embeddings.
+    \item \( \Delta(a_i, a_j, t) \): Asymmetry threshold between agents \( a_i \) and \( a_j \) at time \( t \), based on distance between knowledge or belief embeddings.
+    \item \( D(N_{i,t}, N_{j,t}) \): Narrative divergence between narratives \( N_{i,t} \) and \( N_{j,t} \) at time \(t\).
+    \item \( \alpha_{ij}(t) \): Influence weight of agent \( a_j \) on agent \( a_i \) at time \( t \).
+    \item \( R_i(s_t, a_t, s_{t+1}) \): Reward function for agent \( a_i \) at time \(t\), given state \(s_t\), action \(a_t\), and next state \(s_{t+1}\).
+    \item \( Q(N) \): Narrative quality metric.
+    \item \( I(N) \): Narrative influence metric.
+    \item \( P(a_i, t) \): Pleasure/pain reward for agent \( a_i \) at time \( t \).
+    \item \( BCI_i \): Bi-directional Brain-Computer Interface for agent \( a_i \).
+    \item \( \text{Translator}_i \): Code translator for agent \( a_i \), converting between LCM embeddings and BCI signals.
+    \item \( P_i = \{M_{i,1}, M_{i,2}, \dots, M_{i,k}\} \): Pool of models for agent \( a_i \).
+    \item \( S_i(t) \): Agent-switching function, selecting a model for agent \( a_i \) at time \( t \).
+    \item \( H(j) \): Entropy term for model selection, encouraging exploration.
+    \item \( \lambda \): A hyperparameter controlling the balance between exploitation and exploration in agent-switching.
+    \item \( \mathcal{L} \): Set of legal constraints.
+    \item \( \mathcal{E} \): Set of ethical constraints.
+    \item \( \mathcal{P} \): Set of privacy preservation constraints.
+    \item \( \text{Actions}(a_i, t) \): Set of actions taken by agent \( a_i \) at time \( t \).
+    \item \( f_B \): Belief update function.
+    \item \( f_{Infl} \): Influence function.
+    \item \( w(c) \): Weight function based on veracity of concept \( c \).
+    \item \( I_{ij} \): Information shared by agent \( a_i \) with agent \( a_j \).
+    \item \( C_t \): Context at time \( t \).
+    \item \( A_i \): Parameters specific to agent \( a_i \) within the LCM.
+    \item \( \tau_K \): Threshold for accepting a proposition as knowledge.
+    \item \( H(s,t) \): Historical accuracy of source \(s\) at time \(t\).
+    \item \( E(s) \): Expertise level of source \(s\).
+    \item \( B(s,t) \): Detected biases of source \(s\) at time \(t\).
+    \item \( C_j(e,t) \): Corroboration from independent source \(j\) for embedding \(e\) at time \(t\).
+    \item \( \alpha, \beta, \gamma, \delta \): Weighting parameters for the components of the source reliability function.
+    \item \( N_{ij} \): Strength of network connection between agents \( a_i \) and \( a_j \).
+    \item \( \text{Rep}_i(t) \): Reputation score of agent \( a_i \) at time \( t \).
+    \item \( \eta \): Learning rate or scaling factor for reputation update.
+    \item \( I_{ij}(t) \): Impact of agent \( j \)'s narrative on agent \( a_i \)'s reputation at time \( t \).
+    \item \( D(A_k) \): Damage from actions at time \( k \).
+    \item \( \gamma(t) \): Decay function.
+    \item \( T \):  Total time steps (duration) for narrative evolution.
+    \item \( p(j|t') \): Probability of selecting model \( j \) at time \( t' \).
 \end{itemize}
 
 \section{Veracity Function}
