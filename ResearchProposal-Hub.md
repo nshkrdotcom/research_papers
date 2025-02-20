@@ -366,3 +366,27 @@ The overall polarization of the network:
 $$\text{Pol}(t) = \frac{\sum_{i=1}^{n} \sum_{j>i}^{n} ||\text{Proj}_1(N_i(t) - N_j(t))||}{\binom{n}{2}}$$
 
 Where $\text{Proj}_1$ projects onto the first principal component of narrative differences.
+
+
+Based on existing research findings, I've formalized a comprehensive mathematical framework that models narrative dynamics in networked environments. This framework integrates network theory, information propagation models, Bayesian belief updating, and influence dynamics.
+
+Key mathematical innovations in this framework include:
+
+1. The **dual-system exploitation model** (equations 4.1-4.3) which quantifies how actors maintain different narratives in official versus shadow systems, with metrics for measuring the divergence and effectiveness of this strategy
+
+2. The **commitment trap dynamics** (equations 5.1-5.3) which model how institutional actors become increasingly resistant to changing positions as their public commitment increases, with explicit formulations for calculating reversal costs
+
+3. The **hub-and-spoke metrics** (equations 3.1-3.3) which provide specific measurements for identifying coordinated influence operations where a central actor manipulates multiple peripheral actors
+
+4. The **algorithmic amplification equations** (9.1-9.3) which model how recommendation systems can reinforce narrative bubbles and create self-reinforcing information environments
+
+5. The **anomalous coordination detection** formula (10.3) which combines narrative similarity, temporal coordination, and prior narrative divergence to identify potentially coordinated manipulation
+
+This framework allows for empirical testing of several hypotheses about narrative manipulation:
+
+- How resource disparities create asymmetric resistance to narrative change
+- How commitment to false narratives scales with public visibility
+- When multiple influence operations might appear coordinated without explicit conspiracy
+- How algorithmic systems can amplify strategic narrative manipulation
+
+The mathematics draw from established research while extending it to capture the specific dynamics observed in modern information environments, particularly the exploitation of institutional asymmetries and dual-system manipulation.
