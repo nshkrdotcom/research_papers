@@ -11,6 +11,7 @@
 \usepackage{titlesec}
 \usepackage{cite}
 \usepackage{float}
+\usepackage{amsthm} % Added for \newtheorem
 
 % --- STYLING ---
 \titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
@@ -58,11 +59,13 @@ The framework is built upon three pillars: how narratives are represented, how t
 To overcome the information loss of simple vector representations, we introduce the \textbf{Structured Narrative Object (SNO)}. This provides the necessary richness for genuine reasoning and synthesis.
 
 \begin{definition}[Structured Narrative Object]
-An SNO is a tuple: $SNO = (H, G, E, T)$, where:
+An SNO is a tuple defined as:
+\[ SNO = (H, G, E, T) \]
+where:
 \begin{itemize}
     \item \textbf{H (Hypothesis Embedding):} $H \in \mathbb{R}^d$ is a dense vector representing the core claim or central thesis of the narrative. This preserves the powerful geometric properties for measuring semantic similarity.
-    \item \textbf{G (Reasoning Graph):} $G = (V, E_{graph})$ is a directed graph where nodes $V$ represent sub-claims or premises, and edges $E_{graph}$ represent logical or causal relationships (e.g., "implies," "causes," "is evidence for"). This structure, processable by Graph Neural Networks (GNNs) \cite{Kipf2017GCN}, captures the internal logic of a narrative.
-    \item \textbf{E (Evidence Set):} $E_{set} = \{e_1, e_2, \dots, e_n\}$ is a set of pointers to grounding data. These can be document IDs, hashes of specific data points (like "Spatiotemporal Digests"), or DOIs for academic papers. This explicitly links the narrative to its supporting evidence.
+    \item \textbf{G (Reasoning Graph):} $G = (V, E_{\text{graph}})$ is a directed graph where nodes $V$ represent sub-claims or premises, and edges $E_{\text{graph}}$ represent logical or causal relationships (e.g., "implies," "causes," "is evidence for"). This structure, processable by Graph Neural Networks (GNNs) \cite{Kipf2017GCN}, captures the internal logic of a narrative.
+    \item \textbf{E (Evidence Set):} $E_{\text{set}} = \{e_1, e_2, \dots, e_n\}$ is a set of pointers to grounding data. These can be document IDs, hashes of specific data points (like "Spatiotemporal Digests"), or DOIs for academic papers. This explicitly links the narrative to its supporting evidence.
     \item \textbf{T (Trust Score):} $T \in [0, 1]$ is the overall confidence score, which is an \textit{output} of the Critic system rather than an intrinsic property.
 \end{itemize}
 \end{definition}
@@ -126,7 +129,7 @@ This score is high when two well-supported narratives propose contradictory cent
 \begin{definition}[Evidential Entanglement]
 This new metric measures the degree to which two narratives are arguing over the same data. It is calculated using the Jaccard similarity of their \textit{Evidence Sets (E)}:
 \[
-\text{EScore}(SNO_i, SNO_j) = \frac{|E_{set, i} \cap E_{set, j}|}{|E_{set, i} \cup E_{set, j}|}
+\text{EScore}(SNO_i, SNO_j) = \frac{|E_{\text{set}, i} \cap E_{\text{set}, j}|}{|E_{\text{set}, i} \cup E_{\text{set}, j}|}
 \]
 \end{definition}
 
@@ -173,7 +176,9 @@ This CNS 2.0 blueprint creates a far more plausible and powerful system by makin
     \item \textbf{Bootstrapping the Generative Synthesizer:} The quality of the Generative Synthesis Agent is dependent on its training. We propose a multi-stage strategy:
         \begin{itemize}
             \item \textbf{Phase 1 (Few-Shot Prompting):} Initially, the system will rely on the rich, structured prompts enabled by the SNO format.
-            \item \textbf{Phase 2 (Self-Improvement):} The CNS system itself will generate training data. High-scoring syntheses `SNO_C` generated from pairs `(SNO_A, SNO_B)` will be archived as positive training examples `(A, B) -> C`, creating a flywheel for continuous improvement.
+            % FIX START: Replaced backticks `...` with \texttt{...} and math mode to fix fatal compiler errors.
+            \item \textbf{Phase 2 (Self-Improvement):} The CNS system itself will generate training data. High-scoring syntheses \texttt{SNO\_C} generated from pairs (\texttt{SNO\_A}, \texttt{SNO\_B}) will be archived as positive training examples $(A, B) \to C$, creating a flywheel for continuous improvement.
+            % FIX END
             \item \textbf{Phase 3 (Human-in-the-Loop):} We will develop an interface for human experts to review, rate, and correct syntheses, providing a gold-standard dataset for fine-tuning the LLM on high-quality dialectical reasoning.
         \end{itemize}
 
