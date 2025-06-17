@@ -36,11 +36,11 @@
 \vspace{-2em}
 
 \begin{abstract}
-The synthesis of knowledge from diverse and often conflicting sources is a fundamental challenge in artificial intelligence. This paper introduces Chiral Narrative Synthesis (CNS) 2.0, an enhanced system architecture that transforms the original conceptual model into a viable engineering blueprint. The framework leverages a multi-agent system to model the dialectical process of resolving conflicting information. We replace simplistic vector representations with a rich, structured object called the Structured Narrative Object (SNO), which encapsulates a core hypothesis, a reasoning graph, an evidence set, and a trust score. We deconstruct the "Critic Oracle" into a transparent, multi-component evaluation pipeline that assesses narratives based on grounding, logical coherence, and novelty. Synthesis is upgraded from naive vector averaging to a sophisticated generative process managed by a Large Language Model (LLM) fine-tuned for dialectical reasoning. Finally, we refine the concept of "chirality" by introducing "Evidential Entanglement," a metric to identify narratives that are not only opposed but are arguing about the same underlying data. <!-- CHANGE START: Acknowledge the roadmap nature of the proposal. -->This proposal outlines not only the target architecture but also a research roadmap for addressing the key challenges in its implementation, from narrative ingestion to model development, providing a practical and powerful system for automated knowledge discovery.<!-- CHANGE END -->
+The synthesis of knowledge from diverse and often conflicting sources is a fundamental challenge in artificial intelligence. This paper introduces Chiral Narrative Synthesis (CNS) 2.0, an enhanced system architecture that transforms the original conceptual model into a viable engineering blueprint. The framework leverages a multi-agent system to model the dialectical process of resolving conflicting information. We replace simplistic vector representations with a rich, structured object called the Structured Narrative Object (SNO), which encapsulates a core hypothesis, a reasoning graph, an evidence set, and a trust score. We deconstruct the "Critic Oracle" into a transparent, multi-component evaluation pipeline that assesses narratives based on grounding, logical coherence, and novelty. Synthesis is upgraded from naive vector averaging to a sophisticated generative process managed by a Large Language Model (LLM) fine-tuned for dialectical reasoning. Finally, we refine the concept of "chirality" by introducing "Evidential Entanglement," a metric to identify narratives that are not only opposed but are arguing about the same underlying data. This proposal outlines not only the target architecture but also a research roadmap for addressing the key challenges in its implementation, from narrative ingestion to model development, providing a practical and powerful system for automated knowledge discovery.
 \end{abstract}
 
 \section{Introduction}
-Progress in any complex domain, from scientific research to intelligence analysis, depends on the ability to synthesize vast amounts of information that is frequently incomplete, uncertain, and contradictory. While modern AI has excelled at pattern recognition, the higher-level cognitive task of reconciling conflicting hypotheses into a more comprehensive understanding remains a significant hurdle \cite{Boström2017}. <!-- CHANGE START: Add citation for argumentation context --> This challenge is rooted in the structure of argumentation itself, where claims are supported by evidence and reasoning in complex webs \cite{Toulmin2003}. <!-- CHANGE END -->
+Progress in any complex domain, from scientific research to intelligence analysis, depends on the ability to synthesize vast amounts of information that is frequently incomplete, uncertain, and contradictory. While modern AI has excelled at pattern recognition, the higher-level cognitive task of reconciling conflicting hypotheses into a more comprehensive understanding remains a significant hurdle \cite{Boström2017}. This challenge is rooted in the structure of argumentation itself, where claims are supported by evidence and reasoning in complex webs \cite{Toulmin2003}. 
 
 This paper proposes Chiral Narrative Synthesis (CNS) 2.0, a computational framework designed to operationalize this process of knowledge synthesis. The core idea is to treat hypotheses not as simple text strings but as rich data structures that can be mathematically and logically evaluated. Our framework moves beyond earlier conceptual models by specifying the concrete components needed for a practical implementation. The key enhancements are fourfold:
 \begin{enumerate}
@@ -79,8 +79,8 @@ The "Critic Oracle" problem is resolved by replacing a single, black-box Critic 
 \end{equation}
 The components are:
 \begin{itemize}
-    \item \textbf{A. The Grounding Critic (Score$_G$):} <!-- CHANGE START: Temper claims about NLI capabilities. --> Assesses the \textit{plausibility} of support for claims in the \textit{Reasoning Graph (G)} from the \textit{Evidence Set (E)}. For each evidence link, this critic will use a fine-tuned Natural Language Inference (NLI) model to produce a support score. Acknowledging the brittleness of current NLI models, its primary function is to penalize claims with no evidential backing and reward those with plausible textual support. The final score is a measure of evidential coverage and plausibility.<!-- CHANGE END -->
-    \item \textbf{B. The Logic Critic (Score$_L$):} <!-- CHANGE START: Frame GNN as a research goal, not a solved tool. --> Analyzes the \textit{Reasoning Graph (G)} for structural integrity. A key research objective of this work is to develop a GNN model trained to identify structural correlates of logical weakness, such as circular dependencies or unsupported core claims. Rather than detecting specific named fallacies, its score will represent the overall structural coherence of the narrative's reasoning.<!-- CHANGE END -->
+    \item \textbf{A. The Grounding Critic (Score$_G$):} Assesses the \textit{plausibility} of support for claims in the \textit{Reasoning Graph (G)} from the \textit{Evidence Set (E)}. For each evidence link, this critic will use a fine-tuned Natural Language Inference (NLI) model to produce a support score. Acknowledging the brittleness of current NLI models, its primary function is to penalize claims with no evidential backing and reward those with plausible textual support. The final score is a measure of evidential coverage and plausibility.
+    \item \textbf{B. The Logic Critic (Score$_L$):} Analyzes the \textit{Reasoning Graph (G)} for structural integrity. A key research objective of this work is to develop a GNN model trained to identify structural correlates of logical weakness, such as circular dependencies or unsupported core claims. Rather than detecting specific named fallacies, its score will represent the overall structural coherence of the narrative's reasoning.
     \item \textbf{C. The Novelty \& Parsimony Critic (Score$_N$):} Compares the new SNO's \textit{Hypothesis Embedding (H)} against the embeddings of all existing high-trust SNOs. It penalizes redundancy and rewards novelty. It can also include a penalty for excessive complexity in the \textit{Reasoning Graph (G)} relative to its explanatory power, encouraging parsimony (Occam's razor).
 \end{itemize}
 The weights $(w_g, w_l, w_n)$ can be dynamically adjusted, allowing the system to prioritize grounding, logic, or novelty depending on the current state of the knowledge base.
@@ -93,9 +93,9 @@ The workflow is as follows:
     \item \textbf{Input:} The agent takes two SNOs identified as a high-potential "chiral pair" (see Section 3.1).
     \item \textbf{Prompting:} The LLM is fed a structured prompt containing the full information from both SNOs:
         \begin{quote}
-        "**Narrative A states:** [Text summary of SNO\_A's hypothesis]. **It is supported by evidence:** [Summary of E\_A]. **Its reasoning is:** [Linearized G\_A]." \\
-        "**Narrative B states:** [Text summary of SNO\_B's hypothesis]. **It is supported by evidence:** [Summary of E\_B]. **Its reasoning is:** [Linearized G\_B]." \\
-        "**Task:** The core point of conflict is [conflict description]. Propose a new, unifying hypothesis that resolves this conflict while remaining consistent with the combined evidence. Output your proposal as a new Structured Narrative Object (SNO)."
+        ``\textbf{Narrative A states:} [Text summary of SNO\_A's hypothesis]. \textbf{It is supported by evidence:} [Summary of E\_A]. \textbf{Its reasoning is:} [Linearized G\_A].'' \\[0.5em]
+        ``\textbf{Narrative B states:} [Text summary of SNO\_B's hypothesis]. \textbf{It is supported by evidence:} [Summary of E\_B]. \textbf{Its reasoning is:} [Linearized G\_B].'' \\[0.5em]
+        ``\textbf{Task:} The core point of conflict is [conflict description]. Propose a new, unifying hypothesis that resolves this conflict while remaining consistent with the combined evidence. Output your proposal as a new Structured Narrative Object (SNO).''
         \end{quote}
     \item \textbf{Output:} The LLM generates a \textit{candidate SNO$_C$}. This is not a final product but a new proposal to be fed into the Multi-Component Critic pipeline for evaluation.
 \end{enumerate}
@@ -104,7 +104,6 @@ This approach models synthesis not as a mathematical blend, but as an act of cre
 \section{System Dynamics and Workflow}
 The full CNS 2.0 system operates in a continuous loop, driven by precise metrics and specialized agent actions.
 
-<!-- CHANGE START: Add a new subsection to address the SNO ingestion problem. -->
 \subsection{The Narrative Ingestion Pipeline: A Key Research Challenge}
 A critical prerequisite for the CNS ecosystem is the ability to generate SNOs from unstructured source materials (e.g., academic papers, intelligence reports). This process, a form of advanced argumentation mining \cite{Lippi2016ArgMining}, is a major research challenge in itself. Our proposed initial pipeline is as follows:
 \begin{enumerate}
@@ -113,7 +112,7 @@ A critical prerequisite for the CNS ecosystem is the ability to generate SNOs fr
     \item \textbf{Evidence Set Population:} Use a combination of pattern matching (for explicit citations like DOIs) and semantic search to link claims within the `Reasoning Graph (G)` to specific sentences or data points in the source document, which then form the `Evidence Set (E)`.
 \end{enumerate}
 This pipeline represents a core workstream of the project, turning a critical dependency into a defined research objective.
-<!-- CHANGE END -->
+
 
 \subsection{Refined Relational Metrics}
 The concept of "chirality" is made more precise by distinguishing between opposition and shared context. This allows the system to identify the most productive conflicts.
@@ -139,7 +138,7 @@ This new metric measures the degree to which two narratives are arguing over the
 The full system operates as follows:
 \begin{enumerate}
     \item \textbf{Population:} The system maintains a dynamic population of SNOs, initially populated via the Narrative Ingestion Pipeline.
-    \item \textbf{Relational Mapping:} The system continuously computes relational scores. <!-- CHANGE START: Address scalability of EScore. -->To ensure scalability, this is a two-step process. First, an Approximate Nearest Neighbor index (e.g., LSH \cite{Indyk1998LSH}) on the $H$ vectors is used to efficiently pre-filter a small set of candidate pairs with high potential `CScore`. Second, the more computationally intensive `EScore` is calculated only for these pre-filtered pairs.<!-- CHANGE END -->
+    \item \textbf{Relational Mapping:} The system continuously computes relational scores. To ensure scalability, this is a two-step process. First, an Approximate Nearest Neighbor index (e.g., LSH \cite{Indyk1998LSH}) on the $H$ vectors is used to efficiently pre-filter a small set of candidate pairs with high potential `CScore`. Second, the more computationally intensive `EScore` is calculated only for these pre-filtered pairs.
     \item \textbf{Agent Action:}
         \begin{itemize}
             \item \textbf{Synthesizer Agents} select high-chirality, high-entanglement pairs and pass them to the \textbf{Generative Synthesis Agent (LLM)} to create new candidate SNOs.
@@ -149,7 +148,6 @@ The full system operates as follows:
     \item \textbf{Selection:} SNOs that achieve a high Trust Score are integrated into the main population. Low-scoring SNOs are archived. This constitutes the survival-of-the-fittest mechanism for knowledge.
 \end{enumerate}
 
-<!-- CHANGE START: Rework the gradient ascent section to be logically coherent. -->
 \subsection{Guided Narrative Exploration via Latent Space Targeting}
 Instead of directly modifying an SNO's components via gradient ascent, which can lead to internal inconsistency, we propose a more robust generative method for narrative exploration. When an agent seeks to refine an SNO$_i$ that is part of a chiral pair with SNO$_j$, it can compute a *target embedding* in a novel region of the conceptual space.
 
@@ -158,7 +156,7 @@ The target embedding, $H_{\text{target}}$, can be calculated as:
 H_{\text{target}} = H_{i} + \alpha \nabla_{H_i} \text{Reward}(SNO_i) + \beta \cdot \text{CScore}(SNO_i, SNO_j) \frac{H_{i} - H_{j}}{\|H_{i} - H_{j}\|}
 \end{equation}
 This vector represents a conceptual direction that is rewarded by the critic while also being repelled from its chiral partner. This $H_{\text{target}}$ is not used to modify SNO$_i$. Instead, it is used to prompt a generative agent: "Generate a new SNO whose core hypothesis is semantically close to $H_{\text{target}}$, drawing inspiration from the reasoning and evidence of SNO$_i$." This prompts the creation of a new, fully-formed candidate SNO that explores the space between existing ideas, which can then be evaluated by the critic pipeline.
-<!-- CHANGE END -->
+
 
 \section{Discussion and Future Work}
 This CNS 2.0 blueprint creates a far more plausible and powerful system by making the abstract components of earlier models concrete. It directly addresses key philosophical and practical challenges.
@@ -167,7 +165,6 @@ This CNS 2.0 blueprint creates a far more plausible and powerful system by makin
 
 \textbf{Interpretability and Grounding:} The framework is inherently more interpretable. The success of a given SNO is not a mystery; it can be explained by its individual scores from the critic pipeline (e.g., "This narrative is trusted because its logic is sound and its evidence is verifiable, despite being similar to existing ideas"). The `Evidence Set (E)` and `Grounding Critic` directly solve the grounding problem, anchoring the abstract narrative space to verifiable data.
 
-<!-- CHANGE START: Turn "Challenges" into a structured "Future Work" section, addressing dataset and evaluation issues. -->
 \textbf{Future Work and Research Roadmap:} The primary challenge shifts from conceptual design to engineering, tuning, and evaluation. This proposal defines the following key research thrusts:
 
 \begin{enumerate}
@@ -184,7 +181,7 @@ This CNS 2.0 blueprint creates a far more plausible and powerful system by makin
 
     \item \textbf{Formal Evaluation Protocol:} To measure the system's success, we will develop a formal evaluation protocol. A candidate experiment involves seeding the system with SNOs derived from papers representing historical scientific debates (e.g., plate tectonics vs. geosyncline theory). The primary success metric will be the system's ability to generate a synthesized SNO that aligns with the modern scientific consensus, evaluated both by its Critic Score and by human expert review.
 \end{enumerate}
-<!-- CHANGE END -->
+
 
 \section{Conclusion}
 Chiral Narrative Synthesis 2.0 provides a comprehensive blueprint for a multi-agent system capable of automated knowledge discovery. By integrating a rich narrative structure (SNO), a transparent evaluation pipeline (Multi-Component Critic), a sophisticated generative engine (LLM Synthesizer), and precise relational metrics (Chirality and Entanglement), this framework moves beyond a purely conceptual model. It lays out a practical path and a clear research roadmap toward building AI systems that can reason about, reconcile, and synthesize conflicting information to generate novel and robust insights.
@@ -207,7 +204,6 @@ Kipf, T. N., \& Welling, M. (2017).
 Semi-Supervised Classification with Graph Convolutional Networks.
 \textit{International Conference on Learning Representations (ICLR)}.
 
-<!-- CHANGE START: Add new citations. -->
 \bibitem{Kuhn1962}
 Kuhn, T. S. (1962).
 \textit{The Structure of Scientific Revolutions}.
@@ -222,7 +218,7 @@ Argumentation mining: State of the art and emerging trends.
 Toulmin, S. E. (2003).
 \textit{The Uses of Argument}.
 Cambridge University Press. (Original work published 1958).
-<!-- CHANGE END -->
+
 
 \end{thebibliography}
 
