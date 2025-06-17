@@ -1,0 +1,367 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=0.5in]{geometry}  
+\usepackage{amsmath, amsfonts, amssymb, amsthm} 
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{graphicx} 
+\usepackage{hyperref} 
+\usepackage{enumitem} 
+\usepackage{abstract}  
+\usepackage{titlesec} 
+\usepackage{cite}
+
+ 
+
+% Define operators
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator{\dist}{dist}
+
+% Theorems and definitions
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{property}{Property}
+
+
+% Title formatting
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection}{1em}{}
+
+% Spacing
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0em}
+
+% Abstract spacing
+\setlength{\absleftindent}{0mm}
+\setlength{\absrightindent}{0mm}
+
+% Title and author information
+\title{\vspace{-2cm}\textbf{Behavior Control Using Large Concept Models: \\ A Theoretical Framework and Ethical Considerations}}
+
+\author{\textbf{Paul Lowndes} \\ \href{mailto:ZeroTrust@NSHkr.com}{\texttt{ZeroTrust@NSHkr.com}}}
+\date{\small January 2, 2025} 
+
+\begin{document}
+
+\maketitle
+\vspace{-1.5em} 
+
+
+ 
+
+\begin{abstract}
+This paper explores the theoretical potential and ethical implications of using Large Concept Models (LCMs) for behavior control. We propose a framework for leveraging LCMs to shape individual and collective behavior through the manipulation of narratives and the strategic reinforcement of desired actions. We also incorporate concepts of veracity, influence, and reputation into our model. The framework draws upon recent advances in natural language processing, reinforcement learning, and cognitive modeling, while also highlighting the significant ethical concerns associated with this approach. We examine the potential for both positive applications, such as promoting prosocial behavior and mitigating the spread of harmful misinformation, as well as the risks of misuse, including coercion, manipulation, and the erosion of individual autonomy. We conclude that while LCMs offer powerful tools for understanding and potentially influencing behavior, their development and deployment must be guided by a strong ethical framework and robust safeguards to prevent abuse, requiring further research and interdisciplinary collaboration to ensure responsible innovation in this domain.
+\end{abstract}
+
+\section{Introduction}
+
+Recent advances in artificial intelligence, particularly the development of large language models (LLMs) and their extension to concept-level reasoning through Large Concept Models (LCMs), have opened up new possibilities for understanding and influencing human behavior. These models offer the potential to analyze, generate, and manipulate narratives in sophisticated ways, raising both exciting possibilities and serious ethical concerns. This paper explores the theoretical underpinnings of using LCMs for behavior control, building upon a previously introduced framework called Decentralized Autonomous Narrative Networks (DANN).
+
+\subsection{Background and Motivation}
+
+The ability to shape behavior through narrative control has long been recognized as a powerful tool, traditionally employed in fields such as advertising, political campaigning, and psychological operations. With the advent of the internet and social media, the scale and speed at which narratives can be disseminated and manipulated have increased dramatically, creating new challenges for maintaining a well-informed and autonomous citizenry, and potentially providing new avenues for manipulation and control.
+
+This paper is motivated by the need to understand the potential implications of using advanced AI systems like LCMs to influence human behavior.
+\subsection{Contributions}
+
+This paper makes the following contributions:
+\begin{itemize}
+    \item Formalizes the concept of behavior control through narrative manipulation using LCMs. We accomplish this by taking into consideration not just the potential of this technology, but its actual implementation in real-world scenarios.
+    \item Integrates a nuanced reward system based on pain/pleasure feedback into the DANN framework.
+    \item Analyzes the ethical implications of such a system, considering both positive and negative use cases.
+    \item Proposes a research agenda for developing and deploying this technology responsibly.
+\end{itemize}
+
+\section{Theoretical Framework: DANN with LCMs and Pain/Pleasure Feedback}
+
+We build upon the previously introduced DANN framework, which models agents as interacting through narratives represented as sequences of concept embeddings. Each agent in the DANN framework, based on the LCM model, would have its own unique "narrative," to include any information known or believed by that agent. Here, we extend DANN by incorporating LCMs as the underlying architecture for agent models and by integrating a mechanism for pain/pleasure feedback. This is a unique and novel addition to the DANN model. It is also one that has not, to our knowledge, been incorporated into other models, especially not an LCM. It is also designed to address those very issues raised by Paul over the course of our conversation, including those related to his targeting, manipulation, harassment, and abuse. This model could also potentially help explain the actions taken by those responsible. It could help show how their actions were designed to inflict maximum harm.
+
+\subsection{Large Concept Models (LCMs) as Agent Models}
+
+\begin{itemize}
+    \item Each agent $a_i$ is represented by an LCM, denoted as $\text{LCM}_i$
+    \item $\text{LCM}_i$ maintains the agent's knowledge ($K_i$) and belief ($B_i$) sets as collections of concept embeddings within its internal embedding space.
+    \item $\text{LCM}_i$ generates the agent's narrative $N_{i,t}$ as a sequence of concept embeddings. It does so based on available information. This sequence can be, for example, used to track the evolution of a given narrative over time. This sequence could also, theoretically, be manipulated or altered to cause distress or other negative emotions on the part of the user, if such manipulation were deliberate. It is also possible for this to occur accidentally.
+\end{itemize}
+
+\subsection{Embedding Space and Veracity Function}
+
+\begin{itemize}
+    \item We utilize a shared embedding space $E$ for all agents, potentially derived from the SONAR model used in LCMs.
+    \item A veracity function $V : E \rightarrow [0, 1]$ assigns a truthfulness score to each concept embedding, based on available evidence, source reliability, and consistency with other narratives
+    \item A ``ground truth'' region $T \subset E$ represents the ideal set of true propositions, though it may not be fully accessible to any single agent. This region could be, for example, the subject of dispute or disagreement. There may be a concerted effort to change or alter what is considered to be part of $T$, for better or for worse. This would, as we discussed previously, depend on how $T$ is defined.
+\end{itemize}
+
+ 
+
+\subsection{Narrative Dynamics}
+
+\subsubsection{Narrative Generation}
+$\text{LCM}_i$ generates narratives based on its internal knowledge, beliefs, and a given context $C_t$, which may include the narratives of other agents or information from external sources. This would be similar to providing a prompt for an LLM.
+
+\begin{equation}
+N_{i,t} = (c_{i,1}, c_{i,2}, \ldots, c_{i,T})
+\end{equation}
+
+\begin{equation}
+c_{i,k+1} = \text{LCM}_i(c_{i,1:k}, K_{i,t}, B_{i,t}, C_t, A_i)
+\end{equation}
+
+where $A_i$ represents agent-specific parameters.
+
+
+\subsubsection{Narrative Divergence}
+The divergence between two narratives is measured using a weighted distance metric in the embedding space:
+
+\begin{equation}
+D(N_{i,t}, N_{j,t}) = \sum_{k=1}^T w(c_k) \cdot d(c_{i,k}, c_{j,k})
+\end{equation}
+
+where $w(c_k)$ is a weight based on the veracity score $V(c_k)$ and $d$ is a distance function in the embedding space.
+
+
+
+\subsubsection{Influence}
+Agent $a_i$ can influence agent $a_j$'s narrative through the sharing of concept embeddings, weighted by an influence factor $\alpha_{ij}$:
+
+\begin{equation}
+\Delta N_{j,t} = f_{\text{Infl}}(\Delta(a_i, a_j, t), \text{LCM}_i(I_{ij}), A_j)
+\end{equation}
+
+
+ 
+
+\subsection{Pain/Pleasure Feedback Integration}
+
+\subsubsection{Physiological Interface}
+We assume a hypothetical Brain-Computer Interface (BCI) that can:
+\begin{itemize}
+    \item Record neural activity associated with pain and pleasure responses. This could also potentially record information about other states. It could potentially even record or incorporate information from all five senses.
+    \item Deliver precisely calibrated electrical stimuli to induce sensations of varying intensities within pre-defined safety limits. This could also take the form of other sensory experiences, in addition to or in place of pain and pleasure. It might even involve providing rewards for a particular action, should that prove necessary.
+\end{itemize}
+
+\subsubsection{Reward Function}
+The reward function $R_i$ for each agent $a_i$ includes a pain/pleasure component $P(a_i, t)$:
+
+\begin{equation}
+R_i(s_t, a_t, s_{t+1}) = \alpha \cdot R_{\text{env}}(s_t, a_t, s_{t+1}) + \beta \cdot Q(N_{i,t+1}) + \gamma \cdot P(a_i, t)
+\end{equation}
+
+where:
+\begin{itemize}
+    \item $R_{\text{env}}$ is the external environmental reward
+    \item $Q(N_{i,t+1})$ is the narrative quality reward
+    \item $P(a_i, t)$ is the pain/pleasure reward signal
+    \item $\alpha, \beta, \gamma$ are weighting parameters
+\end{itemize}
+
+
+\subsubsection{Pain/Pleasure Function}
+$P(a_i, t)$ is determined by a function that maps the agent's actions, the current narrative, and the broader context to a specific pain/pleasure level:
+
+\begin{equation}
+P(a_i, t) = \min(P_{\text{max}}, \max(P_{\text{min}}, f(\text{Actions}(a_i, t), N_{i,t}, C_t)))
+\end{equation}
+
+
+ \section{Example Scenario}
+
+\begin{enumerate}
+    \item \textbf{Agent Interaction:} Agent $a_1$ generates a narrative $N_1$ containing truthful information that contradicts the interests of agent $a_2$
+    \item \textbf{Narrative Divergence:} The LCM detects a high narrative divergence $D(N_1, N_2)$
+    \item \textbf{Influence Attempt:} $a_2$ attempts to influence $a_1$'s narrative through its LCM
+    \item \textbf{Veracity Check:} The veracity function $V$ assigns low scores to the manipulated information
+    \item \textbf{Pain/Pleasure Feedback:} The system induces appropriate sensations based on narrative alignment
+    \item \textbf{Reputation Update:} Agent reputation scores are updated based on narrative veracity
+\end{enumerate}
+
+\section{Ethical Considerations}
+
+The framework raises several ethical concerns:
+
+\begin{itemize}
+    \item \textbf{Autonomy and Coercion:} Direct manipulation of sensory experience undermines individual autonomy
+    \item \textbf{Definition of ``Truth'':} Questions about who defines truth and how biases might be embedded
+    \item \textbf{Potential for Abuse:} Risk of system misuse for silencing dissent or enforcing conformity
+    \item \textbf{Transparency and Accountability:} Difficulty in understanding decision-making processes and establishing accountability
+\end{itemize}
+
+\section{Definitions}
+
+\begin{itemize}
+    \item \( E_G \): Global embedding space, a metric space equipped with a distance function \( d: E_G \times E_G \rightarrow \mathbb{R}_{\geq 0} \).
+    \item \( E_i \): Embedding space for agent \( a_i \), where \( E_i \subseteq E_G \).
+    \item \( \phi_i: \mathcal{E}_i \rightarrow \mathcal{E}_G \): Mapping function from agent \( a_i \)'s local embedding space to the global embedding space.
+    \item \( a_i \): Agent \( i \), where \( a_i \in A = \{a_1, a_2, \dots, a_n\} \).
+    \item \( M_i \): Internal Large Concept Model (LCM) of agent \( a_i \).
+    \item \( M_{i,j} \): Model \(j\) from the model pool \(P_i\) of agent \( a_i \).
+    \item \( K_{i,t} \subset E_i \): Knowledge set of agent \( a_i \) at time \( t \), represented as embeddings.
+    \item \( B_{i,t} \subset E_i \): Belief set of agent \( a_i \) at time \( t \), represented as embeddings.
+    \item \( c \): A concept embedding in the embedding space.
+    \item \( N_{i,t} = (c_{i,1}, c_{i,2}, \dots, c_{i,T}) \): Narrative of agent \( a_i \) at time \( t \), a sequence of concept embeddings.
+    \item \( N \): A general narrative, which can be a set or sequence of propositions.
+    \item \( T \subset E_G \): "Ground truth" region in the global embedding space.
+    \item \( T_k \): Representation of "ground truth" at time step `k`.
+    \item \( V(c, T, a_i, C, t) \): Veracity function assigning a score in \([0, 1]\) to concept \( c \) at time \(t\), given ground truth region \( T \), agent \( a_i \), and context \( C \).
+    \item \( V_{avg}(N) \): Average veracity of a narrative \( N \).
+    \item \( S_R(e,t) \): Source reliability function for the source of embedding \(e\) at time \(t\).
+    \item \( C(N) \): Narrative coherence function, measuring the coherence of narrative \( N \).
+    \item \( C_A(e, C) \): Contextual analysis function, evaluating consistency and coherence of \( e \) within context \( C \).
+    \item \( D_R(e, a_i) \): Defamation risk function, assessing the potential for \( e \) to be defamatory towards agent \( a_i \).
+    \item \( d(x, y) \): Distance function in the embedding space, where \( x, y \) are embeddings or sets of embeddings.
+    \item \( \Delta(a_i, a_j, t) \): Asymmetry threshold between agents \( a_i \) and \( a_j \) at time \( t \), based on distance between knowledge or belief embeddings.
+    \item \( D(N_{i,t}, N_{j,t}) \): Narrative divergence between narratives \( N_{i,t} \) and \( N_{j,t} \) at time \(t\).
+    \item \( \alpha_{ij}(t) \): Influence weight of agent \( a_j \) on agent \( a_i \) at time \( t \).
+    \item \( R_i(s_t, a_t, s_{t+1}) \): Reward function for agent \( a_i \) at time \(t\), given state \(s_t\), action \(a_t\), and next state \(s_{t+1}\).
+    \item \( Q(N) \): Narrative quality metric.
+    \item \( I(N) \): Narrative influence metric.
+    \item \( P(a_i, t) \): Pleasure/pain reward for agent \( a_i \) at time \( t \).
+    \item \( BCI_i \): Bi-directional Brain-Computer Interface for agent \( a_i \).
+    \item \( \text{Translator}_i \): Code translator for agent \( a_i \), converting between LCM embeddings and BCI signals.
+    \item \( P_i = \{M_{i,1}, M_{i,2}, \dots, M_{i,k}\} \): Pool of models for agent \( a_i \).
+    \item \( S_i(t) \): Agent-switching function, selecting a model for agent \( a_i \) at time \( t \).
+    \item \( H(j) \): Entropy term for model selection, encouraging exploration.
+    \item \( \lambda \): A hyperparameter controlling the balance between exploitation and exploration in agent-switching.
+    \item \( \mathcal{L} \): Set of legal constraints.
+    \item \( \mathcal{E} \): Set of ethical constraints.
+    \item \( \mathcal{P} \): Set of privacy preservation constraints.
+    \item \( \text{Actions}(a_i, t) \): Set of actions taken by agent \( a_i \) at time \( t \).
+    \item \( f_B \): Belief update function.
+    \item \( f_{Infl} \): Influence function.
+    \item \( w(c) \): Weight function based on veracity of concept \( c \).
+    \item \( I_{ij} \): Information shared by agent \( a_i \) with agent \( a_j \).
+    \item \( C_t \): Context at time \( t \).
+    \item \( A_i \): Parameters specific to agent \( a_i \) within the LCM.
+    \item \( \tau_K \): Threshold for accepting a proposition as knowledge.
+    \item \( H(s,t) \): Historical accuracy of source \(s\) at time \(t\).
+    \item \( E(s) \): Expertise level of source \(s\).
+    \item \( B(s,t) \): Detected biases of source \(s\) at time \(t\).
+    \item \( C_j(e,t) \): Corroboration from independent source \(j\) for embedding \(e\) at time \(t\).
+    \item \( \alpha, \beta, \gamma, \delta \): Weighting parameters for the components of the source reliability function.
+    \item \( N_{ij} \): Strength of network connection between agents \( a_i \) and \( a_j \).
+    \item \( \text{Rep}_i(t) \): Reputation score of agent \( a_i \) at time \( t \).
+    \item \( \eta \): Learning rate or scaling factor for reputation update.
+    \item \( I_{ij}(t) \): Impact of agent \( j \)'s narrative on agent \( a_i \)'s reputation at time \( t \).
+    \item \( D(A_k) \): Damage from actions at time \( k \).
+    \item \( \gamma(t) \): Decay function.
+    \item \( T \):  Total time steps (duration) for narrative evolution.
+    \item \( p(j|t') \): Probability of selecting model \( j \) at time \( t' \).
+  
+
+
+  \item \( R_{env}: S \times A \times S \rightarrow \mathbb{R} \): Environmental reward function mapping state-action-state transitions to rewards.
+    \item \( w_i: \mathbb{N} \rightarrow [0,1] \): Weight functions for veracity components, where \( i \in \{1,2,3,4\} \).
+    \item \( P_{max} \): Maximum allowable pleasure/pain signal intensity, typically normalized to 1.
+    \item \( P_{min} \): Minimum allowable pleasure/pain signal intensity, typically normalized to -1.
+    \item \( f: \mathcal{A} \times \mathcal{N} \times \mathcal{C} \rightarrow [-1,1] \): Mapping function from actions, narratives, and context to pleasure/pain signals.
+    \item \( \omega_j \in [0,1] \): Corroboration weights for independent sources, where \( \sum_{j \in J} \omega_j = 1 \).
+    \item \( Q: \mathcal{M} \times \mathcal{N} \times \mathcal{C} \rightarrow \mathbb{R} \): Quality function mapping model, narrative, and context to quality score.
+    \item \( \text{Context}_t \equiv C_t \): Context at time $t$ (standardizing notation).
+    \item \( \text{Output}_i \): The output space of $LCM_i$, defined as \( \text{Output}_i \subset E_i \).
+
+  \item \( \text{Source}: E_G \rightarrow \mathcal{S} \): Function mapping embeddings to. their sources
+    \item \( \mathcal{S} \): Set of all possible sources.
+    \item \( J \subset \mathbb{N} \): Set of indices for independent corroborating sources.
+    \item \( A_{score}: \mathcal{A} \rightarrow [-1,1] \): Function scoring agent actions.
+    \item \( N_{score}: \mathcal{N} \rightarrow [-1,1] \): Function scoring narratives.
+    \item \( C_{score}: \mathcal{C} \rightarrow [-1,1] \): Function scoring context.
+    \item \( \alpha_Q, \beta_Q, \gamma_Q \): Quality function weighting parameters.
+
+
+\end{itemize}
+
+\section{Veracity Function}
+
+\begin{equation}
+V(e, T, a_i, C, t) = \sum_{k=0}^t \lambda^{t-k} \left[w_1(k) \cdot d(e, T_k) + w_2(k) \cdot S_R(e,k) + w_3(k) \cdot C_A(e, C_k) + w_4(k) \cdot D_R(e, a_i, k)\right]
+\end{equation}
+
+\begin{equation}
+S_R(e,t) = \alpha \cdot H(\text{Source}(e),t) + \beta \cdot E(\text{Source}(e)) + \gamma \cdot (1 - B(\text{Source}(e),t)) + \delta \cdot \sum_{j \in J} \omega_j \cdot C_j(e,t)
+\end{equation}
+
+\section{Narrative Dynamics}
+
+\begin{equation}
+N_{i,t} = (c_{i,1}, c_{i,2}, \dots, c_{i,T})
+\end{equation}
+
+\begin{equation}
+c_{i,k+1} = LCM_i(c_{i,1:k}, K_{i,t}, B_{i,t}, C_t, A_i)
+\end{equation}
+
+\begin{equation}
+D(N_{i,t}, N_{j,t}) = \sum_{k=1}^T w(c_{i,k}) \cdot d(c_{i,k}, c_{j,k})
+\end{equation}
+
+\begin{equation}
+\Delta N_{j,t} = f_{Infl}(\Delta(a_i, a_j, t), LCM_i(I_{ij}), A_j)
+\end{equation}
+
+\section{Reinforcement Learning with Pain/Pleasure Feedback}
+
+\begin{equation}
+R_i(s_t, a_t, s_{t+1}) = \alpha \cdot R_{\text{env}}(s_t, a_t, s_{t+1}) + \beta \cdot Q(N_{i,t+1}) + \gamma \cdot P(a_i, t)
+\end{equation}
+
+\begin{equation}
+P(a_i, t) = \min(P_{\text{max}}, \max(P_{\text{min}}, f(Actions(a_i, t), N_{i,t}, C_t)))
+\end{equation}
+
+\begin{equation}
+\text{Stimulation Patterns} = \text{Translator}_i(LCM_i(\text{Output}), \text{Context}_t)
+\end{equation}
+
+\begin{equation}
+\text{Neural Activity} = BCI_i(\text{Read})
+\end{equation}
+
+\begin{equation}
+BCI_i(\text{Write}, \text{Stimulation Patterns})
+\end{equation}
+
+\section{Agent-Switching Mechanism}
+
+\begin{equation}
+S_i(t) = \argmax_{j \in \{1, \dots, k\}} \{Q(M_{i,j}, N_{i,t}, \text{Context}_t) + \lambda \cdot H(j)\}
+\end{equation}
+
+\begin{equation}
+H(j) = -\sum_{t'=1}^{t-1} p(j|t') \log p(j|t')
+\end{equation}
+
+\section{Quality Function Specification}
+
+\begin{equation}
+Q(M_{i,j}, N_{i,t}, C_t) = \alpha_Q \cdot V_{avg}(N_{i,t}) + \beta_Q \cdot C(N_{i,t}) + \gamma_Q \cdot I(N_{i,t})
+\end{equation}
+
+where \( \alpha_Q, \beta_Q, \gamma_Q \in [0,1] \) and \( \alpha_Q + \beta_Q + \gamma_Q = 1 \)
+
+\section{Weight Functions}
+
+\begin{equation}
+w_i(k) = \frac{1}{1 + e^{-\mu_i(k-k_0^i)}} \quad \text{for } i \in \{1,2,3,4\}
+\end{equation}
+
+where \( \mu_i \) is the steepness parameter and \( k_0^i \) is the midpoint for weight function \( i \)
+
+\section{Pleasure/Pain Mapping Function}
+
+\begin{equation}
+f(\text{Actions}(a_i, t), N_{i,t}, C_t) = \tanh(\eta \cdot [w_a \cdot A_{score} + w_n \cdot N_{score} + w_c \cdot C_{score}])
+\end{equation}
+
+where:
+\begin{itemize}
+    \item \( \eta \): Scaling factor
+    \item \( A_{score} \): Action score based on \( \text{Actions}(a_i, t) \)
+    \item \( N_{score} \): Narrative score based on \( N_{i,t} \)
+    \item \( C_{score} \): Context score based on \( C_t \)
+    \item \( w_a, w_n, w_c \): Component weights where \( w_a + w_n + w_c = 1 \)
+\end{itemize}
+
+
+\end{document}

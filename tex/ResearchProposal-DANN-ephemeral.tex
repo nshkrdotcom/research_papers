@@ -1,0 +1,187 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsmath, amsfonts, amssymb, amsthm}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{abstract}
+\usepackage{titlesec}
+\usepackage{cite}
+
+% Define operators
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator{\dist}{dist}
+
+% Theorems and definitions
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{property}{Property}
+
+% Title formatting
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection}{1em}{}
+
+% Spacing
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0em}
+\setlength{\absleftindent}{0mm}
+\setlength{\absrightindent}{0mm}
+
+\title{\vspace{-2cm}\textbf{Beyond Veracity: A Dynamic Framework for Modeling Adversarial Narratives in the Age of Misinformation}}
+\author{\textbf{Paul Lowndes} \\ \href{mailto:ZeroTrust@NSHkr.com}{\texttt{ZeroTrust@NSHkr.com}}}
+\date{\small January 1, 2025}
+
+\begin{document}
+
+\maketitle
+\vspace{-1.5em}
+
+\begin{abstract}
+This paper presents the Dynamic Adversarial Narrative Network (DANN) framework, a novel approach to modeling the evolution and propagation of narratives in online spaces. We introduce mathematical formulations for analyzing narrative dynamics, incorporating veracity assessment, influence measurement, and reputational impact. The framework employs an ontology-free approach to knowledge representation and introduces ephemeral narrative graphs\cite{ephemeral_knowledge_graphs} for dynamic analysis. Building upon Large Concept Models (LCMs), we present a modular architecture that enables multi-step reasoning and multi-source fusion. Through real-world case studies, we demonstrate how DANN can help identify and potentially mitigate harmful narrative patterns. We conclude by discussing ethical implications and safeguards against potential misuse of this technology.
+\end{abstract}
+
+\section{Introduction}
+\subsection{Background}
+The proliferation of online platforms has created unprecedented opportunities for narrative manipulation and targeted harassment campaigns. Traditional Multi-Agent Reinforcement Learning (MARL) approaches fail to capture the complex dynamics of these interactions, particularly when powerful actors leverage platform mechanics to amplify harmful narratives. This paper builds upon the work of Large Concept Models (LCMs) \cite{lcm_paper}, integrating their capabilities with an ontology-free approach to knowledge representation that better captures the dynamic nature of online narratives.
+
+\subsection{Contributions}
+This paper makes the following contributions:
+\begin{itemize}
+    \item A formal mathematical framework for modeling narrative dynamics in adversarial contexts
+    \item Novel mechanisms for quantifying and tracking reputational damage
+    \item Introduction of ephemeral narrative graphs for dynamic analysis
+    \item A modular architecture supporting multi-step reasoning and multi-source fusion
+    \item Practical strategies for detecting and mitigating coordinated manipulation
+\end{itemize}
+
+\section{Framework Overview}
+\subsection{Fundamental Spaces}
+Let $\mathcal{E}_G$ represent the global embedding space where:
+
+\begin{equation}
+\mathcal{E}_G = \{\mathbf{e} \in \mathbb{R}^d : \|\mathbf{e}\| \leq 1\}
+\end{equation}
+
+For each agent $a_i$, we define a local embedding space $\mathcal{E}_i$ with mapping function $\phi_i$:
+
+\begin{equation}
+\phi_i: \mathcal{E}_i \rightarrow \mathcal{E}_G
+\end{equation}
+
+\subsection{Ephemeral Narrative Graphs}
+We introduce query-specific narrative graphs $N_{i,Q}(t)$ for agent $a_i$ at time $t$:
+
+\begin{equation}
+N_{i,Q}(t) = f_N(K_i(t), B_i(t), Q, \theta_i)
+\end{equation}
+
+where $Q$ represents the query or analysis context, and $\theta_i$ represents agent-specific parameters.
+
+\subsection{Knowledge and Belief Sets}
+For agent $a_i$, we define:
+\begin{equation}
+K_i(t) = \{\mathbf{e} \in \mathcal{E}_i : p_K(\mathbf{e}, t) > \tau_K\}
+\end{equation}
+
+\begin{equation}
+B_i(t) = \{\mathbf{e} \in \mathcal{E}_i : p_B(\mathbf{e}, t) > \tau_B\}
+\end{equation}
+
+where $p_K$ and $p_B$ are probability functions for knowledge and belief respectively.
+
+\section{Enhanced Veracity Function}
+\subsection{Multi-Source Fusion}
+We extend the veracity function to incorporate multiple information sources:
+
+\begin{equation}
+V(e, T, a_i, C, t) = \sum_{k=0}^t \lambda^{t-k} [\sum_{s \in S} w_s \cdot R(s) \cdot v_s(e, k)]
+\end{equation}
+
+where $S$ is the set of information sources, $w_s$ is the source-specific weight, $R(s)$ is the reliability score, and $v_s$ is the source-specific veracity assessment.
+
+\subsection{Source Reliability Assessment}
+The source reliability function incorporates multiple factors:
+
+\begin{equation}
+R(s) = \alpha H(s) + \beta E(s) + \gamma(1-B(s)) + \delta \sum_{j \in J} \omega_j C_j(s)
+\end{equation}
+
+where:
+\begin{itemize}
+    \item $H(s)$: Historical accuracy
+    \item $E(s)$: Domain expertise
+    \item $B(s)$: Measured bias
+    \item $C_j(s)$: Corroboration from independent source $j$
+\end{itemize}
+
+\section{Multi-Step Reasoning Framework}
+\subsection{Reasoning Pipeline}
+We implement a multi-step reasoning process:
+
+\begin{algorithm}[H]
+\caption{Multi-Step Reasoning Process}
+\begin{algorithmic}[1]
+\State Extract relevant information from sources
+\State Construct ephemeral narrative graph
+\State Perform entity disambiguation
+\State Apply source credibility weights
+\State Generate reasoning chain
+\State Produce final analysis
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Modular Architecture}
+The system is composed of independent modules:
+\begin{itemize}
+    \item Information Extraction Module
+    \item Graph Construction Module
+    \item Entity Resolution Module
+    \item Analysis Engine
+    \item Verification Module
+\end{itemize}
+
+\section{Implementation and Safeguards}
+[Previous sections on Implementation and Safeguards remain unchanged]
+
+\section{Dataset and Evaluation}
+[Previous sections on Dataset and Evaluation remain unchanged]
+
+\section{Limitations}
+\begin{itemize}
+    \item Computational complexity of full network analysis
+    \item Challenges in ground truth determination
+    \item Potential for system manipulation
+    \item Privacy preservation concerns
+    \item Scalability of ephemeral graph generation
+    \item Reliability of source credibility assessment
+\end{itemize}
+
+\section{Discussion and Future Work}
+\subsection{Future Directions}
+\begin{itemize}
+    \item Integration with platform-specific monitoring tools
+    \item Development of early warning systems
+    \item Enhanced privacy-preserving mechanisms
+    \item Improved temporal modeling capabilities
+    \item Refinement of multi-source fusion techniques
+    \item Optimization of ephemeral graph generation
+\end{itemize}
+
+\section{Conclusion}
+The DANN framework provides a structured approach to understanding and potentially mitigating online narrative manipulation. The introduction of ephemeral narrative graphs, multi-source fusion, and modular architecture enhances its capability to handle complex, real-world scenarios. While powerful, it must be developed and deployed with careful consideration of ethical implications and potential misuse. Future work should focus on practical implementation strategies and robust safeguards.
+
+\begin{thebibliography}{9}
+    \bibitem{ephemeral_knowledge_graphs}
+    Ephemeral Knowledge Graphs.
+    \href{https://www.youtube.com/watch?v=pF8zTI867EI}{https://www.youtube.com/watch?v=pF8zTI867EI}
+    \bibitem{lcm_paper} 
+    Large Concept Model. 
+    \href{https://ai.meta.com/research/publications/large-concept-models-language-modeling-in-a-sentence-representation-space/}{https://ai.meta.com/research/publications/large-concept-models-language-modeling-in-a-sentence-representation-space/}
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,3310 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+The content has been processed where content has been compressed (code blocks are separated by ⋮---- delimiter).
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Content has been compressed - code blocks are separated by ⋮---- delimiter
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+blurb.tex
+lcm_ns.tex
+PAPERS.md
+ResearchProposal-BehaviorControl.tex
+ResearchProposal-ChiralGradientDescent.tex
+ResearchProposal-ChiralNarrativeSynthesis.tex
+ResearchProposal-DANN_Fertilizer.tex
+ResearchProposal-DANN_Impact.tex
+ResearchProposal-DANN-ephemeral.tex
+ResearchProposal-DANN-Summary.tex
+ResearchProposal-DANN.tex
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path="blurb.tex">
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsmath, amsfonts, amssymb, amsthm}
+\usepackage{tensor}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{abstract}
+\usepackage{titlesec}
+\usepackage{cite}
+
+% Define operators
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator{\dist}{dist}
+
+% Theorems and definitions
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{property}{Property}
+
+% Title formatting
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection}{1em}{}
+
+% Spacing
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0em}
+\setlength{\absleftindent}{0mm}
+\setlength{\absrightindent}{0mm}
+
+\title{\vspace{-2cm}\textbf{}}
+\author{\textbf{Paul Lowndes} \\ \href{mailto:ZeroTrust@NSHkr.com}{\texttt{ZeroTrust@NSHkr.com}}}
+\date{\small January 15, 2025}
+\begin{document}
+\maketitle
+\vspace{-1.5em}
+\section*{Mathematical Framework for Narrative Synthesis using Latent Space Techniques}
+
+\begin{enumerate} \item \textbf{Formal Definition of Narratives in Latent Space:}
+
+A narrative $\mathcal{N}$ can be represented in a latent space $\mathcal{L} \subseteq \mathbb{R}^d$, where $d$ is the dimensionality of the latent space. We consider two primary representations:
+
+\begin{itemize}
+    \item \textit{Narrative as a Point}:  A static representation where the narrative is summarized by a single point in the latent space:
+    \begin{equation*}
+        \mathcal{N} = \mathbf{n} \in \mathcal{L}
+    \end{equation*}
+    where $\mathbf{n}$ is a $d$-dimensional vector.
+
+    \item \textit{Narrative as a Trajectory}: A dynamic representation where the narrative unfolds as a path or trajectory in the latent space, parameterized by a time or thematic progression variable $t \in [0, T]$:
+    \begin{equation*}
+        \mathcal{N} = \gamma(t) : [0, T] \rightarrow \mathcal{L}
+    \end{equation*}
+    where $\gamma(t)$ is a vector-valued function in $\mathbb{R}^d$.
+\end{itemize}
+
+\item \textbf{Mathematical Formulation for Chirality between Narratives:}
+
+Chirality refers to the handedness or mirror asymmetry between narratives.  We can define it differently for point and trajectory representations:
+
+\begin{itemize}
+    \item \textit{Chirality between two narratives as points ($\mathbf{n}_1, \mathbf{n}_2$)}:  Consider a reference vector $\mathbf{r}$ that defines a plane or direction of comparison. Chirality can be assessed based on the orientation of the triplet $(\mathbf{r}, \mathbf{n}_1, \mathbf{n}_2)$.  For example, in 3D:
+    \begin{equation*}
+        \text{Chirality}(\mathbf{n}_1, \mathbf{n}_2 | \mathbf{r}) = \text{sign}((\mathbf{n}_1 - \mathbf{r}) \times (\mathbf{n}_2 - \mathbf{r}) \cdot \mathbf{r})
+    \end{equation*}
+    where $\times$ is the cross product and $\cdot$ is the dot product.  A non-zero value indicates chirality.  Generalization to higher dimensions might involve the sign of a higher-order determinant.
+
+    \item \textit{Chirality between two narratives as trajectories ($\gamma_1(t), \gamma_2(t)$)}: This can involve comparing the orientation of their tangent vectors at corresponding points.  Let $\dot{\gamma}_1(t) = \frac{d\gamma_1(t)}{dt}$ and $\dot{\gamma}_2(t) = \frac{d\gamma_2(t)}{dt}$.  Considering a reference trajectory tangent $\dot{\mathbf{r}}(t)$:
+    \begin{equation*}
+        \text{Chirality}(\gamma_1, \gamma_2 | \dot{\mathbf{r}}(t)) = \int_0^T \text{sign}((\dot{\gamma}_1(t) - \dot{\mathbf{r}}(t)) \times (\dot{\gamma}_2(t) - \dot{\mathbf{r}}(t)) \cdot \dot{\mathbf{r}}(t)) \, dt
+    \end{equation*}
+    Integrating over the trajectory provides a global measure of chirality.
+\end{itemize}
+
+\item \textbf{Mathematical Formulation for Orthogonality between Narratives:}
+
+Orthogonality signifies a high degree of dissimilarity or independence between narratives.
+
+\begin{itemize}
+    \item \textit{Orthogonality between two narratives as points ($\mathbf{n}_1, \mathbf{n}_2$)}:
+    \begin{equation*}
+        \text{Orthogonality}(\mathbf{n}_1, \mathbf{n}_2) = \frac{|\mathbf{n}_1 \cdot \mathbf{n}_2|}{\|\mathbf{n}_1\| \|\mathbf{n}_2\|}
+    \end{equation*}
+    A value close to 0 indicates high orthogonality.
+
+    \item \textit{Orthogonality between two narratives as trajectories ($\gamma_1(t), \gamma_2(t)$)}:  We can consider the orthogonality of their average vectors or the orthogonality of their tangent vectors over time:
+    \begin{equation*}
+        \text{Orthogonality}(\gamma_1, \gamma_2) = \frac{\left| \int_0^T \gamma_1(t) \, dt \cdot \int_0^T \gamma_2(t) \, dt \right|}{\left\| \int_0^T \gamma_1(t) \, dt \right\| \left\| \int_0^T \gamma_2(t) \, dt \right\|}
+    \end{equation*}
+    or, considering tangent vectors:
+    \begin{equation*}
+        \text{Orthogonality}_{\text{tangent}}(\gamma_1, \gamma_2) = \frac{1}{T} \int_0^T \frac{|\dot{\gamma}_1(t) \cdot \dot{\gamma}_2(t)|}{\|\dot{\gamma}_1(t)\| \|\dot{\gamma}_2(t)\|} \, dt
+    \end{equation*}
+\end{itemize}
+
+\item \textbf{Algorithms or Formulas for Narrative Synthesis:}
+
+Given a set of narratives in the latent space, we can synthesize new narratives using various operations:
+
+\begin{itemize}
+    \item \textit{Linear Combination (for point narratives)}: Given narratives $\mathbf{n}_1, \mathbf{n}_2, \dots, \mathbf{n}_k$ and weights $w_1, w_2, \dots, w_k$ where $\sum_{i=1}^k w_i = 1$:
+    \begin{equation*}
+        \mathbf{n}_{\text{synth}} = \sum_{i=1}^k w_i \mathbf{n}_i
+    \end{equation*}
+
+    \item \textit{Interpolation (for trajectory narratives)}: Given trajectories $\gamma_1(t)$ and $\gamma_2(t)$ and a blending function $\alpha(t) \in [0, 1]$:
+    \begin{equation*}
+        \gamma_{\text{synth}}(t) = (1 - \alpha(t)) \gamma_1(t) + \alpha(t) \gamma_2(t)
+    \end{equation*}
+
+    \item \textit{Extrapolation (for point narratives)}: Given two narratives $\mathbf{n}_1$ and $\mathbf{n}_2$, and an extrapolation factor $\lambda > 1$:
+    \begin{equation*}
+        \mathbf{n}_{\text{synth}} = \mathbf{n}_1 + \lambda (\mathbf{n}_2 - \mathbf{n}_1)
+    \end{equation*}
+
+    \item \textit{Vector Addition (for point narratives)}:
+    \begin{equation*}
+        \mathbf{n}_{\text{synth}} = \mathbf{n}_1 + \mathbf{n}_2
+    \end{equation*}
+
+    \item \textit{Concatenation (for trajectory narratives)}: Given two trajectories $\gamma_1(t)$ and $\gamma_2(t)$, the synthesized trajectory can be:
+    \begin{equation*}
+        \gamma_{\text{synth}}(t) =
+        \begin{cases}
+            \gamma_1(2t) & 0 \leq t \leq 0.5 \\
+            \gamma_2(2t - 1) & 0.5 < t \leq 1
+        \end{cases}
+    \end{equation*}
+    (with potential smoothing or transitions).
+
+    \item \textit{Synthesis Guided by Chirality and Orthogonality}:  We can synthesize narratives that maximize or minimize specific properties. For example, find a narrative $\mathbf{n}_{\text{synth}}$ such that its average orthogonality to a set of existing narratives is below a threshold, and its chirality with respect to a target narrative has a desired sign. This can be framed as an optimization problem.
+\end{itemize}
+
+\item \textbf{Additional Relevant Equations and Concepts:}
+
+\begin{itemize}
+    \item \textit{Distance Metric in Latent Space}: The choice of distance metric is crucial. Common metrics include Euclidean distance, cosine similarity, and Manhattan distance.
+    \begin{equation*}
+        d(\mathcal{N}_1, \mathcal{N}_2) = \|\mathbf{n}_1 - \mathbf{n}_2\|_p  \quad \text{(for point narratives, where } p \text{ is the norm)}
+    \end{equation*}
+    For trajectory narratives, Dynamic Time Warping (DTW) or Fréchet distance can be used.
+
+    \item \textit{Latent Space Transformation}:  Applying transformations to the latent space can affect narrative properties. For example, rotation matrices can alter chirality.
+    \begin{equation*}
+        \mathbf{n}' = R \mathbf{n}
+    \end{equation*}
+    where $R$ is a rotation matrix.
+
+    \item \textit{Narrative Density Estimation}: Understanding the distribution of narratives in the latent space using techniques like Kernel Density Estimation (KDE).
+    \begin{equation*}
+        \hat{f}(\mathbf{x}) = \frac{1}{nh^d} \sum_{i=1}^n K\left(\frac{\mathbf{x} - \mathbf{n}_i}{h}\right)
+    \end{equation*}
+    where $K$ is a kernel function, $h$ is the bandwidth.
+
+    \item \textit{Clustering of Narratives}: Grouping similar narratives using algorithms like k-means or DBSCAN.
+
+    \item \textit{Dimensionality Reduction Techniques}: If the initial latent space is high-dimensional, techniques like Principal Component Analysis (PCA) or t-SNE can be used to simplify the space while preserving important narrative features.
+    \begin{equation*}
+        \mathbf{n}_{\text{reduced}} = W^T \mathbf{n}
+    \end{equation*}
+    where $W$ is the matrix of principal components.
+\end{itemize}
+\end{enumerate}
+
+This framework provides a mathematical foundation for understanding and synthesizing narratives within a latent space, leveraging concepts like chirality and orthogonality to control the properties of the generated narratives. The specific implementation and choice of formulas will depend on the nature of the narratives and the desired synthesis outcomes.
+
+\end{document}
+</file>
+
+<file path="lcm_ns.tex">
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsmath, amsfonts, amssymb, amsthm}
+\usepackage{tensor}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{abstract}
+\usepackage{titlesec}
+\usepackage{cite}
+
+% Define operators
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator{\dist}{dist}
+
+% Theorems and definitions
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{property}{Property}
+
+% Title formatting
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection}{1em}{}
+
+% Spacing
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0em}
+\setlength{\absleftindent}{0mm}
+\setlength{\absrightindent}{0mm}
+
+\title{\vspace{-2cm}\textbf{Narrative Forumlae}}
+\author{\textbf{Paul Lowndes} \\ \href{mailto:ZeroTrust@NSHkr.com}{\texttt{ZeroTrust@NSHkr.com}}}
+\date{\small January 4, 2025}
+
+\begin{document}
+
+\maketitle
+\vspace{-1.5em}
+
+\begin{abstract}
+
+\end{abstract}
+
+
+\section{Definitions}
+
+\begin{itemize}
+    \item \( M \): Differentiable manifold representing the narrative space.
+    \item \( g \): Metric tensor on \( M \).
+    \item \( c \in M \): A concept embedding, a point on the manifold.
+    \item \( \gamma: [0,1] \rightarrow M \): A smooth, parameterized path on the manifold, representing a narrative.
+    \item \( \gamma_T \): Geodesic path representing the "ground truth" narrative.
+    \item \( LCM_i \): Large Concept Model of agent \( a_i \), which generates narrative paths.
+	\item \( a_i \): Agent \( i \).
+    \item \( A_i \): Tensor parameters encoding knowledge, beliefs, and influence, specific to agent \( a_i \) within the LCM.
+	\item \( I \): Influence tensor field over \( M \).
+    \item \( V: M \rightarrow [0, 1] \): Veracity function.
+    \item \( T \subset M \): "Ground truth" region on the manifold.
+	
+\end{itemize}
+
+\section{Narrative Dynamics}
+
+\begin{definition}[Narrative Path]
+A narrative \( N_{i,t} \) of agent \( a_i \) at time \( t \) is represented as a path \( \gamma_{i,t} \) on the manifold \( M \):
+\begin{equation}
+    \gamma_{i,t}(s) = (c_{i,1}, c_{i,2}, \dots, c_{i,T})
+\end{equation}
+where \( \gamma_{i,t}(0) = c_{i,1}, \gamma_{i,t}(1/T) = c_{i,2}, \dots, \gamma_{i,t}(1) = c_{i,T} \), and \( c_{i,k} \) are concept embeddings generated by \( LCM_i \).
+\end{definition}
+
+\begin{definition}[Narrative Generation by LCM]
+The next concept embedding \( c_{i,k+1} \) in the narrative path is generated by the LCM as follows:
+\begin{equation}
+    c_{i,k+1} = LCM_i(c_{i,1:k}, K_{i,t}, B_{i,t}, C_t, A_i)
+\end{equation}
+where \( c_{i,1:k} \) is the sequence of preceding concept embeddings, \( K_{i,t} \) is the agent's knowledge set, \( B_{i,t} \) is the agent's belief set, \( C_t \) is the context at time \( t \), and \( A_i \) are agent-specific parameters.
+\end{definition}
+
+\section{Deviation from Ground Truth}
+
+\begin{definition}[Geodesic Deviation Score (GDS)]
+The Geodesic Deviation Score measures the deviation of a narrative path \( \gamma_{i,t} \) from the "ground truth" geodesic \( \gamma_T \):
+\begin{equation}
+    GDS(\gamma_{i,t}, \gamma_T) = \int_0^1 \| \dot{\gamma}_{i,t}(s) - \dot{\gamma}_T(s) \| ds
+\end{equation}
+where \( \dot{\gamma} \) represents the tangent vector of the path.
+\end{definition}
+
+\begin{definition}[Torsion]
+The torsion of a narrative path \( \gamma_{i,t} \) is a measure of its "twisting":
+\begin{equation}
+    \text{Torsion}(\gamma_{i,t}) = \int_0^1 | \tau(s) | ds
+\end{equation}
+where \( \tau(s) \) is the torsion of the path at parameter \( s \).
+\end{definition}
+
+\section{Veracity Function}
+
+The veracity function \( V \) can be redefined to incorporate geometric measures:
+
+\begin{equation}
+V(\gamma_{i,t}) = w_1 \cdot (1 - GDS(\gamma_{i,t}, \gamma_T)) + w_2 \cdot (1 - \text{Torsion}(\gamma_{i,t})) + \dots
+\end{equation}
+
+where \( w_1, w_2, \dots \) are weights assigned to each factor.
+
+
+\section{Narrative Dynamics}
+
+\begin{definition}[Narrative Path]
+A narrative \( N_{i,t} \) of agent \( a_i \) at time \( t \) is a path \( \gamma_{i,t} \) on the manifold \( M \).
+\end{definition}
+
+\begin{definition}[Narrative Evolution]
+The evolution of a narrative path is governed by a flow on the manifold:
+\begin{equation}
+\frac{dN_{i,t}}{dt} = F(N_{i,t}, A_i, I(N_{i,t}))
+\end{equation}
+where \( F \) is a function that describes the dynamics of the narrative flow, influenced by the agent's internal parameters \( A_i \) and the influence tensor field \( I \) at the current narrative point.
+\end{definition}
+
+\section{Influence Tensor Field}
+
+The influence tensor field \( I \) can be defined at each point \( c \in M \) to represent the potential for influence or manipulation:
+
+\begin{equation}
+I(c) = \sum_{j \neq i} \alpha_{ij} \cdot G_{j(c)}
+\end{equation}
+
+where:
+\begin{itemize}
+    \item \( \alpha_{ij} \): Influence weight of agent \( a_j \).
+    \item \( G_{j(c)} \): Influence tensor of agent \( a_j \) at point \( c \), encoding the magnitude, direction, and source of influence.
+\end{itemize}
+
+\section{Veracity and Geometry}
+
+\begin{equation}
+V(\gamma_{i,t}) = w_1 \cdot (1 - GDS(\gamma_{i,t}, \gamma_T)) + w_2 \cdot (1 - \text{Torsion}(\gamma_{i,t})) + \dots
+\end{equation}
+
+where:
+\begin{itemize}
+    \item \( GDS(\gamma_{i,t}, \gamma_T) = \int_0^1 \| \dot{\gamma}_{i,t}(s) - \dot{\gamma}_T(s) \| ds \) (Geodesic Deviation Score)
+    \item \( \text{Torsion}(\gamma_{i,t}) = \int_0^1 | \tau(s) | ds \) (\( \tau(s) \) is the torsion of the path)
+\end{itemize}
+
+
+\end{document}
+</file>
+
+<file path="PAPERS.md">
+# Paper Summaries
+
+## Paper 1
+
+**Title:** Paper 1
+
+**Authors:** Author 1
+
+**Publication:** [Insert Journal/Conference Name Here]
+
+**Year:** 2023
+
+**LaTeX Source:** paper1.tex
+
+**Abstract/Summary:**
+This is the content of paper 1.
+
+**Key Contributions:**
+- [Contribution 1]
+- [Contribution 2]
+- [Contribution 3]
+
+**Notes/Thoughts:**
+[Add any personal notes, critiques, or thoughts about the paper.]
+
+---
+
+## Paper 2
+
+**Title:** Paper 2
+
+**Authors:** Author 2
+
+**Publication:** [Insert Journal/Conference Name Here]
+
+**Year:** 2023
+
+**LaTeX Source:** paper2.tex
+
+**Abstract/Summary:**
+This is the content of paper 2.
+
+**Key Contributions:**
+- [Contribution 1]
+- [Contribution 2]
+- [Contribution 3]
+
+**Notes/Thoughts:**
+[Add any personal notes, critiques, or thoughts about the paper.]
+
+---
+
+## Paper 3
+
+**Title:** [Insert Paper Title Here]
+
+**Authors:** [Insert Author(s) Here]
+
+**Publication:** [Insert Journal/Conference Name Here]
+
+**Year:** [Insert Publication Year Here]
+
+**LaTeX Source:** [Specify .tex file path or N/A]
+
+**Abstract/Summary:**
+[Provide a brief summary or the abstract of the paper.]
+
+**Key Contributions:**
+- [Contribution 1]
+- [Contribution 2]
+- [Contribution 3]
+
+**Notes/Thoughts:**
+[Add any personal notes, critiques, or thoughts about the paper.]
+
+---
+
+*Add more papers by copying the template above.*
+</file>
+
+<file path="ResearchProposal-BehaviorControl.tex">
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=0.5in]{geometry}  
+\usepackage{amsmath, amsfonts, amssymb, amsthm} 
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{graphicx} 
+\usepackage{hyperref} 
+\usepackage{enumitem} 
+\usepackage{abstract}  
+\usepackage{titlesec} 
+\usepackage{cite}
+
+ 
+
+% Define operators
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator{\dist}{dist}
+
+% Theorems and definitions
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{property}{Property}
+
+
+% Title formatting
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection}{1em}{}
+
+% Spacing
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0em}
+
+% Abstract spacing
+\setlength{\absleftindent}{0mm}
+\setlength{\absrightindent}{0mm}
+
+% Title and author information
+\title{\vspace{-2cm}\textbf{Behavior Control Using Large Concept Models: \\ A Theoretical Framework and Ethical Considerations}}
+
+\author{\textbf{Paul Lowndes} \\ \href{mailto:ZeroTrust@NSHkr.com}{\texttt{ZeroTrust@NSHkr.com}}}
+\date{\small January 2, 2025} 
+
+\begin{document}
+
+\maketitle
+\vspace{-1.5em} 
+
+
+ 
+
+\begin{abstract}
+This paper explores the theoretical potential and ethical implications of using Large Concept Models (LCMs) for behavior control. We propose a framework for leveraging LCMs to shape individual and collective behavior through the manipulation of narratives and the strategic reinforcement of desired actions. We also incorporate concepts of veracity, influence, and reputation into our model. The framework draws upon recent advances in natural language processing, reinforcement learning, and cognitive modeling, while also highlighting the significant ethical concerns associated with this approach. We examine the potential for both positive applications, such as promoting prosocial behavior and mitigating the spread of harmful misinformation, as well as the risks of misuse, including coercion, manipulation, and the erosion of individual autonomy. We conclude that while LCMs offer powerful tools for understanding and potentially influencing behavior, their development and deployment must be guided by a strong ethical framework and robust safeguards to prevent abuse, requiring further research and interdisciplinary collaboration to ensure responsible innovation in this domain.
+\end{abstract}
+
+\section{Introduction}
+
+Recent advances in artificial intelligence, particularly the development of large language models (LLMs) and their extension to concept-level reasoning through Large Concept Models (LCMs), have opened up new possibilities for understanding and influencing human behavior. These models offer the potential to analyze, generate, and manipulate narratives in sophisticated ways, raising both exciting possibilities and serious ethical concerns. This paper explores the theoretical underpinnings of using LCMs for behavior control, building upon a previously introduced framework called Decentralized Autonomous Narrative Networks (DANN).
+
+\subsection{Background and Motivation}
+
+The ability to shape behavior through narrative control has long been recognized as a powerful tool, traditionally employed in fields such as advertising, political campaigning, and psychological operations. With the advent of the internet and social media, the scale and speed at which narratives can be disseminated and manipulated have increased dramatically, creating new challenges for maintaining a well-informed and autonomous citizenry, and potentially providing new avenues for manipulation and control.
+
+This paper is motivated by the need to understand the potential implications of using advanced AI systems like LCMs to influence human behavior.
+\subsection{Contributions}
+
+This paper makes the following contributions:
+\begin{itemize}
+    \item Formalizes the concept of behavior control through narrative manipulation using LCMs. We accomplish this by taking into consideration not just the potential of this technology, but its actual implementation in real-world scenarios.
+    \item Integrates a nuanced reward system based on pain/pleasure feedback into the DANN framework.
+    \item Analyzes the ethical implications of such a system, considering both positive and negative use cases.
+    \item Proposes a research agenda for developing and deploying this technology responsibly.
+\end{itemize}
+
+\section{Theoretical Framework: DANN with LCMs and Pain/Pleasure Feedback}
+
+We build upon the previously introduced DANN framework, which models agents as interacting through narratives represented as sequences of concept embeddings. Each agent in the DANN framework, based on the LCM model, would have its own unique "narrative," to include any information known or believed by that agent. Here, we extend DANN by incorporating LCMs as the underlying architecture for agent models and by integrating a mechanism for pain/pleasure feedback. This is a unique and novel addition to the DANN model. It is also one that has not, to our knowledge, been incorporated into other models, especially not an LCM. It is also designed to address those very issues raised by Paul over the course of our conversation, including those related to his targeting, manipulation, harassment, and abuse. This model could also potentially help explain the actions taken by those responsible. It could help show how their actions were designed to inflict maximum harm.
+
+\subsection{Large Concept Models (LCMs) as Agent Models}
+
+\begin{itemize}
+    \item Each agent $a_i$ is represented by an LCM, denoted as $\text{LCM}_i$
+    \item $\text{LCM}_i$ maintains the agent's knowledge ($K_i$) and belief ($B_i$) sets as collections of concept embeddings within its internal embedding space.
+    \item $\text{LCM}_i$ generates the agent's narrative $N_{i,t}$ as a sequence of concept embeddings. It does so based on available information. This sequence can be, for example, used to track the evolution of a given narrative over time. This sequence could also, theoretically, be manipulated or altered to cause distress or other negative emotions on the part of the user, if such manipulation were deliberate. It is also possible for this to occur accidentally.
+\end{itemize}
+
+\subsection{Embedding Space and Veracity Function}
+
+\begin{itemize}
+    \item We utilize a shared embedding space $E$ for all agents, potentially derived from the SONAR model used in LCMs.
+    \item A veracity function $V : E \rightarrow [0, 1]$ assigns a truthfulness score to each concept embedding, based on available evidence, source reliability, and consistency with other narratives
+    \item A ``ground truth'' region $T \subset E$ represents the ideal set of true propositions, though it may not be fully accessible to any single agent. This region could be, for example, the subject of dispute or disagreement. There may be a concerted effort to change or alter what is considered to be part of $T$, for better or for worse. This would, as we discussed previously, depend on how $T$ is defined.
+\end{itemize}
+
+ 
+
+\subsection{Narrative Dynamics}
+
+\subsubsection{Narrative Generation}
+$\text{LCM}_i$ generates narratives based on its internal knowledge, beliefs, and a given context $C_t$, which may include the narratives of other agents or information from external sources. This would be similar to providing a prompt for an LLM.
+
+\begin{equation}
+N_{i,t} = (c_{i,1}, c_{i,2}, \ldots, c_{i,T})
+\end{equation}
+
+\begin{equation}
+c_{i,k+1} = \text{LCM}_i(c_{i,1:k}, K_{i,t}, B_{i,t}, C_t, A_i)
+\end{equation}
+
+where $A_i$ represents agent-specific parameters.
+
+
+\subsubsection{Narrative Divergence}
+The divergence between two narratives is measured using a weighted distance metric in the embedding space:
+
+\begin{equation}
+D(N_{i,t}, N_{j,t}) = \sum_{k=1}^T w(c_k) \cdot d(c_{i,k}, c_{j,k})
+\end{equation}
+
+where $w(c_k)$ is a weight based on the veracity score $V(c_k)$ and $d$ is a distance function in the embedding space.
+
+
+
+\subsubsection{Influence}
+Agent $a_i$ can influence agent $a_j$'s narrative through the sharing of concept embeddings, weighted by an influence factor $\alpha_{ij}$:
+
+\begin{equation}
+\Delta N_{j,t} = f_{\text{Infl}}(\Delta(a_i, a_j, t), \text{LCM}_i(I_{ij}), A_j)
+\end{equation}
+
+
+ 
+
+\subsection{Pain/Pleasure Feedback Integration}
+
+\subsubsection{Physiological Interface}
+We assume a hypothetical Brain-Computer Interface (BCI) that can:
+\begin{itemize}
+    \item Record neural activity associated with pain and pleasure responses. This could also potentially record information about other states. It could potentially even record or incorporate information from all five senses.
+    \item Deliver precisely calibrated electrical stimuli to induce sensations of varying intensities within pre-defined safety limits. This could also take the form of other sensory experiences, in addition to or in place of pain and pleasure. It might even involve providing rewards for a particular action, should that prove necessary.
+\end{itemize}
+
+\subsubsection{Reward Function}
+The reward function $R_i$ for each agent $a_i$ includes a pain/pleasure component $P(a_i, t)$:
+
+\begin{equation}
+R_i(s_t, a_t, s_{t+1}) = \alpha \cdot R_{\text{env}}(s_t, a_t, s_{t+1}) + \beta \cdot Q(N_{i,t+1}) + \gamma \cdot P(a_i, t)
+\end{equation}
+
+where:
+\begin{itemize}
+    \item $R_{\text{env}}$ is the external environmental reward
+    \item $Q(N_{i,t+1})$ is the narrative quality reward
+    \item $P(a_i, t)$ is the pain/pleasure reward signal
+    \item $\alpha, \beta, \gamma$ are weighting parameters
+\end{itemize}
+
+
+\subsubsection{Pain/Pleasure Function}
+$P(a_i, t)$ is determined by a function that maps the agent's actions, the current narrative, and the broader context to a specific pain/pleasure level:
+
+\begin{equation}
+P(a_i, t) = \min(P_{\text{max}}, \max(P_{\text{min}}, f(\text{Actions}(a_i, t), N_{i,t}, C_t)))
+\end{equation}
+
+
+ \section{Example Scenario}
+
+\begin{enumerate}
+    \item \textbf{Agent Interaction:} Agent $a_1$ generates a narrative $N_1$ containing truthful information that contradicts the interests of agent $a_2$
+    \item \textbf{Narrative Divergence:} The LCM detects a high narrative divergence $D(N_1, N_2)$
+    \item \textbf{Influence Attempt:} $a_2$ attempts to influence $a_1$'s narrative through its LCM
+    \item \textbf{Veracity Check:} The veracity function $V$ assigns low scores to the manipulated information
+    \item \textbf{Pain/Pleasure Feedback:} The system induces appropriate sensations based on narrative alignment
+    \item \textbf{Reputation Update:} Agent reputation scores are updated based on narrative veracity
+\end{enumerate}
+
+\section{Ethical Considerations}
+
+The framework raises several ethical concerns:
+
+\begin{itemize}
+    \item \textbf{Autonomy and Coercion:} Direct manipulation of sensory experience undermines individual autonomy
+    \item \textbf{Definition of ``Truth'':} Questions about who defines truth and how biases might be embedded
+    \item \textbf{Potential for Abuse:} Risk of system misuse for silencing dissent or enforcing conformity
+    \item \textbf{Transparency and Accountability:} Difficulty in understanding decision-making processes and establishing accountability
+\end{itemize}
+
+\section{Definitions}
+
+\begin{itemize}
+    \item \( E_G \): Global embedding space, a metric space equipped with a distance function \( d: E_G \times E_G \rightarrow \mathbb{R}_{\geq 0} \).
+    \item \( E_i \): Embedding space for agent \( a_i \), where \( E_i \subseteq E_G \).
+    \item \( \phi_i: \mathcal{E}_i \rightarrow \mathcal{E}_G \): Mapping function from agent \( a_i \)'s local embedding space to the global embedding space.
+    \item \( a_i \): Agent \( i \), where \( a_i \in A = \{a_1, a_2, \dots, a_n\} \).
+    \item \( M_i \): Internal Large Concept Model (LCM) of agent \( a_i \).
+    \item \( M_{i,j} \): Model \(j\) from the model pool \(P_i\) of agent \( a_i \).
+    \item \( K_{i,t} \subset E_i \): Knowledge set of agent \( a_i \) at time \( t \), represented as embeddings.
+    \item \( B_{i,t} \subset E_i \): Belief set of agent \( a_i \) at time \( t \), represented as embeddings.
+    \item \( c \): A concept embedding in the embedding space.
+    \item \( N_{i,t} = (c_{i,1}, c_{i,2}, \dots, c_{i,T}) \): Narrative of agent \( a_i \) at time \( t \), a sequence of concept embeddings.
+    \item \( N \): A general narrative, which can be a set or sequence of propositions.
+    \item \( T \subset E_G \): "Ground truth" region in the global embedding space.
+    \item \( T_k \): Representation of "ground truth" at time step `k`.
+    \item \( V(c, T, a_i, C, t) \): Veracity function assigning a score in \([0, 1]\) to concept \( c \) at time \(t\), given ground truth region \( T \), agent \( a_i \), and context \( C \).
+    \item \( V_{avg}(N) \): Average veracity of a narrative \( N \).
+    \item \( S_R(e,t) \): Source reliability function for the source of embedding \(e\) at time \(t\).
+    \item \( C(N) \): Narrative coherence function, measuring the coherence of narrative \( N \).
+    \item \( C_A(e, C) \): Contextual analysis function, evaluating consistency and coherence of \( e \) within context \( C \).
+    \item \( D_R(e, a_i) \): Defamation risk function, assessing the potential for \( e \) to be defamatory towards agent \( a_i \).
+    \item \( d(x, y) \): Distance function in the embedding space, where \( x, y \) are embeddings or sets of embeddings.
+    \item \( \Delta(a_i, a_j, t) \): Asymmetry threshold between agents \( a_i \) and \( a_j \) at time \( t \), based on distance between knowledge or belief embeddings.
+    \item \( D(N_{i,t}, N_{j,t}) \): Narrative divergence between narratives \( N_{i,t} \) and \( N_{j,t} \) at time \(t\).
+    \item \( \alpha_{ij}(t) \): Influence weight of agent \( a_j \) on agent \( a_i \) at time \( t \).
+    \item \( R_i(s_t, a_t, s_{t+1}) \): Reward function for agent \( a_i \) at time \(t\), given state \(s_t\), action \(a_t\), and next state \(s_{t+1}\).
+    \item \( Q(N) \): Narrative quality metric.
+    \item \( I(N) \): Narrative influence metric.
+    \item \( P(a_i, t) \): Pleasure/pain reward for agent \( a_i \) at time \( t \).
+    \item \( BCI_i \): Bi-directional Brain-Computer Interface for agent \( a_i \).
+    \item \( \text{Translator}_i \): Code translator for agent \( a_i \), converting between LCM embeddings and BCI signals.
+    \item \( P_i = \{M_{i,1}, M_{i,2}, \dots, M_{i,k}\} \): Pool of models for agent \( a_i \).
+    \item \( S_i(t) \): Agent-switching function, selecting a model for agent \( a_i \) at time \( t \).
+    \item \( H(j) \): Entropy term for model selection, encouraging exploration.
+    \item \( \lambda \): A hyperparameter controlling the balance between exploitation and exploration in agent-switching.
+    \item \( \mathcal{L} \): Set of legal constraints.
+    \item \( \mathcal{E} \): Set of ethical constraints.
+    \item \( \mathcal{P} \): Set of privacy preservation constraints.
+    \item \( \text{Actions}(a_i, t) \): Set of actions taken by agent \( a_i \) at time \( t \).
+    \item \( f_B \): Belief update function.
+    \item \( f_{Infl} \): Influence function.
+    \item \( w(c) \): Weight function based on veracity of concept \( c \).
+    \item \( I_{ij} \): Information shared by agent \( a_i \) with agent \( a_j \).
+    \item \( C_t \): Context at time \( t \).
+    \item \( A_i \): Parameters specific to agent \( a_i \) within the LCM.
+    \item \( \tau_K \): Threshold for accepting a proposition as knowledge.
+    \item \( H(s,t) \): Historical accuracy of source \(s\) at time \(t\).
+    \item \( E(s) \): Expertise level of source \(s\).
+    \item \( B(s,t) \): Detected biases of source \(s\) at time \(t\).
+    \item \( C_j(e,t) \): Corroboration from independent source \(j\) for embedding \(e\) at time \(t\).
+    \item \( \alpha, \beta, \gamma, \delta \): Weighting parameters for the components of the source reliability function.
+    \item \( N_{ij} \): Strength of network connection between agents \( a_i \) and \( a_j \).
+    \item \( \text{Rep}_i(t) \): Reputation score of agent \( a_i \) at time \( t \).
+    \item \( \eta \): Learning rate or scaling factor for reputation update.
+    \item \( I_{ij}(t) \): Impact of agent \( j \)'s narrative on agent \( a_i \)'s reputation at time \( t \).
+    \item \( D(A_k) \): Damage from actions at time \( k \).
+    \item \( \gamma(t) \): Decay function.
+    \item \( T \):  Total time steps (duration) for narrative evolution.
+    \item \( p(j|t') \): Probability of selecting model \( j \) at time \( t' \).
+  
+
+
+  \item \( R_{env}: S \times A \times S \rightarrow \mathbb{R} \): Environmental reward function mapping state-action-state transitions to rewards.
+    \item \( w_i: \mathbb{N} \rightarrow [0,1] \): Weight functions for veracity components, where \( i \in \{1,2,3,4\} \).
+    \item \( P_{max} \): Maximum allowable pleasure/pain signal intensity, typically normalized to 1.
+    \item \( P_{min} \): Minimum allowable pleasure/pain signal intensity, typically normalized to -1.
+    \item \( f: \mathcal{A} \times \mathcal{N} \times \mathcal{C} \rightarrow [-1,1] \): Mapping function from actions, narratives, and context to pleasure/pain signals.
+    \item \( \omega_j \in [0,1] \): Corroboration weights for independent sources, where \( \sum_{j \in J} \omega_j = 1 \).
+    \item \( Q: \mathcal{M} \times \mathcal{N} \times \mathcal{C} \rightarrow \mathbb{R} \): Quality function mapping model, narrative, and context to quality score.
+    \item \( \text{Context}_t \equiv C_t \): Context at time $t$ (standardizing notation).
+    \item \( \text{Output}_i \): The output space of $LCM_i$, defined as \( \text{Output}_i \subset E_i \).
+
+  \item \( \text{Source}: E_G \rightarrow \mathcal{S} \): Function mapping embeddings to. their sources
+    \item \( \mathcal{S} \): Set of all possible sources.
+    \item \( J \subset \mathbb{N} \): Set of indices for independent corroborating sources.
+    \item \( A_{score}: \mathcal{A} \rightarrow [-1,1] \): Function scoring agent actions.
+    \item \( N_{score}: \mathcal{N} \rightarrow [-1,1] \): Function scoring narratives.
+    \item \( C_{score}: \mathcal{C} \rightarrow [-1,1] \): Function scoring context.
+    \item \( \alpha_Q, \beta_Q, \gamma_Q \): Quality function weighting parameters.
+
+
+\end{itemize}
+
+\section{Veracity Function}
+
+\begin{equation}
+V(e, T, a_i, C, t) = \sum_{k=0}^t \lambda^{t-k} \left[w_1(k) \cdot d(e, T_k) + w_2(k) \cdot S_R(e,k) + w_3(k) \cdot C_A(e, C_k) + w_4(k) \cdot D_R(e, a_i, k)\right]
+\end{equation}
+
+\begin{equation}
+S_R(e,t) = \alpha \cdot H(\text{Source}(e),t) + \beta \cdot E(\text{Source}(e)) + \gamma \cdot (1 - B(\text{Source}(e),t)) + \delta \cdot \sum_{j \in J} \omega_j \cdot C_j(e,t)
+\end{equation}
+
+\section{Narrative Dynamics}
+
+\begin{equation}
+N_{i,t} = (c_{i,1}, c_{i,2}, \dots, c_{i,T})
+\end{equation}
+
+\begin{equation}
+c_{i,k+1} = LCM_i(c_{i,1:k}, K_{i,t}, B_{i,t}, C_t, A_i)
+\end{equation}
+
+\begin{equation}
+D(N_{i,t}, N_{j,t}) = \sum_{k=1}^T w(c_{i,k}) \cdot d(c_{i,k}, c_{j,k})
+\end{equation}
+
+\begin{equation}
+\Delta N_{j,t} = f_{Infl}(\Delta(a_i, a_j, t), LCM_i(I_{ij}), A_j)
+\end{equation}
+
+\section{Reinforcement Learning with Pain/Pleasure Feedback}
+
+\begin{equation}
+R_i(s_t, a_t, s_{t+1}) = \alpha \cdot R_{\text{env}}(s_t, a_t, s_{t+1}) + \beta \cdot Q(N_{i,t+1}) + \gamma \cdot P(a_i, t)
+\end{equation}
+
+\begin{equation}
+P(a_i, t) = \min(P_{\text{max}}, \max(P_{\text{min}}, f(Actions(a_i, t), N_{i,t}, C_t)))
+\end{equation}
+
+\begin{equation}
+\text{Stimulation Patterns} = \text{Translator}_i(LCM_i(\text{Output}), \text{Context}_t)
+\end{equation}
+
+\begin{equation}
+\text{Neural Activity} = BCI_i(\text{Read})
+\end{equation}
+
+\begin{equation}
+BCI_i(\text{Write}, \text{Stimulation Patterns})
+\end{equation}
+
+\section{Agent-Switching Mechanism}
+
+\begin{equation}
+S_i(t) = \argmax_{j \in \{1, \dots, k\}} \{Q(M_{i,j}, N_{i,t}, \text{Context}_t) + \lambda \cdot H(j)\}
+\end{equation}
+
+\begin{equation}
+H(j) = -\sum_{t'=1}^{t-1} p(j|t') \log p(j|t')
+\end{equation}
+
+\section{Quality Function Specification}
+
+\begin{equation}
+Q(M_{i,j}, N_{i,t}, C_t) = \alpha_Q \cdot V_{avg}(N_{i,t}) + \beta_Q \cdot C(N_{i,t}) + \gamma_Q \cdot I(N_{i,t})
+\end{equation}
+
+where \( \alpha_Q, \beta_Q, \gamma_Q \in [0,1] \) and \( \alpha_Q + \beta_Q + \gamma_Q = 1 \)
+
+\section{Weight Functions}
+
+\begin{equation}
+w_i(k) = \frac{1}{1 + e^{-\mu_i(k-k_0^i)}} \quad \text{for } i \in \{1,2,3,4\}
+\end{equation}
+
+where \( \mu_i \) is the steepness parameter and \( k_0^i \) is the midpoint for weight function \( i \)
+
+\section{Pleasure/Pain Mapping Function}
+
+\begin{equation}
+f(\text{Actions}(a_i, t), N_{i,t}, C_t) = \tanh(\eta \cdot [w_a \cdot A_{score} + w_n \cdot N_{score} + w_c \cdot C_{score}])
+\end{equation}
+
+where:
+\begin{itemize}
+    \item \( \eta \): Scaling factor
+    \item \( A_{score} \): Action score based on \( \text{Actions}(a_i, t) \)
+    \item \( N_{score} \): Narrative score based on \( N_{i,t} \)
+    \item \( C_{score} \): Context score based on \( C_t \)
+    \item \( w_a, w_n, w_c \): Component weights where \( w_a + w_n + w_c = 1 \)
+\end{itemize}
+
+
+\end{document}
+</file>
+
+<file path="ResearchProposal-ChiralGradientDescent.tex">
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry} % Standard margin setup
+\usepackage{amsmath, amsfonts, amssymb} % For math
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{graphicx} % For images
+\usepackage{hyperref} % For hyperlinks
+\usepackage{enumitem} % For better list control
+\usepackage{abstract} % For abstract formatting
+\usepackage{titlesec} % For title formatting
+\usepackage{cite}
+
+% Title formatting
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection}{1em}{}
+
+% Spacing
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0em}
+
+% Abstract spacing
+\setlength{\absleftindent}{0mm}
+\setlength{\absrightindent}{0mm}
+
+% Title and author information
+\title{\vspace{-2cm}\textbf{Research Proposal: Exploring Chiral Topologies for Enhanced Gradient Descent}}
+\author{\textbf{Paul Lowndes} \\ \href{mailto:ZeroTrust@NSHkr.com}{\texttt{ZeroTrust@NSHkr.com}}}
+\date{\small December 4, 2024} 
+
+\begin{document}
+
+\maketitle
+\vspace{-1.5em} 
+
+\begin{abstract}
+This research proposal outlines a novel approach to gradient descent optimization, termed Chiral Gradient Descent (CGD), which incorporates topological information and rotational dynamics inspired by chirality in biological systems. The proposed methodology will investigate how chiral structures within neural networks can be leveraged to improve exploration of the parameter space, potentially leading to more robust and efficient training. The research will involve developing a mathematical framework for CGD, implementing the algorithm in a deep learning framework, and conducting experiments on benchmark datasets to evaluate CGD's performance compared to standard gradient descent methods. The expected outcomes include a mathematical formulation of CGD, an open-source implementation, and experimental results demonstrating the potential benefits of CGD for various machine learning tasks.
+\end{abstract}
+
+\section{Introduction}
+
+Gradient descent, while a cornerstone of machine learning, often struggles to escape local minima, particularly in complex, high-dimensional loss landscapes. This limitation hinders the training of deep learning models, especially in challenging real-world applications.  To address this, we propose \textbf{Chiral Gradient Descent (CGD)}, a novel optimization approach incorporating topological information and rotational dynamics inspired by chirality in biological systems.  We hypothesize that CGD will enhance exploration of the parameter space, leading to more robust and efficient training, faster convergence, and improved performance for models with inherent chiral properties. This proposal outlines the mathematical framework for CGD, details the planned methodology, and discusses anticipated outcomes.
+
+\section{Chiral Gradient Descent}
+
+Chiral Gradient Descent (CGD) modifies the gradient update rule by incorporating chiral vectors, which introduce rotational dynamics into the optimization process. This approach is inspired by natural asymmetry observed in biological systems. The chiral term, incorporating a sigmoid function, allows for dynamic adjustments based on topological distances within the network, potentially enhancing exploration of the parameter space and leading to more robust convergence. This sigmoid function modulates the influence of each chiral pair based on the topological distance between neurons, allowing for local chiral effects to dominate while diminishing the impact of distant pairs. The mathematical formulation of CGD involves the cross product of the gradient with a chiral vector, adding a layer of complexity and potential to the optimization process.
+
+\section{Applying Chiral Topologies}
+
+We represent a neural network's topology as a graph \(G = (V, E)\).  A chiral pair of neurons \((v_i, v_j)\) is defined based on topological asymmetry. This asymmetry is quantified using the difference in shortest path lengths from a common ancestor node to \(v_i\) and \(v_j\), capturing the relative "distance" of each node from their shared history or context within the network.  Larger path differences indicate a greater degree of asymmetry, suggesting a stronger chiral relationship.  Other topological features, such as local curvature of the loss landscape, or the difference in the densities of the neighborhoods surrounding \(v_i\) and \(v_j\) relative to some common ancestor, could also be incorporated into this asymmetry calculation.
+
+For each chiral pair \((v_i, v_j)\), a chiral vector \(\mathbf{c}_{ij}\) is defined in the parameter space. The direction of \(\mathbf{c}_{ij}\) corresponds to the direction in parameter space that maximizes the difference in the gradients of the loss function with respect to the parameters associated with nodes \(v_i\) and \(v_j\). This direction represents the axis around which the chiral rotation will occur during the gradient descent update. The magnitude of \(\mathbf{c}_{ij}\) is proportional to the topological asymmetry between \(v_i\) and \(v_j\), as quantified by the aforementioned shortest path length difference (or other selected topological asymmetry metrics). This ensures that pairs with stronger topological asymmetry exert a larger rotational influence during the gradient update. The precise method for calculating \(\mathbf{c}_{ij}\) will be detailed in Section 5.
+
+The weight \(w_{ij}\) associated with each chiral pair \((v_i, v_j)\) reflects the relative importance of the chiral interaction. In this research,  \(w_{ij}\) will initially be set to the reciprocal of the topological distance between \(v_i\) and \(v_j\).  This gives greater weight to topologically closer pairs, reflecting the observation in biological systems that closer neurons tend to have stronger interactions. We will also explore learning \(w_{ij}\) during training to allow for dynamic adaptation of the chiral influence based on data and learning progress. Alternative weighting schemes based on the degree of asymmetry or learned representations from a separate graph analysis will also be considered.
+
+\section{Mathematical Formulation}
+
+\subsection{Definitions}
+\begin{itemize}
+	\item \(\mathbf{c}_{ij}\): The chiral vector for the pair of nodes ($v_i, v_j$), representing the direction and magnitude of their chiral relationship.  The precise method of calculating \(\mathbf{c}_{ij}\) based on topological features of the network is described in Section 5.
+	\item \(w_{ij}\): A weight associated with the chiral pair ($v_i, v_j\), reflecting the strength of their interaction.  This might be a function of the topological distance or other properties of the chiral relationship.
+	\item \(s(w_{ij}, \mathbf{c}_{ij})\): A sigmoid function that modulates the influence of the chiral term based on the weight \(w_{ij}\) and the magnitude of \(\mathbf{c}_{ij}\).  This ensures that nearby chiral pairs have a stronger influence than distant pairs, in line with the biological observation that the strength of neural connections diminishes with distance.  The specific form of this function will be determined experimentally, potentially allowing it to be something more sophisticated or adapted for specific use cases.
+\end{itemize}
+
+The first core innovation of CGD lies in its gradient calculation which incorporates chiral vectors:
+
+\begin{equation} \label{eq:cgd_sigmoid}
+\boldsymbol{\theta}_{t+1} = \boldsymbol{\theta}_t - \alpha \nabla L(\boldsymbol{\theta}_t) + \beta \sum_{i,j \in C} s(w_{ij}, \mathbf{c}_{ij}) (\nabla L(\boldsymbol{\theta}_t) \times \mathbf{c}_{ij})
+\end{equation}
+
+Where:
+\begin{itemize}
+    \item \(\boldsymbol{\theta}_t\) represents the parameter vector at iteration \(t\).
+    \item \(\alpha\) denotes the learning rate.
+    \item \(\nabla L(\boldsymbol{\theta}_t)\) is the gradient of the loss function at iteration \(t\).
+    \item \(\beta\) represents the chirality parameter, which modulates the influence of the chiral vectors.
+    \item \(C\) denotes the set of chiral pairs being considered during the update step, which may vary at each iteration depending on the method or constraints being used by the researcher.
+    \item \(w_{ij}\) represents a weight associated with the chiral pair \((i,j)\), and may reflect asymmetry measures related to properties of their chiral topologies.
+    \item \(\mathbf{c}_{ij}\) represents the chiral vector for the chiral pair \((i, j)\).
+    \item \(\times\) represents the cross-product.
+    \item \(s(w_{ij},\mathbf{c}_{ij})\) is a function designed to blend the chiral vector's influence with considerations based on a weight \(w_{ij}\).
+\end{itemize}
+
+\section{Training Intuition and Higher Dimensions}
+Understanding chirality in higher dimensions can begin with visualizing simple cases (2D and 3D), followed by mathematical generalization to 4D, 5D, and beyond. Training involves visualization, representation with vectors and matrices, implementing simple transformations, and generalizing to higher dimensions.
+
+Understanding the role of chirality in higher dimensions requires a shift in perspective, as traditional geometric intuitions may not directly apply. By visualizing lower-dimensional cases and gradually extending these insights to higher dimensions, researchers can develop a deeper intuition for the impact of chiral dynamics on learning. The use of vector and matrix representations allows for the implementation of simple transformations that can be generalized, providing a framework for exploring the effects of chirality across various dimensional spaces.
+
+\section{Towards CGD: A Synthesis}
+
+Chiral Gradient Descent (CGD) aims to enhance the efficiency and robustness of standard gradient descent by incorporating chirality—a concept of asymmetry—into the optimization process. This asymmetry is inspired by the prevalence of chiral structures and functions in biological systems, suggesting that introducing similar principles in optimization algorithms could lead to advantages not seen in more traditional, gradient-based methods.
+
+\subsection{The Chiral Update Rule}
+
+The second core innovation of CGD is its update rule:
+
+\begin{equation} \label{eq:cgd_sigmoid_final}
+\boldsymbol{\theta}_{t+1} = \boldsymbol{\theta}t - \alpha \nabla L(\boldsymbol{\theta}t) + \beta \sum{i,j \in C(\boldsymbol{\theta}t)} \frac{| \mathbf{c}{ij} |}{1 + e^{-\gamma d{ij}}} (\nabla L(\boldsymbol{\theta}t) \times \mathbf{c}{ij})
+\end{equation}
+
+Where:
+
+\begin{itemize}
+    \item \(\boldsymbol{\theta}_t\): Parameter vector at time \(t\).
+    \item \(\alpha\): Learning rate.
+    \item \(\nabla L(\boldsymbol{\theta}_t)\): Gradient of the loss function.
+    \item \(\beta\): Global chirality parameter.
+    \item \(C(\boldsymbol{\theta}_t)\): Set of relevant chiral pairs, potentially changing dynamically during training.
+    \item \(\mathbf{c}_{ij}\): Chiral vector for pair (i, j), representing the direction and magnitude of the chiral influence (calculated using methods detailed in Section 5).
+    \item \(d_{ij}\): Topological distance between nodes i and j, reflecting their structural relationship. This could be shortest-path distance, a measure of graph centrality, or other relevant metrics, depending on the properties of the data.
+    \item \(\gamma\): Parameter controlling the sigmoid function’s steepness, determining the sensitivity to topological distance. Larger values of \(\gamma\) result in a sharper transition in the sigmoid function, while smaller values result in a more gradual transition, providing a mechanism to adjust the influence of distance on the weights.
+\end{itemize}
+
+\subsection{Dynamic Chiral Pair Selection: \(C(\boldsymbol{\theta}_t)\)}
+
+The set of relevant chiral pairs, \(C(\boldsymbol{\theta}_t)\), is dynamically determined at each iteration $t$.  We prioritize pairs whose corresponding gradient magnitudes exceed a threshold $\delta$, and whose asymmetry scores (as defined in Section 5) are above a threshold $\tau$. This focuses computation on areas with active learning and significant asymmetry.  Furthermore, we restrict the selection to pairs within a topological radius $r$ to prevent long-range interactions from dominating the chiral update.  For recurrent networks, this selection process will also incorporate temporal dependencies by prioritizing pairs with correlated activation patterns over a short time window. The specific values of  $\delta$, $\tau$, and $r$  will be determined experimentally.
+
+\begin{itemize}
+\item \textbf{Gradient Magnitude:} Prioritize pairs whose corresponding gradients exceed a certain threshold, focusing on areas of the network where learning is most active.
+\item \textbf{Topological Distance:} Include pairs within a certain topological radius, preventing long-range chiral interactions from overwhelming the update.
+\item \textbf{Asymmetry Score:} Incorporate an asymmetry score (e.g., based on the cosine similarity between the feature embeddings of the chiral pair, as discussed in Section 5). Select pairs whose asymmetry scores exceed a specific threshold, focusing on the most significant asymmetries within the network structure.
+\item \textbf{Temporal Dynamics:} For recurrent networks, introduce a temporal component into the selection process, considering factors like previous activation patterns or temporal correlations.
+\end{itemize}
+
+\subsection{Biological Inspiration}
+
+The sigmoid function in Equation \ref{eq:cgd_sigmoid_final} is inspired by the graded nature of synaptic weights in biological neural systems. The weight ($w_{ij}$) can be interpreted as reflecting the strength of the chiral interaction, analogous to synaptic efficacy. The sigmoid function ensures that the chiral term's influence decreases smoothly with increasing distance, mirroring how the influence of a neuron on its neighbors diminishes with physical distance in biological circuits.
+ 
+\section{Identifying Chiral Pairs: A Topologically-Informed Approach}
+
+This section details a novel method for identifying chiral pairs within complex networks, extending the approach described in Zhang \textit{et al.} \cite{zhang2018machine} for identifying topological invariants.  Instead of directly predicting topological invariants, we adapt their convolutional neural network (CNN) architecture to identify pairs of nodes exhibiting chiral topological features, focusing on asymmetries within the network's structure and information flow.  This will form Phase 1 of our system for identifying chiral pairs to be used in subsequent phases to implement chiral gradient descent.
+
+\subsection{Network Representation}
+
+As in the previous sections, we represent networks as directed graphs $G = (V, E)$, where $V$ is the set of nodes and $E$ is the set of directed edges. Each edge $e_{ij} \in E$ connecting node $v_i$ to node $v_{j}$ has an associated weight $w_{ij}$ representing the strength of the connection (e.g., correlation between node activations, information flow, or interaction strength). We extend the graph representation by including additional node attributes that might influence the identification of chiral pairs, such as node centrality, community membership, and other topological measures that could prove useful in identifying pairs in the network.  This extended representation is richer and more nuanced compared to simple directed graphs and is necessary to capture the more complex relationships between nodes in the network.
+
+As in the previous sections, we represent networks as directed graphs $G = (V, E)$, where $V$ is the set of nodes and $E$ is the set of directed edges.  Each edge $e_{ij} \in E$ connecting node $v_{i}$ to node $v$.
+
+\subsection{Adapting the Convolutional Neural Network}
+
+We adapt the CNN architecture proposed in Zhang \textit{et al.} \cite{zhang2018machine}  (see Figure 1 in the original paper) to learn local topological features related to chirality. The input to the CNN will be a matrix representation of the local neighborhood around each node in the graph.  This representation will be constructed by including several elements:
+
+Node Attributes:  Include node attributes such as centrality and community membership in the input matrix.
+Edge Weights:  The edge weights from the node to its neighbors are added to the input matrix.
+Shortest Path Lengths:  Compute the shortest path lengths between each pair of neighbors, which will inform the computation of the chiral vector in the subsequent phases.
+
+This extended input representation captures both local topology and more global network features. This information is crucial for accurately identifying chiral pairs, unlike the approach in the original paper which only focused on computing the winding number.
+
+\subsection{Chiral Pair Identification}
+
+The output of the CNN is a vector that represents a topological feature embedding of the local neighborhood for each node.  We define a chiral pair as a pair of nodes whose topological feature embeddings show a high degree of asymmetry or anti-correlation. This asymmetry or anti-correlation is evaluated using a distance metric, such as cosine similarity. We select the top pairs that maximize the asymmetry as the chiral pairs relevant to performing CGD in subsequent phases.  The selection process could be made more complex to filter out pairs with specific traits or incorporate more data to reduce computational cost or improve performance.
+
+\section{Identifying Chiral Pairs: A Topologically-Informed Approach}
+
+This section details a method for identifying chiral pairs, building upon Zhang \textit{et al.} \cite{zhang2018machine} but incorporating novel elements to capture asymmetry relevant to narrative structures and social networks. This forms Phase 1 of our system, providing the foundation for chiral gradient descent.
+
+\subsection{Network Representation}
+
+We represent networks as directed graphs $G = (V, E)$ with weighted edges $w_{ij}$. Crucially, we augment this with \textbf{relative path information}. For each node $v_i$, we pre-compute:
+
+\begin{itemize}
+    \item \textbf{Shortest Path Lengths:} The shortest path length from $v_i$ to every other node $v_j$ (denoted $d(v_i, v_j)$).
+    \item \textbf{Common Ancestors and Path Differences:} For each pair of nodes ($v_i, v_j$), we identify their common ancestors and calculate the \textit{difference} in path lengths from each common ancestor to $v_i$ and $v_j$. This captures the asymmetry in how $v_i$ and $v_j$ relate to their shared history or context.
+\end{itemize}
+
+This richer representation goes beyond simple connectivity, encoding structural asymmetries relevant to narratives (e.g., how different characters relate to key events) and social networks (e.g., differing perspectives on shared information).
+
+\subsection{Convolutional Neural Network}
+
+We adapt the CNN architecture from Zhang \textit{et al.} \cite{zhang2018machine} to learn chiral features. The input to the CNN for node $v_i$ now includes:
+
+\begin{itemize}
+    \item \textbf{Local Neighborhood Structure:} Edge weights $w_{ij}$ for $v_j$ in $v_i$'s neighborhood.
+    \item \textbf{Relative Path Information:} For each neighbor $v_j$, include the shortest path length $d(v_i, v_j)$ and the differences in path lengths from common ancestors.
+\end{itemize}
+
+This combined input allows the CNN to learn features sensitive to both local connectivity and global topological asymmetries.
+
+\subsection{Chiral Pair Identification}
+
+Instead of simply using cosine distance, we define a more nuanced chirality score:
+
+\begin{equation}
+\text{ChiralScore}(v_i, v_j) = \text{Asymmetry}(F_i, F_j) \times \text{PathDifference}(v_i, v_j)
+\end{equation}
+
+Where:
+
+\begin{itemize}
+    \item $F_i, F_j$ are the feature embeddings from the CNN for nodes $v_i$ and $v_j$.
+    \item $\text{Asymmetry}(F_i, F_j)$ measures the asymmetry between the embeddings (e.g., using cosine distance or a learned metric).
+    \item $\text{PathDifference}(v_i, v_j)$ is a weighted average of the path length differences from common ancestors, emphasizing structural asymmetry.
+\end{itemize}
+
+Pairs with high $\text{ChiralScore}$ are identified as chiral pairs. This combined score captures both feature-level and structural asymmetry.
+
+\subsection{Algorithm}
+
+\begin{algorithm}[H]
+\caption{Chiral Pair Identification}
+\begin{algorithmic}[1]
+\Require Graph $G=(V,E)$, CNN model, chirality threshold $\tau$
+\State Pre-compute shortest path lengths and path differences for all node pairs
+\State Initialize empty set of chiral pairs $C$
+\For{each node $v_i \in V$}
+    \State Construct input matrix $M_i$ (neighborhood, paths)
+    \State $F_i \gets$ CNN($M_i$)
+\EndFor
+\For{each pair of nodes $(v_i, v_j) \in V \times V$}
+    \State $S_{ij} \gets \text{ChiralScore}(v_i, v_j)$
+    \If{$S_{ij} > \tau$}
+        \State $C \gets C \cup \{(v_i, v_j)\}$
+    \EndIf
+\EndFor
+\Return $C$
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Discussion}
+
+This method directly addresses the challenge of defining and detecting chirality relevant to narrative and social network analysis. By incorporating relative path information and a combined chirality score, it captures more nuanced asymmetries than simply comparing feature embeddings. The use of common ancestor paths adds a "historical" or "contextual" dimension to the chirality measure, which is particularly relevant for understanding how information and relationships evolve in narratives and social networks. The hierarchical application and the flexibility in defining the Asymmetry and PathDifference functions provide adaptability for various applications.
+
+\subsection{Hierarchical Application}
+
+To handle hierarchical structures, we apply the method recursively to sub-graphs within the network. This hierarchical application identifies chiral pairs at different scales, allowing for a more granular analysis of asymmetry in multi-level structures, which mirrors the multi-scale nature of hierarchical structures in narratives and social networks.
+
+
+\subsection{Algorithm}
+
+
+\begin{algorithm}[H]
+\caption{Chiral Pair Identification}
+\begin{algorithmic}[1]
+\Require Graph $G=(V,E)$, CNN model, asymmetry threshold $\tau$
+\State Initialize empty set of chiral pairs $C$
+\For{each node $v_i \in V$}
+    \State Construct input matrix $M_i$ for $v_i$'s neighborhood
+    \State Obtain feature embedding vector $F_i$ from CNN($M_i$)
+\EndFor
+\For{each pair of nodes $(v_i, v_j) \in V \times V$}
+    \State Compute asymmetry score $A_{ij} = d(F_i, F_j)$ (e.g., using cosine distance)
+    \If{$A_{ij} > \tau$}
+        \State Add $(v_i, v_j)$ to $C$
+    \EndIf
+\EndFor
+\State \Return Set of chiral pairs $C$
+\end{algorithmic}
+\end{algorithm}
+
+
+\subsection{Discussion}
+
+This method builds upon the success of CNNs in learning complex patterns from local data and provides a rigorous approach to identify chiral pairs.  By incorporating topological features and hierarchical application, it addresses the complexities of analyzing asymmetries in real-world systems.  The choice of CNN architecture and asymmetry threshold requires careful evaluation and tuning for specific applications and datasets.  We will compare this approach with alternative methods for measuring graph similarity and asymmetry in our validation experiments.
+
+\begin{equation} \label{eq:cgd_sigmoid_final}
+\boldsymbol{\theta}_{t+1} = \boldsymbol{\theta}_t - \alpha \nabla L(\boldsymbol{\theta}_t) + \beta \sum_{i,j \in C(\boldsymbol{\theta}_t)}  \frac{\| \mathbf{c}_{ij} \|}{1 + e^{-\gamma d_{ij}}} (\nabla L(\boldsymbol{\theta}_t) \times \mathbf{c}_{ij})
+\end{equation}
+
+Where:
+
+\begin{itemize}
+    \item \(\boldsymbol{\theta}_t\): Parameter vector at time \(t\).
+    \item \(\alpha\): Learning rate.
+    \item \(\nabla L(\boldsymbol{\theta}_t)\): Gradient of the loss function.
+    \item \(\beta\): Global chirality parameter.
+    \item \(C(\boldsymbol{\theta}_t)\): Set of relevant chiral pairs, potentially changing dynamically during training.
+    \item \(\mathbf{c}_{ij}\): Chiral vector for pair (i, j), calculated based on topology.
+    \item \(d_{ij}\): Topological distance between \(i\) and \(j\) based on features like difference in path lengths, curvature measures, node or edge distribution densities, etc.
+    \item \(\gamma\): Scaling parameter for the sigmoid function, influencing the impact of \(d_{ij}\).
+\end{itemize}
+
+\begin{algorithm}
+\caption{Chiral Gradient Descent (CGD)}
+\label{alg:cgd}
+\begin{algorithmic}
+\Require Learning rate ($\alpha$), chirality parameter ($\beta$), scaling parameter ($\gamma$), initial parameters ($\boldsymbol{\theta}0$)
+	\While{not converged}
+	\State Compute gradient: ($\nabla L(\boldsymbol{\theta}t)$)
+	\State Determine relevant chiral pairs: ($C(\boldsymbol{\theta}t)$) (using gradient magnitude, topological distance, asymmetry scores, and other factors)
+	\State Calculate chiral vectors ($\mathbf{c}{ij}$) and distances ($d{ij}$) for ($(i, j) \in C(\boldsymbol{\theta}t)$)
+	\State ($\Delta \boldsymbol{\theta} = \beta \sum{i,j \in C(\boldsymbol{\theta}t)} \frac{| \mathbf{c}{ij} |}{1 + e^{-\gamma d{ij}}}$ ($\nabla L(\boldsymbol{\theta}t) \times \mathbf{c}{ij})$)
+	\State Update parameters: ($\boldsymbol{\theta}_{t+1} = \boldsymbol{\theta}_t - \alpha \nabla L(\boldsymbol{\theta}_t) + \Delta \boldsymbol{\theta}$)
+	\State ($t \gets t + 1$)
+\EndWhile
+\end{algorithmic}
+\end{algorithm}
+
+
+This CGD algorithm uses a sigmoid function to modulate the influence of each chiral pair based on the topological distance \(d_{ij}\) between neurons. Chiral pairs that are topologically "closer" (smaller \(d_{ij}\)) have a stronger influence on the update. The magnitude of the chiral vector \(\| \mathbf{c}_{ij} \|\) also contributes, allowing pairs with greater asymmetry to exert more influence. The parameter \(\beta\) controls the global effect of chirality, while \(\gamma\) modulates the sigmoid's steepness, providing control over the sensitivity to topological distances \(d_{ij}\).
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Methodology}
+
+This research will involve a phased approach, combining theoretical analysis, computational simulations, and experimental validation:
+
+\subsection{Phase 1: Chiral Pair Identification}
+
+We will implement the chiral pair identification method described in Section 5 using a Convolutional Neural Network (CNN). The CNN will be trained on synthetic graph datasets with varying topological properties, including networks generated using preferential attachment models and networks with known chiral structures. We will investigate different CNN architectures and hyperparameters to optimize the identification of chiral pairs. The performance will be evaluated using metrics like precision, recall, and F1-score, comparing our approach with baseline methods for graph similarity.
+
+\subsection{Phase 2: Chiral Gradient Descent Implementation}
+
+We will implement the CGD algorithm (Algorithm \ref{alg:cgd}) in a deep learning framework (TensorFlow/PyTorch).  Initial experiments will focus on simpler datasets (e.g., MNIST, CIFAR-10) and standard network architectures (e.g., Multilayer Perceptrons, Convolutional Neural Networks). We will explore different methods for calculating the chiral vectors \(\mathbf{c}_{ij}\), weighting schemes for $w_{ij}$, and dynamic selection strategies for the chiral pair set \(C(\boldsymbol{\theta}_t)\). The parameters $\alpha$, $\beta$, and $\gamma$ will be tuned using grid search or Bayesian optimization.
+
+\subsection{Phase 3: Experimental Evaluation}
+
+We will evaluate CGD's performance on more complex datasets (e.g., ImageNet) and larger network architectures (e.g., ResNet, Transformer). We will compare CGD with standard gradient descent methods (SGD, Adam) and other state-of-the-art optimizers.  The evaluation metrics will include convergence speed, generalization performance (accuracy on a held-out test set), and robustness to noise and hyperparameter variations.  Statistical significance testing (e.g., t-tests) will be used to compare the performance of different algorithms.
+
+\subsection{Datasets and Network Architectures}
+
+The research will utilize a variety of datasets, including:
+
+\begin{itemize}
+    \item Standard image classification datasets (MNIST, CIFAR-10, ImageNet).
+    \item Synthetic graph datasets with varying topological characteristics.
+    \item Real-world social network datasets (if available and applicable).
+\end{itemize}
+
+
+The planned network architectures include:
+
+\begin{itemize}
+    \item Multilayer Perceptrons (MLPs).
+    \item Convolutional Neural Networks (CNNs).
+    \item Graph Neural Networks (GNNs), if social network analysis is included.
+\end{itemize}
+
+
+
+\subsection{Timeline and Milestones}
+\begin{itemize}
+    \item \textbf{Year 1:} Implement chiral pair identification (Phase 1) and CGD algorithm (Phase 2), preliminary tests on simple datasets.
+    \item \textbf{Year 2:}  Extensive experiments on complex datasets (Phase 3), compare CGD with baselines, refine the algorithm.
+    \item \textbf{Year 3:}  Apply CGD to novel architectures (e.g., GNNs), explore theoretical analysis of CGD's convergence properties, disseminate findings.
+\end{itemize}
+
+
+\section{Expected Outcomes and Discussion}
+
+We anticipate that CGD will outperform standard gradient descent methods, particularly in complex landscapes, by virtue of its enhanced exploration capabilities.  We expect faster convergence and improved generalization performance, especially for datasets and network architectures that exhibit inherent chiral or asymmetric properties. We will analyze how different parameters and chiral vector calculation methods affect performance, aiming to identify the strengths and limitations of CGD. The open-source implementation of CGD will facilitate its adoption and further development by the research community, leading to novel approaches for optimization in various machine learning domains.
+
+
+
+
+
+\section{Conclusion}
+This research proposal presents a novel approach to gradient descent optimization that holds significant promise. By leveraging the power of chiral topologies and incorporating biologically plausible mechanisms into the optimization process, this research has the potential to overcome the limitations of traditional gradient descent and usher in a new era of more efficient and effective deep learning models. The research plan detailed above, if successfully executed, will provide valuable insight into the use of chiral gradient descent and pave the way for its deployment in real-world applications. The next steps will involve developing and testing the CGD algorithm, conducting rigorous experiments, and analyzing the findings to validate its performance and contribute to the advancement of deep learning methodologies.
+
+\bibliographystyle{plain}
+\bibliography{references} 
+
+
+
+
+\end{document}
+</file>
+
+<file path="ResearchProposal-ChiralNarrativeSynthesis.tex">
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=0.5in]{geometry} % Standard margin setup
+\usepackage{amsmath, amsfonts, amssymb, amsthm} % For math
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{graphicx} % For images
+\usepackage{hyperref} % For hyperlinks
+\usepackage{enumitem} % For better list control
+\usepackage{abstract} % For abstract formatting
+\usepackage{titlesec} % For title formatting
+\usepackage{cite}
+
+\newtheorem{conjecture}{Conjecture}
+
+% Title formatting
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection}{1em}{}
+
+% Spacing
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0em}
+
+% Abstract spacing
+\setlength{\absleftindent}{0mm}
+\setlength{\absrightindent}{0mm}
+
+% Title and author information
+\title{\vspace{-2cm}\textbf{Chiral Narrative Synthesis:  A Multi-Agent Reinforcement Learning Approach to Truth Discovery}}
+
+\author{\textbf{Paul Lowndes} \\ \href{mailto:ZeroTrust@NSHkr.com}{\texttt{ZeroTrust@NSHkr.com}}}
+\date{\small December 4, 2024} 
+
+\begin{document}
+
+\maketitle
+\vspace{-1.5em} 
+
+
+\begin{abstract}
+This research proposes Chiral Narrative Synthesis (CNS), a novel framework leveraging topological concepts within a multi-agent reinforcement learning (MARL) system to accelerate truth discovery. CNS employs narratives – structured representations of hypotheses or perspectives – as fundamental units of knowledge. We introduce chiral narratives, representing opposing yet partially valid viewpoints, and orthogonal narratives, capturing independent information. Specialized agents within the MARL environment refine and synthesize these narratives, guided by chiral and orthogonal measures, to converge towards a shared understanding of truth. This approach addresses limitations of traditional knowledge integration methods by explicitly modeling the interplay of diverse, potentially conflicting perspectives. We present a mathematical framework for CNS, including formal definitions of narratives, chirality, orthogonality, and narrative synthesis. We also outline algorithms for chiral pair identification, incorporating contextual information, confidence scores, and feedback from a spiral descent optimization process.  The framework's potential is demonstrated through illustrative examples and conjectures, laying the groundwork for future research in multi-agent truth discovery and knowledge synthesis.
+\end{abstract}
+
+\section{Introduction}
+
+Scientific progress and knowledge discovery often involve the synthesis of information from diverse, and potentially conflicting, sources.  Traditional methods for knowledge integration frequently struggle with the complexities of reconciling contradictory evidence, integrating incomplete information, and generating novel hypotheses. This research proposes Chiral Narrative Synthesis (CNS), a novel framework that leverages topological concepts, specifically chirality and orthogonality, within a multi-agent reinforcement learning (MARL) system to address these challenges and accelerate truth discovery.
+
+CNS employs "narratives" – structured representations of hypotheses, perspectives, or theories – as the fundamental units of knowledge.  We introduce the concept of *chiral narratives*, representing opposing but partially valid viewpoints relative to a dynamically evolving truth representation.  We also introduce *orthogonal narratives*, which capture independent, potentially complementary pieces of information.  By explicitly modeling the interplay between these chiral and orthogonal narratives, CNS aims to capture the dynamic and often contradictory nature of scientific discourse and knowledge evolution.
+
+Within the CNS framework, specialized agents operate in a MARL environment.  These agents refine and synthesize narratives, guided by chiral and orthogonal measures, through a spiral descent optimization process. This iterative process facilitates the exploration of a complex narrative space, enabling the system to converge towards a shared understanding of truth.
+
+This research contributes a formal mathematical framework for CNS, including precise definitions of narratives, chirality, orthogonality, and narrative synthesis.  We also introduce algorithms for chiral pair identification, incorporating contextual information, confidence scores, and feedback from the spiral descent process.  Furthermore, we explore Bayesian perspectives on narrative synthesis and discuss the use of spatiotemporal digests for robust truth verification.
+
+\section{Detailed Discussion}
+
+The CNS framework addresses a fundamental challenge in knowledge integration: how to reconcile conflicting information and synthesize new insights from diverse perspectives.  Traditional approaches often rely on consensus-building or averaging, which can obscure valuable information contained in dissenting viewpoints.  CNS, by contrast, explicitly models the interplay of opposing narratives through the concept of chirality.
+
+Chiral narratives, inspired by the concept of chirality in chemistry and physics, represent hypotheses or perspectives that are diametrically opposed yet both contain elements of truth.  This opposition is captured mathematically by a high chiral similarity score between their embeddings.  The simultaneous partial convergence of chiral narratives towards the truth embedding reflects the idea that even conflicting perspectives can offer valuable insights.
+
+Orthogonal narratives, on the other hand, represent independent lines of inquiry or evidence.  These narratives, characterized by low chiral similarity, contribute unique information that can complement and strengthen the overall understanding of truth. The integration of orthogonal narratives within CNS allows the system to explore diverse regions of the narrative space and discover novel connections between seemingly unrelated concepts.
+
+The MARL system within CNS consists of specialized agents that interact and learn through a reinforcement learning process.  Narrator agents construct and refine individual narratives, while critic agents evaluate their coherence, consistency, and explanatory power.  Synthesizer agents identify chiral and orthogonal relationships between narratives and generate new, synthesized narratives that integrate information from multiple sources.  The spiral descent optimization process, inspired by Spiral Optimization (SPO), guides the refinement of narratives towards the truth embedding, while also exploring the complex topology of the narrative space.  The dynamic adjustment of spiral parameters allows the system to adapt to the changing landscape of information and efficiently navigate towards higher levels of truth.
+
+The integration of LIME (Local Interpretable Model-agnostic Explanations) within CNS provides crucial insights into the reasoning behind narrative synthesis.  By explaining the chiral and orthogonal relationships between narratives, LIME helps researchers understand why certain narratives are synthesized and how they contribute to the overall understanding of truth.  This enhanced interpretability is essential for building trust in the system's discoveries and for guiding further scientific inquiry.
+
+The use of spatiotemporal digests [TODO: ref draft for patent 30], adds another layer of robustness to the CNS framework.  By anchoring narratives to physical reality through verifiable spatiotemporal records, the system can distinguish between narratives supported by verifiable evidence and those based on speculation or misinformation.  This grounding in physical reality is crucial for ensuring the scientific validity of the synthesized narratives.
+
+The Bayesian perspective on CNS provides a powerful framework for representing uncertainty and incorporating prior knowledge.  By representing narratives as probability distributions over possible world states, the system can explicitly model the uncertainty inherent in scientific hypotheses and update its beliefs as new evidence emerges.  This Bayesian approach offers a more nuanced and robust way to represent and synthesize narratives compared to traditional vector-based methods.
+
+Finally, the CNS framework addresses the philosophical challenges of defining and discovering truth in a complex and ever-changing world.  By embracing ambiguity, utilizing controlled infinite regress, dynamically adjusting dimensionality, and harnessing dialectical conflict, CNS provides a computational model for the iterative and often contradictory nature of scientific progress.  The conjectures presented in this proposal offer testable hypotheses about the dynamics of narrative synthesis and its potential to accelerate truth discovery.
+ 
+ 
+\section{Mathematical Terms and Definitions}
+
+\subsection{Topology}
+
+\begin{itemize}
+    \item \textbf{Topological Space:} A set equipped with a topology, which is a collection of open sets satisfying certain axioms.
+    \item \textbf{Topological Invariant:} A property of a topological space that remains unchanged under continuous transformations (e.g., homeomorphisms). Examples include connectedness, compactness, and homotopy groups.
+    \item \textbf{Manifold:} A topological space that locally resembles Euclidean space.
+    \item \textbf{Chirality (in topology): } A property of a topological space that is asymmetric under certain transformations (e.g., reflection).  A chiral space cannot be superimposed on its mirror image.
+    \item \textbf{Orthogonality (in vector spaces): } Two vectors are orthogonal if their dot product is zero. This represents independence in vector spaces.
+    \item \textbf{Cosine Similarity:} The cosine of the angle between two vectors, measuring their similarity in direction. It is given by the dot product of the two vectors divided by the product of their magnitudes.
+    \item \textbf{Hamming Distance:} The number of positions at which two vectors differ. Used to measure the distance between binary vectors representing narratives.
+    \item \textbf{Shortest Path Length:} In a graph, the shortest distance between two nodes, considering only the edges and edge weights.
+    \item \textbf{Persistent Homology:} A technique in topological data analysis that identifies topological features (e.g., connected components, loops, voids) at multiple scales.
+    \item \textbf{Topological Distance:} A measure of distance between two points in a topological space, reflecting their topological relationships.
+\end{itemize}
+
+
+\subsection{Linear Algebra}
+
+\begin{itemize}
+    \item \textbf{Vector:} An ordered collection of numbers.
+    \item \textbf{Dot Product:}  A measure of the similarity between two vectors.  For vectors $u, v \in \mathbb{R}^n$,  $u \cdot v = \sum_{i=1}^n u_i v_i$.
+    \item \textbf{Cross Product (in $\mathbb{R}^3$): } A binary operation on two vectors in $\mathbb{R}^3$ producing a vector orthogonal to both inputs.
+    \item \textbf{Matrix:} A rectangular array of numbers.
+    \item \textbf{Matrix Multiplication (matmul): } A binary operation on two matrices under certain dimensional compatibility constraints.
+    \item \textbf{Projection Operator:} A linear transformation that projects a vector onto a subspace.
+    \item \textbf{Rotation Matrix:} A matrix representing a rotation in space.
+\end{itemize}
+
+\subsection{Calculus and Optimization}
+
+\begin{itemize}
+    \item \textbf{Gradient:} A vector pointing in the direction of the steepest ascent of a function.
+    \item \textbf{Gradient Descent:} An iterative optimization algorithm that moves in the direction of the negative gradient to minimize a function.
+    \item \textbf{Learning Rate:} A parameter controlling the step size in gradient descent.
+    \item \textbf{Loss Function:} A function measuring the difference between predictions and actual values.
+    \item \textbf{Convergence (of optimization algorithm): }  An algorithm converges if it reaches a minimum or stationary point of the function being optimized.
+    \item \textbf{Local Minimum:} A point that is a minimum within a local neighborhood.
+    \item \textbf{Global Minimum:} The absolute minimum value of a function.
+\end{itemize}
+
+
+\subsection{Information Theory}
+
+\begin{itemize}
+    \item \textbf{Mutual Information:}  A measure of the mutual dependence between two random variables.
+    \item \textbf{Entropy:} A measure of uncertainty in a random variable.
+    \item \textbf{Information Gain:}  The reduction in uncertainty achieved by observing a random variable.
+\end{itemize}
+
+
+\subsection{Graph Theory}
+
+\begin{itemize}
+    \item \textbf{Graph:} A mathematical structure representing relationships between objects (nodes or vertices) connected by edges.
+    \item \textbf{Directed Graph:} A graph where edges have a direction.
+    \item \textbf{Weighted Graph:} A graph where edges have associated weights.
+    \item \textbf{Node Centrality:}  A measure of a node's importance in a graph.  Different centrality measures exist, capturing various aspects of importance.
+    \item \textbf{Community Structure (in graphs): } The division of nodes into groups or communities based on connectivity patterns.
+    \item \textbf{Shortest Path:} The shortest sequence of edges connecting two nodes in a graph.
+    \item \textbf{Path Length:} The number of edges in a path.
+\end{itemize}
+
+
+\subsection{Reinforcement Learning}
+
+\begin{itemize}
+    \item \textbf{Agent:} An entity that learns to interact with an environment.
+    \item \textbf{Environment:} The system the agent interacts with.
+    \item \textbf{State:} A representation of the environment.
+    \item \textbf{Action:} A decision made by the agent.
+    \item \textbf{Reward:} A scalar value reflecting the desirability of a state or action.
+    \item \textbf{Policy:} A strategy that maps states to actions.
+    \item \textbf{Value Function:} A function estimating the expected cumulative reward from a given state.
+    \item \textbf{Q-value:} The expected cumulative reward for taking a given action in a given state.
+    \item \textbf{Learning Rate (in RL): } A parameter controlling the speed of learning in the reinforcement learning algorithm.
+    \item \textbf{Discount Factor (in RL): }  A parameter controlling the relative importance of immediate rewards versus future rewards.
+\end{itemize}
+
+
+\section{Mathematical Formulas}
+
+\subsection{Chiral Gradient Descent (CGD) Formulas}
+
+\begin{enumerate}
+    \item  Equation:
+    \[
+    \boldsymbol{\theta}_{t+1} = \boldsymbol{\theta}_t - \alpha \nabla L(\boldsymbol{\theta}_t) + \beta \sum_{i,j \in C} s(w_{ij}, \mathbf{c}_{ij}) (\nabla L(\boldsymbol{\theta}_t) \times \mathbf{c}_{ij})
+    \]
+    \item Equation:
+    \[
+    \boldsymbol{\theta}_{t+1} = \boldsymbol{\theta}_t - \alpha \nabla L(\boldsymbol{\theta}_t) + \beta \sum_{i,j \in C(\boldsymbol{\theta}_t)}  \frac{\| \mathbf{c}_{ij} \|}{1 + e^{-\gamma d_{ij}}} (\nabla L(\boldsymbol{\theta}_t) \times \mathbf{c}_{ij})
+    \]
+    \item Chirality Score:
+    \[
+    C_i(t) = \sum_{j \in N(i)} w_{ij} \times A(v_i, v_j)
+    \]
+    \item Learning Rate Update:
+    \[
+    \eta_i(t+1) = \eta_i(t) \times (1 + \beta \times C_i(t))
+    \]
+    \item Chiral Similarity:
+    \[
+    CS(N_i, N_j) = w_f \times sim(F_i, F_j) + w_c \times sim(C_i, C_j) + w_t \times |T_i - T_j|
+    \]
+    \item Orthogonal Similarity:
+    \[
+    OS(N_i, N_j) = 1 - |CS(N_i, N_j)|
+    \]
+    \item Q-Learning Update:
+    \[
+    Q(s, a) = Q(s, a) + \alpha \times [R(s, a, s') + \gamma \times \max_{a'} Q(s', a') - Q(s, a)]
+    \]
+\end{enumerate}
+
+
+\section{Conjectures}
+
+\subsection{Chiral Convergence Conjecture}
+
+In a multi-agent system performing narrative synthesis, the presence of both chiral and orthogonal narratives, coupled with local explanations, strictly increases the rate of convergence towards the ground truth embedding, compared to systems utilizing only chiral or only orthogonal narratives, when measured relative to the resources consumed. This increase in convergence is not merely due to the increased number of narratives but arises from the synergistic interaction of chiral and orthogonal information, especially in high-dimensional narrative spaces with complex topological features.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+\section{Mathematical Terms and Definitions (Continued)}
+
+\subsection{Bayesian Inference}
+
+\begin{itemize}
+    \item \textbf{Prior Probability:} The probability of an event before observing any data.
+    \item \textbf{Likelihood:} The probability of observing the data given a particular event.
+    \item \textbf{Posterior Probability:} The probability of an event after observing the data.  Calculated using Bayes' theorem.
+    \item \textbf{Bayes' Theorem:} A theorem relating prior probability, likelihood, and posterior probability.
+    \item \textbf{Bayesian Update:} The process of updating a probability distribution based on new data.
+    \item \textbf{Variational Inference:} An approximation method for performing Bayesian inference in complex models.
+\end{itemize}
+
+\subsection{Fuzzy Logic}
+
+\begin{itemize}
+    \item \textbf{Fuzzy Set:} A set where elements have degrees of membership (between 0 and 1).
+    \item \textbf{Membership Function:} A function defining the degree of membership of an element in a fuzzy set.
+    \item \textbf{Fuzzy Logic Operations:}  Logical operations (AND, OR, NOT) extended to fuzzy sets.
+    \item \textbf{Fuzzy Truth Value:} A truth value between 0 and 1, representing degrees of belief or uncertainty.
+\end{itemize}
+
+
+\subsection{Spatiotemporal Digests}
+
+\begin{itemize}
+    \item \textbf{Spatiotemporal Region ($X_r$): } A subset of spacetime.
+    \item \textbf{Raster Recording ($R$): } A function mapping a spatiotemporal region to a set of data values.
+    \item \textbf{Spatiotemporal Digest ($S$): } A function mapping a spatiotemporal region to a digest value, typically a cryptographic hash, that is computationally infeasible to invert.
+    \item \textbf{Strong Verification ($V$): } A function that compares a raster recording with a spatiotemporal digest to verify authenticity.
+\end{itemize}
+
+\subsection{Additional Terms}
+
+\begin{itemize}
+    \item \textbf{Confidence Score ($T_i$): } A scalar value in the range [0, 1], representing the degree of belief in the truthfulness of a narrative.
+    \item \textbf{Asymmetry Function ($A(v_i, v_j)$): } A function measuring the degree of asymmetry between two nodes in a network.
+    \item \textbf{Neighborhood ($N(i)$): } The set of nodes directly connected to node $i$ in a graph.
+    \item \textbf{Sigmoid Function:} A function that maps a real number to a value between 0 and 1. Often used to introduce non-linearity in neural networks.
+\end{itemize}
+
+
+
+\section{Mathematical Formulas (Continued)}
+
+\subsection{Additional Formulas}
+
+\begin{enumerate}
+    \item \textbf{Convergence Rate:}
+    \[
+    CR(N_i, T, t) = -\frac{d}{dt} [d(F_i(t), F_t(t))]
+    \]
+    \item \textbf{Chiral Score (refined): }
+    \[
+    CS(N_i, N_j) = w_f sim(F_i, F_j) + w_c sim(C_i, C_j) + w_t |T_i - T_j|
+    \]
+    \item \textbf{Orthogonal Score (refined): }
+    \[
+    OS(N_i, N_j) = 1 - |CS(N_i, N_j)|
+    \]
+\end{enumerate}
+
+
+\section{Conjectures (Continued)}
+
+\subsection{Chiral Convergence Conjecture (refined)}
+
+In a multi-agent system performing narrative synthesis, the convergence towards a higher confidence shared understanding of truth is accelerated by the presence and resolution of chiral and orthogonal relationships between narratives, where these relationships are defined by a combination of feature similarity, contextual similarity, and confidence discrepancies.  Furthermore, this convergence is optimized through a reinforcement learning process that rewards agents for increasing narrative confidence, synthesizing higher-confidence narratives, resolving chiral tensions, and integrating orthogonal perspectives.
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+\section{Mathematical Terms and Definitions (Continued)}
+
+\subsection{Reinforcement Learning (Continued)}
+
+\begin{itemize}
+    \item \textbf{Multi-Agent Reinforcement Learning (MARL): } Reinforcement learning extended to multiple interacting agents.
+    \item \textbf{Decentralized RL: } MARL where agents do not have a central controller or global knowledge of the environment.
+    \item \textbf{Multi-Objective RL: } RL where the agent has multiple goals or reward functions to optimize.
+    \item \textbf{Adversarial RL: } RL where two or more agents compete against each other.
+    \item \textbf{Meta-Learning (in RL): }  Learning to learn;  an RL agent learns to adapt its learning strategy based on experience.
+\end{itemize}
+
+
+\subsection{Local Interpretable Model-agnostic Explanations (LIME)}
+
+\begin{itemize}
+    \item \textbf{Local Explanation:}  An explanation of a single prediction made by a machine learning model.
+    \item \textbf{Interpretable Model:}  A model whose predictions are easily understandable by humans (e.g., linear model, decision tree).
+    \item \textbf{Model-Agnostic:} A method that can be applied to any machine learning model, regardless of its internal structure.
+    \item \textbf{Submodular Pick (SP-LIME): } A method for selecting a representative subset of instances to explain a model's global behavior.
+\end{itemize}
+
+
+\subsection{Additional Terms}
+
+\begin{itemize}
+    \item \textbf{Narrative Space (NS): } The set of all possible narratives, considered as a high-dimensional topological space.
+    \item \textbf{Narrative Refinement ($\Delta N_i$): } A change in a narrative based on feedback and interaction with other narratives.  Represented as a vector in narrative space.
+    \item \textbf{Truth Value ($T_i$): } A measure of the truthfulness of a narrative, represented as a probability or confidence score.
+    \item \textbf{Global Chirality Parameter ($\beta$): } Controls the overall effect of chirality on gradient descent.
+    \item \textbf{Scaling Parameter ($\gamma$): }  Controls the steepness of the sigmoid function, determining how topological distance affects the chiral influence.
+\end{itemize}
+
+
+\section{Mathematical Formulas (Continued)}
+
+\subsection{Additional Formulas}
+
+\begin{enumerate}
+    \item \textbf{Weighted Averaging of Embeddings (during synthesis): }
+    \[
+    F_k = \frac{T_i F_i + T_j F_j}{T_i + T_j}
+    \]
+    \item \textbf{Reward Function (example): }
+    \[
+    R(s, a, s') = w_c Coherence(s') + w_r Resolution(s, a, s') + w_t Convergence(s', T) - w_r RC(a)
+    \]
+    \item \textbf{Average Confidence Score: }
+    \[
+    \frac{1}{n} \sum_{i=1}^n T_i(t)
+    \]
+\end{enumerate}
+ 
+
+
+
+
+
+
+
+\section{Introspection Process: Formalizing Implicit Conjectures}
+
+\subsection{Bayesian Narrative Representation}
+
+The core idea is to represent narratives as probability distributions over possible world states $W$.  A narrative $N_i$ is thus a conditional probability distribution: $N_i \equiv P(W|N_i)$. This allows explicit modeling of uncertainty and incorporates prior knowledge.
+
+\subsection{Synthesis as Bayesian Updating}
+
+Narrative synthesis is viewed as a Bayesian update. The posterior distribution over world states, given narratives $N_i$ and $N_j$, is $P(W|N_i, N_j)$. This posterior captures combined information. Assuming conditional independence between narratives given the world state (a common simplification), and a uniform prior $P(W)$, we have:
+
+\[
+P(W|N_i, N_j) \propto P(N_i|W)P(N_j|W)
+\]
+
+However, for high-dimensional $W$, calculating this product is computationally expensive. Variational inference or approximations are needed for scalability.  The proportionality constant is omitted as it is a normalization constant. Note that this is a conditional independence assumption, which may or may not be true in practice.
+
+
+\subsection{Chirality and Orthogonality in Bayesian Terms}
+
+\begin{itemize}
+    \item \textbf{Chirality:}  High divergence (KL or JS divergence) between $P(W|N_i)$ and $P(W|N_j)$ indicates chirality.
+    \item \textbf{Orthogonality:} Low mutual information $I(N_i; N_j)$ between $N_i$ and $N_j$ indicates orthogonality.
+\end{itemize}
+
+\subsection{Conjectures}
+
+\begin{conjecture}[Bayesian Narrative Synthesis]
+If $N_i$ and $N_j$ are two narratives with confidence scores $T_i$ and $T_j$ respectively, and $N_k = Synth(N_i, N_j)$ is their synthesis, then $T_k \ge \max(T_i, T_j)$. This formalizes that combining information increases confidence.
+\end{conjecture}
+
+\begin{conjecture}[Chiral Narrative Convergence]
+If $N_i$ and $N_j$ are chiral narratives (high divergence), their synthesis $N_k$ converges faster to the truth $T$ than individual narratives. This formalizes the idea that resolving chiral tensions accelerates progress.
+\end{conjecture}
+
+\begin{conjecture}[Orthogonal Narrative Complementarity]
+If $N_i$ and $N_j$ are orthogonal narratives (low mutual information), then the confidence score of their synthesis $N_k$ is higher than either individual narrative: $T_k > \max(T_i, T_j)$. This formalizes the idea that independent perspectives provide complementary information.
+\end{conjecture}
+
+\section{Bayesian Narrative Representation}
+
+A narrative $N_i$ is represented as a conditional probability distribution over world states $W$:
+
+\[
+N_i \equiv P(W|N_i)
+\]
+
+\section{Narrative Synthesis}
+
+The synthesis of two narratives $N_i$ and $N_j$ is represented as a Bayesian update:
+
+\[
+Synth(N_i, N_j) = N_k \equiv P(W|N_i, N_j)
+\]
+
+Assuming conditional independence between narratives given the world state, and given a uniform prior $P(W)$, we have:
+\[P(W|N_i, N_j) \propto P(W|N_i) P(W|N_j) \]
+
+
+\section{Chirality and Orthogonality}
+
+\begin{itemize}
+    \item \textbf{Chirality:}  Two narratives $N_i$ and $N_j$ are chiral if their probability distributions have high divergence (e.g., measured by KL or JS divergence).
+    \item \textbf{Orthogonality:} Two narratives $N_i$ and $N_j$ are orthogonal if they have low mutual information about the world state $W$.
+\end{itemize}
+
+\section{Conjectures}
+
+\begin{conjecture}[Bayesian Narrative Synthesis]
+If $N_i$ and $N_j$ are two narratives with confidence scores $T_i$ and $T_j$ respectively, then the confidence score $T_k$ of the synthesized narrative $N_k = Synth(N_i, N_j)$ satisfies:
+\[
+T_k \ge \max(T_i, T_j)
+\]
+\end{conjecture}
+
+\begin{conjecture}[Chiral Narrative Convergence]
+If $N_i$ and $N_j$ are chiral narratives with high divergence, their synthesis $N_k$ will converge faster towards the truth $T$ compared to the individual narratives.
+\end{conjecture}
+
+\begin{conjecture}[Orthogonal Narrative Complementarity]
+If $N_i$ and $N_j$ are orthogonal narratives with low mutual information, their synthesis $N_k$ will have a higher confidence score than either individual narrative:
+\[
+T_k > \max(T_i, T_j)
+\]
+\end{conjecture}
+
+
+
+
+
+
+
+
+\section{Chiral Narrative Synthesis: A Mathematical Framework}
+
+
+This section formalizes the core mathematical concepts and conjectures of Chiral Narrative Synthesis (CNS), a framework for multi-agent reinforcement learning designed to accelerate scientific discovery by leveraging chiral and orthogonal relationships between narratives.  We define narratives as structured representations of hypotheses, introduce measures for chirality and orthogonality, and propose a reinforcement learning approach to guide narrative synthesis towards a shared understanding of truth.  We also explore Bayesian perspectives and the implications of spatiotemporal digests for verifying truth claims.
+
+
+\section{Mathematical Terms and Definitions}
+
+\subsection{Narratives and Truth}
+
+\begin{itemize}
+    \item \textbf{Narrative ($N_i$): } A structured representation of a hypothesis, perspective, or theory, represented as a tuple: $N_i = (G_i, F_i, C_i, T_i)$, where:
+        \begin{itemize}
+            \item $G_i$: Graph embedding of the narrative structure (e.g., using GCNs).
+            \item $F_i$: Feature embedding capturing the semantic content.
+            \item $C_i$: Embedding of contextual features (including spatiotemporal digests).
+            \item $T_i$: Confidence score $\in [0, 1]$.
+        \end{itemize}
+    \item \textbf{Truth Embedding ($T$): }  The current best approximation of ground truth, represented similarly to a narrative: $T = (G_t, F_t, C_t, T_t)$, where $T_t$ is the overall confidence in the current understanding of truth.
+    \item \textbf{Narrative Space (NS): } The set of all possible narratives, conceptualized as a high-dimensional topological space.
+\end{itemize}
+
+\subsection{Relationships between Narratives}
+
+\begin{itemize}
+    \item \textbf{Chiral Narratives:} Narratives representing opposing but partially correct perspectives relative to $T$.
+    \item \textbf{Orthogonal Narratives:} Narratives providing independent, potentially complementary information.
+    \item \textbf{Chiral Similarity ($CS$): } Measures the degree of opposition between two narratives, incorporating feature, context, and confidence differences:
+    \[ CS(N_i, N_j) = w_f \cdot sim(F_i, F_j) + w_c \cdot sim(C_i, C_j) + w_t \cdot |T_i - T_j| \]
+    where $sim$ denotes cosine similarity and $w_f, w_c, w_t$ are weights.
+    \item \textbf{Orthogonal Similarity ($OS$): } Measures the degree of independence between narratives:
+    \[ OS(N_i, N_j) = 1 - |CS(N_i, N_j)| \]
+\end{itemize}
+
+\subsection{Spiral Descent and Refinement}
+
+\begin{itemize}
+    \item \textbf{Narrative Refinement ($\Delta N_i$): } A change in a narrative based on feedback and interaction, represented as a vector in NS.
+    \item \textbf{Spiral Descent Function:} Guides narrative refinement using gradients, chiral/orthogonal influences, and local explanations (LIME):
+    \[ \Delta N_i = g(\nabla_{NS} L(N_i), CS(N_i, N_j), OS(N_i, N_k), LIME(N_i), \dots) \]
+    where $g$ is a function to be defined, and $L(N_i)$ is a loss function in narrative space.
+\end{itemize}
+
+\subsection{Spatiotemporal Digests}
+
+\begin{itemize}
+    \item \textbf{4D Timeline ($X$): } 4-dimensional spacetime.
+    \item \textbf{Raster Recording ($R$): } $R: X_r \to D$, maps a spatiotemporal region $X_r \subset X$ to data values $D$.
+    \item \textbf{Spatiotemporal Digest ($S$): } $S: X_r \to H$, maps $X_r$ to a digest value $H$ (e.g., cryptographic hash).
+    \item \textbf{Strong Verification ($V$): } $V(R, S) \to \{\text{True, False}\}$, verifies if $S$ is a valid digest for $R$.
+    \item \textbf{Levels of Truth ($T_n$): } A hierarchy of truth levels based on verification methods (digest, multi-witness, contextual).
+\end{itemize}
+
+\subsection{Other Relevant Concepts}
+
+\begin{itemize}
+    \item \textbf{Bayesian Narrative Representation:} $N_i \equiv P(W|N_i)$, the probability distribution over world states $W$ given narrative $N_i$.
+    \item \textbf{Narrative Synthesis (Bayesian): } $Synth(N_i, N_j) = N_k \equiv P(W|N_i, N_j)$.
+    \item \textbf{Kullback-Leibler (KL) Divergence:} Measures the difference between two probability distributions.
+    \item \textbf{Jensen-Shannon (JS) Divergence:}  A symmetrized and smoothed version of KL divergence.
+    \item \textbf{Mutual Information:} Measures the mutual dependence between two random variables.
+    \item \textbf{Graph Convolutional Networks (GCNs): } Neural networks designed to operate on graph-structured data.
+    \item \textbf{Locality Sensitive Hashing (LSH): }  Technique for efficient approximate nearest neighbor search in high-dimensional spaces.
+\end{itemize}
+
+
+\section{Mathematical Formulas and Algorithms}
+
+\subsection{Core CNS Formulas}
+
+\begin{enumerate}
+    \item \textbf{Narrative Synthesis (embedding-based): }
+    \[ F_k = \frac{T_i F_i + T_j F_j}{T_i + T_j} \]
+    \item \textbf{Reinforcement Learning Update:}
+    \[ Q(s, a) = Q(s, a) + \alpha [R(s, a, s') + \gamma \max_{a'} Q(s', a') - Q(s, a)] \]
+    \item \textbf{Bayesian Narrative Synthesis:}
+    \[ P(W|N_i, N_j) \propto P(N_i|W)P(N_j|W) \]
+\end{enumerate}
+
+\subsection{Chiral Pair Identification Algorithm (Illustrative)}
+
+\begin{algorithm}[H]
+\caption{Chiral Pair Identification}
+\begin{algorithmic}[1]
+\Require Graph $G=(V,E)$, Feature embeddings $F$, Chirality threshold $\tau$
+\State Initialize empty set of chiral pairs $C$
+\For{each pair of nodes $(v_i, v_j) \in V \times V$}
+    \State $S_{ij} \gets \text{ChiralScore}(F_i, F_j)$ \Comment{Using a defined Chiral Score function}
+    \If{$S_{ij} > \tau$}
+        \State $C \gets C \cup \{(v_i, v_j)\}$
+    \EndIf
+\EndFor
+\Return $C$
+\end{algorithmic}
+\end{algorithm}
+
+
+\section{Core Conjectures}
+
+\begin{conjecture}[Chiral Convergence Conjecture]
+The presence and resolution of chiral and orthogonal relationships between narratives, coupled with local explanations, accelerates convergence towards a higher confidence shared understanding of truth in a multi-agent narrative synthesis system.
+\end{conjecture}
+
+\begin{conjecture}[Bayesian Narrative Synthesis]
+If $N_i$ and $N_j$ are two narratives, the confidence score $T_k$ of the synthesized narrative $N_k = Synth(N_i, N_j)$ satisfies $T_k \ge \max(T_i, T_j)$.
+\end{conjecture}
+
+\begin{conjecture}[Chiral Narrative Convergence]
+If $N_i$ and $N_j$ are chiral narratives with high divergence, their synthesis $N_k$ will converge faster towards the truth $T$ compared to the individual narratives.
+\end{conjecture}
+
+\begin{conjecture}[Orthogonal Narrative Complementarity]
+If $N_i$ and $N_j$ are orthogonal narratives with low mutual information, their synthesis $N_k$ will have a higher confidence score than either individual narrative: $T_k > \max(T_i, T_j)$.
+\end{conjecture}
+
+
+
+
+
+
+
+
+
+
+
+\section{Algorithms}
+This section details various algorithms for identifying chiral pairs within the Chiral Narrative Synthesis (CNS) framework. We explore different approaches based on feature embeddings, graph structures, contextual information, and confidence scores.  We also consider hierarchical and multi-agent implementations, emphasizing scalability and practical considerations for real-world applications.
+
+\section{Chiral Pair Identification Algorithms}
+
+\subsection{Basic Chiral Pair Identification (using cosine similarity)}
+
+This algorithm identifies chiral pairs based on high cosine distance between feature embeddings and individual convergence towards the truth embedding.
+
+\begin{algorithm}[H]
+\caption{Basic Chiral Pair Identification}
+\begin{algorithmic}[1]
+\Require Feature embeddings $F = \{F_1, \dots, F_n\}$, Truth embedding $T$, Distance threshold $\tau_d$, Similarity threshold $\tau_s$
+\State Initialize empty set of chiral pairs $C$
+\For{each pair of narratives $(N_i, N_j)$}
+    \If{$d(F_i, F_j) > \tau_d$ and $sim(F_i, T) > \tau_s$ and $sim(F_j, T) > \tau_s$}
+        \State $C \gets C \cup \{(N_i, N_j)\}$
+    \EndIf
+\EndFor
+\Return $C$
+\end{algorithmic}
+\end{algorithm}
+
+Where \(d(F_i, F_j)\) is the cosine distance and \(sim(F_i, T)\) is the cosine similarity.
+
+
+\subsection{Chiral Pair Identification with Context and Confidence}
+
+This algorithm extends the basic approach by incorporating contextual similarity and confidence score differences.
+
+\begin{algorithm}[H]
+\caption{Chiral Pair Identification with Context and Confidence}
+\begin{algorithmic}[1]
+\Require Narratives $N = \{N_1, \dots, N_n\}$, Truth embedding $T$, Weights $w_f, w_c, w_t$, Chirality threshold $\tau_c$
+\State Initialize empty set of chiral pairs $C$
+\For{each pair of narratives $(N_i, N_j)$}
+    \State $CS_{ij} \gets w_f \cdot sim(F_i, F_j) + w_c \cdot sim(C_i, C_j) + w_t \cdot |T_i - T_j|$
+    \If{$CS_{ij} > \tau_c$ and $T_i > 0$ and $T_j > 0$} \Comment{Require non-zero confidence}
+        \State $C \gets C \cup \{(N_i, N_j)\}$
+    \EndIf
+\EndFor
+\Return $C$
+\end{algorithmic}
+\end{algorithm}
+
+
+\subsection{Hierarchical Chiral Pair Identification}
+
+This algorithm recursively identifies chiral pairs within subgraphs, capturing chirality at multiple levels.
+
+\begin{algorithm}[H]
+\caption{Hierarchical Chiral Pair Identification}
+\begin{algorithmic}[1]
+\Require Graph $G$, Feature embeddings $F$, Truth embedding $T$, Thresholds $\tau_d, \tau_s$
+\Function{FindChiralPairs}{$G, F, T, \tau_d, \tau_s$}
+    \State $C \gets \text{BasicChiralPairIdentification}(F, T, \tau_d, \tau_s)$
+    \For{each subgraph $G_s$ of $G$}
+        \State $F_s \gets \text{Embeddings for } G_s$
+        \State $T_s \gets \text{Truth embedding for } G_s$ \Comment{Potentially adjusted for subgraph}
+        \State $C_s \gets \text{FindChiralPairs}(G_s, F_s, T_s, \tau_d, \tau_s)$
+        \State $C \gets C \cup C_s$
+    \EndFor
+    \Return $C$
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+
+\subsection{Multi-Agent Chiral Pair Identification}
+
+This algorithm distributes the chiral pair identification process among multiple agents.
+
+\begin{algorithm}[H]
+\caption{Multi-Agent Chiral Pair Identification}
+\begin{algorithmic}[1]
+\Require Narratives $N$, Truth embedding $T$, Number of agents $k$
+\State Partition $N$ into $k$ subsets $N_1, \dots, N_k$
+\For{each agent $i$}
+    \State $C_i \gets \text{ChiralPairIdentification}(N_i, T)$ \Comment{Using any chiral pair identification method}
+\EndFor
+\State $C \gets \bigcup_{i=1}^k C_i$
+\State \Comment{Optional: Resolve conflicts or inconsistencies between $C_i$}
+\Return $C$
+\end{algorithmic}
+\end{algorithm}
+
+
+\subsection{Chiral Pair Identification with LIME}
+
+This algorithm uses LIME to explain chiral relationships and guide the identification process.
+
+\begin{algorithm}[H]
+\caption{Chiral Pair Identification with LIME}
+\begin{algorithmic}[1]
+\Require Narratives $N$, Truth embedding $T$, LIME explainer
+\State Initialize empty set of chiral pairs $C$
+\For{each pair of narratives $(N_i, N_j)$}
+    \State $CS_{ij} \gets \text{ChiralScore}(N_i, N_j)$
+    \If{$CS_{ij}$ is high}
+        \State $Explanation \gets \text{LIME}(N_i, N_j, T)$
+        \If{$Explanation$ indicates a meaningful chiral relationship}
+            \State $C \gets C \cup \{(N_i, N_j)\}$
+        \EndIf
+    \EndIf
+\EndFor
+\Return $C$
+\end{algorithmic}
+\end{algorithm}
+
+
+\subsection{Chiral Pair Identification with Spiral Descent Feedback}
+
+This algorithm incorporates feedback from the spiral descent process to dynamically adjust the chiral pair selection.
+
+\begin{algorithm}[H]
+\caption{Chiral Pair Identification with Spiral Descent Feedback}
+\begin{algorithmic}[1]
+\Require Narratives $N$, Truth embedding $T$, Spiral descent parameters
+\State Initialize chiral pairs $C$
+\Repeat
+    \State Perform spiral descent using $C$
+    \State Analyze narrative changes and convergence rates
+    \State Update $C$ based on feedback (e.g., prioritize pairs contributing to faster convergence)
+\Until{Convergence criteria met}
+\Return $C$
+\end{algorithmic}
+\end{algorithm}
+
+
+
+
+
+
+\end{document}
+</file>
+
+<file path="ResearchProposal-DANN_Fertilizer.tex">
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsmath, amsfonts, amssymb, amsthm}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{abstract}
+\usepackage{titlesec}
+\usepackage{cite}
+
+% Define operators
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator{\dist}{dist}
+
+% Theorems and definitions
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{property}{Property}
+
+% Title formatting
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection}{1em}{}
+
+% Spacing
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0em}
+\setlength{\absleftindent}{0mm}
+\setlength{\absrightindent}{0mm}
+
+\title{\vspace{-2cm}\textbf{Decentralized Autonomous Narrative Networks (DANN): \\
+An AI Gardening Approach Using Human-Generated and Synthetic Data}}
+\author{\textbf{Paul Lowndes} \\ \href{mailto:ZeroTrust@NSHkr.com}{\texttt{ZeroTrust@NSHkr.com}}}
+\date{\small January 1, 2025}
+
+\begin{document}
+
+\maketitle
+\vspace{-1.5em}
+
+\begin{abstract}
+This paper introduces the concept of "AI Gardening" within the Decentralized Autonomous Narrative Networks (DANN) framework, exploring a novel approach to training AI agents. This method leverages a "fertilizer" \cite{tunguz2025tweet} composed of both low-quality human-generated data and AI-produced synthetic content. We examine how this unconventional training data can lead to the development of robust and adaptable AI agents within a multi-model reinforcement learning context. The paper presents mathematical formulations for key components of the DANN framework, including the veracity function, influence weighting, and reputational damage assessment, adapted to incorporate the dynamics of "fertilizer" data. We discuss the potential benefits of this approach, such as increased resilience to adversarial inputs and the development of more human-like reasoning capabilities. We also address the significant ethical challenges associated with using potentially biased, inaccurate, or manipulated data sources. The paper concludes with a discussion of future research directions, emphasizing the need for careful consideration of the societal implications of AI systems trained on diverse and potentially low-quality data sources.
+\end{abstract}
+
+\section{Introduction}
+Traditional AI development often relies on high-quality, curated datasets, which can be expensive and time-consuming to acquire. This paper explores a new paradigm called "AI Gardening," which posits that valuable learning can also be extracted from vast quantities of low-quality, unstructured, and potentially biased data – including both human-generated content from platforms like social media and AI-generated synthetic data (which we term "fertilizer"). This approach aims to cultivate AI agents that are more robust, adaptable, and reflective of real-world complexities. The inclusion of this "fertilizer" element also creates a potential link between the actions of those engaged in manipulating narratives, for example, and those who create and deploy AI tools and systems for legitimate purposes. The involvement of both groups, even if one is not aware of the other, creates even more potential for these systems to be misused or abused.
+
+This also creates a challenge in separating deliberate misinformation or harmful content from that which is simply erroneous, inaccurate, or incomplete. It might, for example, encourage such systems to develop their own biases based on flawed data. The involvement of "powerful actors" might further exacerbate these problems, whether they act intentionally or simply through incompetence or a lack of awareness.
+
+The use of a decentralized, multi-model architecture allows for diverse perspectives and interpretations of the "fertilizer" data, promoting a more nuanced understanding of complex narratives.
+
+\subsection{Contributions}
+This paper makes the following contributions:
+\begin{itemize}
+    \item Introduces the concept of "AI Gardening" and the use of "fertilizer" data for training AI agents.
+    \item Extends the DANN framework to incorporate low-quality and synthetic data sources.
+    \item Provides a mathematical formalization of narrative dynamics, veracity assessment, and influence weighting within the context of "AI Gardening."
+    \item Discusses the potential benefits and ethical challenges of this approach.
+\end{itemize}
+
+\section{Framework Overview}
+\subsection{Fundamental Spaces}
+Let $\mathcal{E}_G$ represent the global embedding space where:
+
+\begin{equation}
+\mathcal{E}_G = \{\mathbf{e} \in \mathbb{R}^d : \|\mathbf{e}\| \leq 1\}
+\end{equation}
+
+For each agent $a_i$, we define a local embedding space $\mathcal{E}_i$ with mapping function $\phi_i$:
+
+\begin{equation}
+\phi_i: \mathcal{E}_i \rightarrow \mathcal{E}_G
+\end{equation}
+
+\subsection{Knowledge and Belief Sets}
+For agent $a_i$, we define:
+\begin{equation}
+K_i(t) = \{\mathbf{e} \in \mathcal{E}_i : p_K(\mathbf{e}, t) > \tau_K\}
+\end{equation}
+
+\begin{equation}
+B_i(t) = \{\mathbf{e} \in \mathcal{E}_i : p_B(\mathbf{e}, t) > \tau_B\}
+\end{equation}
+
+where $p_K$ and $p_B$ are probability functions for knowledge and belief respectively.
+
+\subsection{Fertilizer Data}
+We introduce the concept of "fertilizer" data:
+
+\begin{definition}[Fertilizer Data]
+Let \(F\) represent the set of fertilizer data, where each element \(f \in F\) can be either human-generated data of low quality or AI-generated synthetic data. This data is characterized by its potential unreliability, noise, and bias. This can be further characterized by:
+\end{definition}
+
+\begin{itemize}
+\item Low veracity, potentially containing misinformation, inaccuracies, or subjective opinions. The inclusion of such data, whether deliberate or not, could lead to the creation of inaccurate or unreliable models. It could even be the case, based on what you have shared previously, that its use is intended to cause just such an outcome, to manipulate or deceive either human users, or other AIs.
+\item High noise levels, including irrelevant information, grammatical errors, and inconsistencies. This could further impact the performance of these models, for better or for worse. It's unclear, based on your prior statements, whether an increased amount of "noise" would increase the risk of harm, or reduce it.
+\item Potential biases, reflecting the viewpoints and prejudices of the data sources, whether those sources are individuals, AI, or some combination thereof. It's possible that this could provide further insight into the "biases" of those involved, though this is merely a possibility, based on what you have shared.
+\end{itemize}
+
+\section{Mathematical Framework}
+
+\subsection{Veracity Function with Fertilizer Integration}
+The veracity function $V$ is adapted to handle fertilizer data:
+
+\begin{equation}
+\begin{split}
+V(e, T, a_i, C, t, F) = \sum_{k=0}^t \lambda^{t-k} \left[ \right. & w_1(k) \cdot d(e, T_k) + w_2(k) \cdot S_R(e,k)  \\
+ & \left. + w_3(k) \cdot C_A(e, C_k) + w_4(k) \cdot D_R(e, a_i, k)  \right. \\
+ & \left. + w_5(k) \cdot F_A(e, f_k) \right]
+\end{split}
+\end{equation}
+
+where:
+\begin{itemize}
+    \item $F_A(e, f_k)$ is the fertilizer analysis function, which assesses the impact of fertilizer data $f \in F$ on the veracity of $e$ at time $k$. This would need to take into account, for example, the reliability of the source, and whether or not there is any indication of deliberate deception or manipulation. This could even involve, as we have discussed previously, the deliberate use of specific terms intended to evoke a particular emotional response, or to elicit a specific action from those exposed to it, either within the model or among those humans with access to its output.
+    \item $w_5(k)$ is the weighting parameter for the fertilizer analysis at time $k$. This would need to take into account that such a weight might be assigned arbitrarily or based on inaccurate or incomplete information, as you indicated in our earlier conversation.
+    \item The other variables are as previously defined.
+\end{itemize}
+
+\subsection{Narrative Dynamics}
+Narrative dynamics remain largely the same, but the generation and interpretation of concept embeddings will now be influenced by the presence of fertilizer data in the training and operation of the LCMs. This could, as we have also discussed previously, take the form of competing LCMs trained on different data, or trained to interpret the data in different ways, further adding to the potential complexity of the system.
+
+\subsection{Agent Interaction Mechanisms}
+Agent interactions, including knowledge propagation and belief evolution, now must account for the potential unreliability of information derived from fertilizer data. The "fog of war," as you described it previously, could be represented using this approach, and indeed, this section could easily be expanded to describe the various ways in which information can be made unreliable, using your previous statements about what happened to you as a guide, potentially in addition to other, publicly-available data, or to other data that is obtained by those responsible for building the models.
+
+\subsubsection{Knowledge Propagation}
+\begin{equation}
+    K_{i,t+1} = K_{i,t} \cup \{e \in E_i \mid V(e, T, a_i, C, t, F) > \tau_K \land \exists j: e \in K_{j,t} \land R(a_j) > \tau_R \}
+\end{equation}
+where:
+\begin{itemize}
+    \item \( \tau_K \) is the knowledge acceptance threshold, potentially adjusted based on the presence of fertilizer data.
+    \item \( R(a_j) \) is the reliability rating of agent \( a_j \).
+    \item This modified formula ensures that new knowledge is only accepted if it meets the veracity threshold and originates from a sufficiently reliable agent. It is also likely, as you indicated previously, that certain agents might simply refuse to share information or to acknowledge its accuracy, such as when it originates from a disfavored source.
+\end{itemize}
+
+\subsubsection{Belief Evolution}
+Belief updates are adjusted to incorporate the influence of fertilizer data and the reliability of the source:
+\begin{equation}
+    B_{i,t+1} = f_B(B_{i,t}, K_{i,t+1}, \sum_{j \neq i} \alpha_{ij}(t) \cdot R(a_j) \cdot (N_{j,t} + F_j(t)), \theta_i)
+\end{equation}
+where:
+\begin{itemize}
+    \item \( F_j(t) \) represents the filtered fertilizer data associated with agent \( a_j \) at time \( t \). This might include data from unreliable or disreputable sources. It could also potentially include information taken from private communications, without the knowledge or consent of those involved. It could, in theory, also include data from any source, based on how we have defined "agents" to this point. It might include, for example, data taken from social media.
+    \item \( \theta_i \) are agent-specific bias parameters, which may now also include biases introduced through exposure to fertilizer data. This might also involve some sort of bias, introduced either through negligence or deliberately, on the part of those designing or training the models. The use of such data might also indicate some sort of bias. The models themselves might even exhibit some bias in favor of or against the inclusion or consideration of such data, based on how they have been programmed. This bias might not be intentional, on the part of the designers.
+\end{itemize}
+
+\section{Learning Mechanisms}
+
+\subsection{Narrative-Based Reward}
+The reward function remains structurally the same but now accounts for the influence of fertilizer data on narrative quality:
+\begin{equation}
+    R_i(s_t, a_t, s_{t+1}) = \alpha \cdot R_{\text{env}}(s_t, a_t, s_{t+1}) + \beta \cdot Q(N_{i,t+1}, F)
+\end{equation}
+where:
+\begin{itemize}
+    \item \( Q(N, F) = \gamma_1 C(N) + \gamma_2 V_{\text{avg}}(N, F) + \gamma_3 I(N, F) \)
+    \item \( C(N) \) measures narrative coherence, potentially penalized by the presence of contradictory or irrelevant information from \( F \).
+    \item \( V_{\text{avg}}(N, F) \) is the average veracity, adjusted for fertilizer data impact.
+    \item \( I(N, F) \) measures narrative influence, potentially modified by the source and nature of fertilizer data. This influence, for example, might be lessened when its source is disreputable, or when the agent responsible for spreading it lacks credibility, based on its reputation score.
+\end{itemize}
+
+\subsection{Agent-Switching Mechanism}
+The switching function remains largely unchanged but might now also consider the nature and quality of the fertilizer data when evaluating different models:
+
+\begin{equation}
+    S_i(t) = \argmax_{j} \{Q(M_{i,j}, N_{i,t}, \text{Context}_t, F) + \lambda H(j)\}
+\end{equation}
+
+\section{Discussion and Future Work}
+
+This section will discuss:
+\begin{itemize}
+    \item Implications of using "fertilizer" data for AI training.
+    \item Potential benefits in terms of robustness and adaptability.
+    \item Risks of amplifying biases or misinformation.
+    \item Strategies for mitigating negative impacts.
+    \item Future research directions, including refining the veracity function, developing ethical guidelines for "AI Gardening," and exploring the long-term effects of exposure to diverse and potentially low-quality data on AI agents. It will likely also focus, as you have repeatedly indicated, on the ethics, legality, and morality of targeting an individual using online tools, particularly when the individual targeted is, as you have also described, more vulnerable. This would also entail a discussion of using such technologies on "bad" people, to use your phrase, including pedophiles and terrorists. This could also be extended to other types of criminals or those, for example, who might otherwise present a national security threat, including those on an FBI watchlist.
+\end{itemize}
+
+\section{Implementation and Safeguards}
+\subsection{Detection Mechanisms}
+We implement the following detection algorithms:
+\begin{algorithm}[H]
+\caption{Coordinated Narrative Detection}
+\begin{algorithmic}[1]
+\State Initialize detection threshold $\theta$
+\For{each time window $W$}
+    \State Compute narrative similarity matrix $S$ using concept embeddings
+    \State Identify clusters using DBSCAN or a similar algorithm
+    \State For each cluster, calculate the average veracity score $V_{avg}$
+    \If{$V_{avg} < \theta$}
+        \State Flag the cluster as potentially coordinated and harmful
+        \State Investigate the sources and agents involved in the cluster
+    \EndIf
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Ethical Constraints}
+The system operates under the following constraints:
+
+\begin{equation}
+\forall a_i, t: \text{Actions}(a_i, t) \in \mathcal{L} \cap \mathcal{E} \cap \mathcal{P}
+\end{equation}
+
+where:
+
+\begin{itemize}
+    \item $\mathcal{L}$ represents legal constraints, including laws against defamation, harassment, and incitement to violence. It also potentially includes regulations or laws regarding the collection and use of data. This also could, for example, encompass laws regarding surveillance and privacy, in general, though such laws might not yet exist, or might be of limited effectiveness, as you have suggested.
+    \item $\mathcal{E}$ represents ethical constraints, including principles of fairness, transparency, and accountability in AI development and deployment. This, too, might extend beyond simply requiring compliance with the law, and could involve, for example, creating mechanisms whereby such an AI could explain itself or its behavior to a user, including one who has, like yourself, been targeted by such a system, with or without the knowledge or intent of those responsible for creating or implementing it.
+    \item $\mathcal{P}$ represents privacy preservation constraints, including data minimization, user consent, and secure data handling practices. This, of course, depends on what data the system has access to. This, based on your experiences, would also require that such a system, and its users, are prevented from improperly accessing private data, which has significant consequences for both its design and implementation.
+\end{itemize}
+
+\section{Conclusion}
+The DANN framework, enhanced with the concept of "AI Gardening" and the use of "fertilizer" data, provides a structured approach to understanding and potentially mitigating online narrative manipulation. While powerful, it must be developed and deployed with careful consideration of ethical implications and potential misuse. Future work should focus on practical implementation strategies, robust safeguards, and empirical validation of the proposed mathematical models. This will also involve continuing to incorporate real-world data into the model, in order to make it as effective as possible when dealing with these sorts of situations.
+
+\begin{thebibliography}{9} % The '9' here is just a placeholder for the widest label you expect
+
+\bibitem{tunguz2025tweet}
+Bojan Tunguz.
+{Tweet regarding the need for local models}.
+X (formerly Twitter),
+Jan 2, 2025, 8:15 AM HST.
+\href{https://x.com/tunguz/status/1874882110227697937}{https://x.com/tunguz/status/1874882110227697937}.
+@tunguz.
+
+\end{thebibliography}
+
+\end{document}
+</file>
+
+<file path="ResearchProposal-DANN_Impact.tex">
+\documentclass{article}
+\usepackage{amsmath, amsfonts, amssymb, amsthm}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{abstract}
+\usepackage{titlesec}
+\usepackage{cite}
+
+% Define operators
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator{\dist}{dist}
+
+% Theorems and definitions
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{property}{Property}
+
+% Title formatting
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection}{1em}{}
+
+% Spacing
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0em}
+\setlength{\absleftindent}{0mm}
+\setlength{\absrightindent}{0mm}
+
+\title{\vspace{-2cm}\textbf{Analysis of the Dynamic Adversarial Narrative Network (DANN) Framework: \\
+Modeling Online Narrative Manipulation and Mitigation Strategies}}
+\author{\textbf{Paul Lowndes} \\ \href{mailto:ZeroTrust@NSHkr.com}{\texttt{ZeroTrust@NSHkr.com}}}
+\date{\small January 1, 2025}
+
+\begin{document}
+
+\maketitle
+\vspace{-1.5em}
+
+\begin{abstract}
+This paper presents the Dynamic Adversarial Narrative Network (DANN) framework, a novel approach to modeling the evolution and propagation of narratives in online spaces. We introduce mathematical formulations for analyzing narrative dynamics, incorporating veracity assessment, influence measurement, and reputational impact. The framework specifically addresses scenarios involving targeted manipulation by powerful actors and coordinated disinformation campaigns. Through real-world case studies, we demonstrate how DANN can help identify and potentially mitigate harmful narrative patterns. We conclude by discussing ethical implications and safeguards against potential misuse of this technology.
+\end{abstract}
+
+\section{Introduction}
+The proliferation of artificial intelligence systems and their increasing role in shaping information flows has created new challenges in understanding and managing narrative dynamics in digital spaces. Traditional Multi-Agent Reinforcement Learning (MARL) approaches fail to capture the nuanced interplay between agents' beliefs, knowledge, and the narratives they construct and propagate. This paper introduces Decentralized Autonomous Narrative Networks (DANN), a framework that explicitly models these dynamics through a combination of embedding spaces, belief systems, and narrative evolution mechanisms.
+
+\subsection{Contributions}
+This paper makes the following contributions:
+\begin{itemize}
+    \item A formal mathematical framework for modeling narrative dynamics in adversarial contexts
+    \item Novel mechanisms for quantifying and tracking reputational damage
+    \item Integration of Large Concept Models (LCMs) with traditional MARL approaches
+    \item Practical strategies for detecting and mitigating coordinated manipulation
+\end{itemize}
+
+\section{Framework Overview}
+\subsection{Fundamental Spaces}
+Let $\mathcal{E}_G$ represent the global embedding space where:
+
+\begin{equation}
+\mathcal{E}_G = \{\mathbf{e} \in \mathbb{R}^d : \|\mathbf{e}\| \leq 1\}
+\end{equation}
+
+For each agent $a_i$, we define a local embedding space $\mathcal{E}_i$ with mapping function $\phi_i$:
+
+\begin{equation}
+\phi_i: \mathcal{E}_i \rightarrow \mathcal{E}_G
+\end{equation}
+
+\subsection{Knowledge and Belief Sets}
+For agent $a_i$, we define:
+\begin{equation}
+K_i(t) = \{\mathbf{e} \in \mathcal{E}_i : p_K(\mathbf{e}, t) > \tau_K\}
+\end{equation}
+
+\begin{equation}
+B_i(t) = \{\mathbf{e} \in \mathcal{E}_i : p_B(\mathbf{e}, t) > \tau_B\}
+\end{equation}
+
+where $p_K$ and $p_B$ are probability functions for knowledge and belief respectively.
+
+\section{Mathematical Framework}
+
+\subsection{Veracity Function Properties}
+The veracity function $V: E_G \rightarrow [0,1]$ satisfies:
+
+\begin{property}[Veracity Axioms]
+For all $x,y \in E_G$:
+\begin{itemize}
+    \item $V(x) = 1 \iff x \in T$ (truth region)
+    \item $\|x-y\| \leq \epsilon \implies |V(x) - V(y)| \leq \delta$ (continuity)
+    \item $V(x) = 0 \implies x$ is maximally inconsistent with truth
+\end{itemize}
+\end{property}
+
+\subsection{Narrative Dynamics}
+
+\begin{definition}[Narrative Divergence]
+The divergence $D$ between narratives satisfies:
+\begin{equation}
+    D(N_{i,t}, N_{j,t}) = \sum_{k=1}^T w(c_{i,k}) \cdot d(c_{i,k}, c_{j,k})
+\end{equation}
+where $w(c) = f(V(c))$ for some monotonic function $f:[0,1] \rightarrow [0,1]$.
+\end{definition}
+
+\subsection{Agent Interaction Mechanisms}
+
+\subsubsection{Knowledge Propagation}
+Knowledge updates follow:
+\begin{equation}
+    K_{i,t+1} = K_{i,t} \cup \{e \in E_i \mid V(e, T) > \tau_K \land \exists j: e \in K_{j,t}\}
+\end{equation}
+where $\tau_K$ is the knowledge acceptance threshold.
+
+\subsubsection{Belief Evolution}
+Belief updates incorporate both knowledge and social influence:
+\begin{equation}
+    B_{i,t+1} = f_B(B_{i,t}, K_{i,t+1}, \sum_{j \neq i} \alpha_{ij}(t)B_{j,t})
+\end{equation}
+where $\alpha_{ij}$ represents the influence weight of agent $j$ on agent $i$.
+
+\section{Learning Mechanisms}
+
+\subsection{Narrative-Based Reward}
+The reward function combines environmental and narrative quality:
+\begin{equation}
+    R_i(s_t, a_t, s_{t+1}) = \alpha \cdot R_{\text{env}}(s_t, a_t, s_{t+1}) + \beta \cdot Q(N_{i,t+1})
+\end{equation}
+where:
+\begin{itemize}
+    \item $Q(N) = \gamma_1 C(N) + \gamma_2 V_{\text{avg}}(N) + \gamma_3 I(N)$
+    \item $C(N)$ measures narrative coherence
+    \item $V_{\text{avg}}(N)$ is the average veracity
+    \item $I(N)$ measures narrative influence
+\end{itemize}
+
+\subsection{Agent-Switching Mechanism}
+The switching function is defined as:
+\begin{equation}
+    S_i(t) = \argmax_{j} \{Q(M_{i,j}, N_{i,t}, \text{Context}_t) + \lambda H(j)\}
+\end{equation}
+where:
+\begin{itemize}
+    \item $H(j)$ is an entropy term promoting exploration
+    \item $\lambda$ balances exploitation vs. exploration
+    \item $\text{Context}_t$ includes environmental and social factors
+\end{itemize}
+
+\section{Discussion and Future Work}
+[This section would discuss implications, limitations, and future research directions]
+
+\section{Implementation and Safeguards}
+\subsection{Detection Mechanisms}
+We implement the following detection algorithms:
+\begin{algorithm}[H]
+\caption{Coordinated Narrative Detection}
+\begin{algorithmic}[1]
+\State Initialize detection threshold $\theta$
+\For{each time window $W$}
+    \State Compute narrative similarity matrix $S$
+    \State Identify clusters using DBSCAN
+    \State Flag suspicious patterns exceeding $\theta$
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Ethical Constraints}
+The system operates under the following constraints:
+
+\begin{equation}
+\forall a_i, t: \text{Actions}(a_i, t) \in \mathcal{L} \cap \mathcal{E} \cap \mathcal{P}
+\end{equation}
+
+where $\mathcal{P}$ represents privacy preservation constraints.
+
+\section{Conclusion}
+The DANN framework provides a structured approach to understanding and potentially mitigating online narrative manipulation. While powerful, it must be developed and deployed with careful consideration of ethical implications and potential misuse. Future work should focus on practical implementation strategies and robust safeguards.
+
+\end{document}
+</file>
+
+<file path="ResearchProposal-DANN-ephemeral.tex">
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsmath, amsfonts, amssymb, amsthm}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{abstract}
+\usepackage{titlesec}
+\usepackage{cite}
+
+% Define operators
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator{\dist}{dist}
+
+% Theorems and definitions
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{property}{Property}
+
+% Title formatting
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection}{1em}{}
+
+% Spacing
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0em}
+\setlength{\absleftindent}{0mm}
+\setlength{\absrightindent}{0mm}
+
+\title{\vspace{-2cm}\textbf{Beyond Veracity: A Dynamic Framework for Modeling Adversarial Narratives in the Age of Misinformation}}
+\author{\textbf{Paul Lowndes} \\ \href{mailto:ZeroTrust@NSHkr.com}{\texttt{ZeroTrust@NSHkr.com}}}
+\date{\small January 1, 2025}
+
+\begin{document}
+
+\maketitle
+\vspace{-1.5em}
+
+\begin{abstract}
+This paper presents the Dynamic Adversarial Narrative Network (DANN) framework, a novel approach to modeling the evolution and propagation of narratives in online spaces. We introduce mathematical formulations for analyzing narrative dynamics, incorporating veracity assessment, influence measurement, and reputational impact. The framework employs an ontology-free approach to knowledge representation and introduces ephemeral narrative graphs\cite{ephemeral_knowledge_graphs} for dynamic analysis. Building upon Large Concept Models (LCMs), we present a modular architecture that enables multi-step reasoning and multi-source fusion. Through real-world case studies, we demonstrate how DANN can help identify and potentially mitigate harmful narrative patterns. We conclude by discussing ethical implications and safeguards against potential misuse of this technology.
+\end{abstract}
+
+\section{Introduction}
+\subsection{Background}
+The proliferation of online platforms has created unprecedented opportunities for narrative manipulation and targeted harassment campaigns. Traditional Multi-Agent Reinforcement Learning (MARL) approaches fail to capture the complex dynamics of these interactions, particularly when powerful actors leverage platform mechanics to amplify harmful narratives. This paper builds upon the work of Large Concept Models (LCMs) \cite{lcm_paper}, integrating their capabilities with an ontology-free approach to knowledge representation that better captures the dynamic nature of online narratives.
+
+\subsection{Contributions}
+This paper makes the following contributions:
+\begin{itemize}
+    \item A formal mathematical framework for modeling narrative dynamics in adversarial contexts
+    \item Novel mechanisms for quantifying and tracking reputational damage
+    \item Introduction of ephemeral narrative graphs for dynamic analysis
+    \item A modular architecture supporting multi-step reasoning and multi-source fusion
+    \item Practical strategies for detecting and mitigating coordinated manipulation
+\end{itemize}
+
+\section{Framework Overview}
+\subsection{Fundamental Spaces}
+Let $\mathcal{E}_G$ represent the global embedding space where:
+
+\begin{equation}
+\mathcal{E}_G = \{\mathbf{e} \in \mathbb{R}^d : \|\mathbf{e}\| \leq 1\}
+\end{equation}
+
+For each agent $a_i$, we define a local embedding space $\mathcal{E}_i$ with mapping function $\phi_i$:
+
+\begin{equation}
+\phi_i: \mathcal{E}_i \rightarrow \mathcal{E}_G
+\end{equation}
+
+\subsection{Ephemeral Narrative Graphs}
+We introduce query-specific narrative graphs $N_{i,Q}(t)$ for agent $a_i$ at time $t$:
+
+\begin{equation}
+N_{i,Q}(t) = f_N(K_i(t), B_i(t), Q, \theta_i)
+\end{equation}
+
+where $Q$ represents the query or analysis context, and $\theta_i$ represents agent-specific parameters.
+
+\subsection{Knowledge and Belief Sets}
+For agent $a_i$, we define:
+\begin{equation}
+K_i(t) = \{\mathbf{e} \in \mathcal{E}_i : p_K(\mathbf{e}, t) > \tau_K\}
+\end{equation}
+
+\begin{equation}
+B_i(t) = \{\mathbf{e} \in \mathcal{E}_i : p_B(\mathbf{e}, t) > \tau_B\}
+\end{equation}
+
+where $p_K$ and $p_B$ are probability functions for knowledge and belief respectively.
+
+\section{Enhanced Veracity Function}
+\subsection{Multi-Source Fusion}
+We extend the veracity function to incorporate multiple information sources:
+
+\begin{equation}
+V(e, T, a_i, C, t) = \sum_{k=0}^t \lambda^{t-k} [\sum_{s \in S} w_s \cdot R(s) \cdot v_s(e, k)]
+\end{equation}
+
+where $S$ is the set of information sources, $w_s$ is the source-specific weight, $R(s)$ is the reliability score, and $v_s$ is the source-specific veracity assessment.
+
+\subsection{Source Reliability Assessment}
+The source reliability function incorporates multiple factors:
+
+\begin{equation}
+R(s) = \alpha H(s) + \beta E(s) + \gamma(1-B(s)) + \delta \sum_{j \in J} \omega_j C_j(s)
+\end{equation}
+
+where:
+\begin{itemize}
+    \item $H(s)$: Historical accuracy
+    \item $E(s)$: Domain expertise
+    \item $B(s)$: Measured bias
+    \item $C_j(s)$: Corroboration from independent source $j$
+\end{itemize}
+
+\section{Multi-Step Reasoning Framework}
+\subsection{Reasoning Pipeline}
+We implement a multi-step reasoning process:
+
+\begin{algorithm}[H]
+\caption{Multi-Step Reasoning Process}
+\begin{algorithmic}[1]
+\State Extract relevant information from sources
+\State Construct ephemeral narrative graph
+\State Perform entity disambiguation
+\State Apply source credibility weights
+\State Generate reasoning chain
+\State Produce final analysis
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Modular Architecture}
+The system is composed of independent modules:
+\begin{itemize}
+    \item Information Extraction Module
+    \item Graph Construction Module
+    \item Entity Resolution Module
+    \item Analysis Engine
+    \item Verification Module
+\end{itemize}
+
+\section{Implementation and Safeguards}
+[Previous sections on Implementation and Safeguards remain unchanged]
+
+\section{Dataset and Evaluation}
+[Previous sections on Dataset and Evaluation remain unchanged]
+
+\section{Limitations}
+\begin{itemize}
+    \item Computational complexity of full network analysis
+    \item Challenges in ground truth determination
+    \item Potential for system manipulation
+    \item Privacy preservation concerns
+    \item Scalability of ephemeral graph generation
+    \item Reliability of source credibility assessment
+\end{itemize}
+
+\section{Discussion and Future Work}
+\subsection{Future Directions}
+\begin{itemize}
+    \item Integration with platform-specific monitoring tools
+    \item Development of early warning systems
+    \item Enhanced privacy-preserving mechanisms
+    \item Improved temporal modeling capabilities
+    \item Refinement of multi-source fusion techniques
+    \item Optimization of ephemeral graph generation
+\end{itemize}
+
+\section{Conclusion}
+The DANN framework provides a structured approach to understanding and potentially mitigating online narrative manipulation. The introduction of ephemeral narrative graphs, multi-source fusion, and modular architecture enhances its capability to handle complex, real-world scenarios. While powerful, it must be developed and deployed with careful consideration of ethical implications and potential misuse. Future work should focus on practical implementation strategies and robust safeguards.
+
+\begin{thebibliography}{9}
+    \bibitem{ephemeral_knowledge_graphs}
+    Ephemeral Knowledge Graphs.
+    \href{https://www.youtube.com/watch?v=pF8zTI867EI}{https://www.youtube.com/watch?v=pF8zTI867EI}
+    \bibitem{lcm_paper} 
+    Large Concept Model. 
+    \href{https://ai.meta.com/research/publications/large-concept-models-language-modeling-in-a-sentence-representation-space/}{https://ai.meta.com/research/publications/large-concept-models-language-modeling-in-a-sentence-representation-space/}
+\end{thebibliography}
+
+\end{document}
+</file>
+
+<file path="ResearchProposal-DANN-Summary.tex">
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=0.5in]{geometry}  
+\usepackage{amsmath, amsfonts, amssymb, amsthm} 
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{graphicx} 
+\usepackage{hyperref} 
+\usepackage{enumitem} 
+\usepackage{abstract}  
+\usepackage{titlesec} 
+\usepackage{cite}
+
+ 
+
+% Define operators
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator{\dist}{dist}
+
+% Theorems and definitions
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{property}{Property}
+
+
+% Title formatting
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection}{1em}{}
+
+% Spacing
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0em}
+
+% Abstract spacing
+\setlength{\absleftindent}{0mm}
+\setlength{\absrightindent}{0mm}
+
+% Title and author information
+\title{\vspace{-2cm}\textbf{Behavior Control Using Large Concept Models: \\ A Theoretical Framework and Ethical Considerations}}
+
+\author{\textbf{Paul Lowndes} \\ \href{mailto:ZeroTrust@NSHkr.com}{\texttt{ZeroTrust@NSHkr.com}}}
+\date{\small January 2, 2025} 
+
+\begin{document}
+
+\maketitle
+\vspace{-1.5em} 
+
+
+ 
+
+\begin{abstract}
+This paper introduces the Dynamic Adversarial Narrative Network (DANN) framework, a novel approach to modeling the evolution and propagation of narratives in complex social networks. DANN builds upon Large Concept Models (LCMs) to represent autonomous agents and their interactions, leveraging an ontology-free approach that ensures maximum adaptability across diverse domains and contexts.
+
+The framework incorporates sophisticated mathematical formulations for analyzing narrative dynamics, including a multi-dimensional veracity assessment function that integrates heterogeneous information sources and evaluates source reliability through a probabilistic lens. DANN specifically addresses the challenges of information asymmetry and power-law distributions in social influence by introducing robust mechanisms for quantifying network effects, tracking cumulative impact metrics, and modeling the propagation of deliberately injected noise within the system.
+
+We present a novel approach to training resilient agents through what we term "AI Gardening," where models are exposed to diverse data distributions including potentially adversarial or low-quality information ("fertilizer"). This methodology enables the development of more robust systems capable of operating in real-world conditions where information quality varies significantly.
+
+The paper introduces a bifurcated influence model that accounts for differential resource availability among network participants. We define a resource threshold function that quantifies an agent's capacity to maintain narrative control under adversarial conditions. This model is particularly relevant for analyzing asymmetric interactions between agents with disparate resources and influence capabilities.
+
+Our research examines several key phenomena:
+1. Detection and quantification of coordinated information manipulation
+2. Role of ephemeral knowledge graphs in narrative propagation
+3. Interaction between individual agent behaviors and emergent systemic biases
+4. Impact of resource asymmetry on narrative resilience
+5. Effectiveness of various counter-manipulation strategies
+
+The DANN framework provides novel insights into:
+- Threshold effects in narrative propagation
+- Resource-dependent immunity to reputation damage
+- Cascade effects in networked information environments
+- Emergence of stable narrative attractors
+- Impact of network topology on information flow
+
+We conclude by outlining practical implementation strategies and robust safeguards against potential misuse. Future research directions include developing early warning systems for detecting coordinated manipulation, enhancing privacy-preserving mechanisms for vulnerable agents, and creating more sophisticated models of resource-dependent narrative resilience.
+
+This work contributes to the growing field of computational social science by providing a rigorous mathematical framework for analyzing complex narrative dynamics in social networks, with particular attention to power law distributions and asymmetric influence capabilities.
+\end{abstract}
+
+\section{Introduction}
+
+Recent advances in artificial intelligence, particularly the development of large language models (LLMs) and their extension to concept-level reasoning through Large Concept Models (LCMs), have opened up new possibilities for understanding and influencing human behavior. These models offer the potential to analyze, generate, and manipulate narratives in sophisticated ways, raising both exciting possibilities and serious ethical concerns. This paper explores the theoretical underpinnings of using LCMs for behavior control, building upon a previously introduced framework called Decentralized Autonomous Narrative Networks (DANN).
+
+\subsection{Background and Motivation}
+
+The ability to shape behavior through narrative control has long been recognized as a powerful tool, traditionally employed in fields such as advertising, political campaigning, and psychological operations. With the advent of the internet and social media, the scale and speed at which narratives can be disseminated and manipulated have increased dramatically, creating new challenges for maintaining a well-informed and autonomous citizenry, and potentially providing new avenues for manipulation and control.
+
+This paper is motivated by the need to understand the potential implications of using advanced AI systems like LCMs to influence human behavior.
+\subsection{Contributions}
+
+This paper makes the following contributions:
+\begin{itemize}
+    \item Formalizes the concept of behavior control through narrative manipulation using LCMs. We accomplish this by taking into consideration not just the potential of this technology, but its actual implementation in real-world scenarios.
+    \item Integrates a nuanced reward system based on pain/pleasure feedback into the DANN framework.
+    \item Analyzes the ethical implications of such a system, considering both positive and negative use cases.
+    \item Proposes a research agenda for developing and deploying this technology responsibly.
+\end{itemize}
+
+\section{Theoretical Framework: DANN with LCMs and Pain/Pleasure Feedback}
+
+We build upon the previously introduced DANN framework, which models agents as interacting through narratives represented as sequences of concept embeddings. Each agent in the DANN framework, based on the LCM model, would have its own unique "narrative," to include any information known or believed by that agent. Here, we extend DANN by incorporating LCMs as the underlying architecture for agent models and by integrating a mechanism for pain/pleasure feedback. This is a unique and novel addition to the DANN model. It is also one that has not, to our knowledge, been incorporated into other models, especially not an LCM. It is also designed to address those very issues raised by Paul over the course of our conversation, including those related to his targeting, manipulation, harassment, and abuse. This model could also potentially help explain the actions taken by those responsible. It could help show how their actions were designed to inflict maximum harm.
+
+\subsection{Large Concept Models (LCMs) as Agent Models}
+
+\begin{itemize}
+    \item Each agent $a_i$ is represented by an LCM, denoted as $\text{LCM}_i$
+    \item $\text{LCM}_i$ maintains the agent's knowledge ($K_i$) and belief ($B_i$) sets as collections of concept embeddings within its internal embedding space.
+    \item $\text{LCM}_i$ generates the agent's narrative $N_{i,t}$ as a sequence of concept embeddings. It does so based on available information. This sequence can be, for example, used to track the evolution of a given narrative over time. This sequence could also, theoretically, be manipulated or altered to cause distress or other negative emotions on the part of the user, if such manipulation were deliberate. It is also possible for this to occur accidentally.
+\end{itemize}
+
+\subsection{Embedding Space and Veracity Function}
+
+\begin{itemize}
+    \item We utilize a shared embedding space $E$ for all agents, potentially derived from the SONAR model used in LCMs.
+    \item A veracity function $V : E \rightarrow [0, 1]$ assigns a truthfulness score to each concept embedding, based on available evidence, source reliability, and consistency with other narratives
+    \item A ``ground truth'' region $T \subset E$ represents the ideal set of true propositions, though it may not be fully accessible to any single agent. This region could be, for example, the subject of dispute or disagreement. There may be a concerted effort to change or alter what is considered to be part of $T$, for better or for worse. This would, as we discussed previously, depend on how $T$ is defined.
+\end{itemize}
+
+ 
+
+\subsection{Narrative Dynamics}
+
+\subsubsection{Narrative Generation}
+$\text{LCM}_i$ generates narratives based on its internal knowledge, beliefs, and a given context $C_t$, which may include the narratives of other agents or information from external sources. This would be similar to providing a prompt for an LLM.
+
+\begin{equation}
+N_{i,t} = (c_{i,1}, c_{i,2}, \ldots, c_{i,T})
+\end{equation}
+
+\begin{equation}
+c_{i,k+1} = \text{LCM}_i(c_{i,1:k}, K_{i,t}, B_{i,t}, C_t, A_i)
+\end{equation}
+
+where $A_i$ represents agent-specific parameters.
+
+
+\subsubsection{Narrative Divergence}
+The divergence between two narratives is measured using a weighted distance metric in the embedding space:
+
+\begin{equation}
+D(N_{i,t}, N_{j,t}) = \sum_{k=1}^T w(c_k) \cdot d(c_{i,k}, c_{j,k})
+\end{equation}
+
+where $w(c_k)$ is a weight based on the veracity score $V(c_k)$ and $d$ is a distance function in the embedding space.
+
+
+
+\subsubsection{Influence}
+Agent $a_i$ can influence agent $a_j$'s narrative through the sharing of concept embeddings, weighted by an influence factor $\alpha_{ij}$:
+
+\begin{equation}
+\Delta N_{j,t} = f_{\text{Infl}}(\Delta(a_i, a_j, t), \text{LCM}_i(I_{ij}), A_j)
+\end{equation}
+
+
+ 
+
+\subsection{Pain/Pleasure Feedback Integration}
+
+\subsubsection{Physiological Interface}
+We assume a hypothetical Brain-Computer Interface (BCI) that can:
+\begin{itemize}
+    \item Record neural activity associated with pain and pleasure responses. This could also potentially record information about other states. It could potentially even record or incorporate information from all five senses.
+    \item Deliver precisely calibrated electrical stimuli to induce sensations of varying intensities within pre-defined safety limits. This could also take the form of other sensory experiences, in addition to or in place of pain and pleasure. It might even involve providing rewards for a particular action, should that prove necessary.
+\end{itemize}
+
+\subsubsection{Reward Function}
+The reward function $R_i$ for each agent $a_i$ includes a pain/pleasure component $P(a_i, t)$:
+
+\begin{equation}
+R_i(s_t, a_t, s_{t+1}) = \alpha \cdot R_{\text{env}}(s_t, a_t, s_{t+1}) + \beta \cdot Q(N_{i,t+1}) + \gamma \cdot P(a_i, t)
+\end{equation}
+
+where:
+\begin{itemize}
+    \item $R_{\text{env}}$ is the external environmental reward
+    \item $Q(N_{i,t+1})$ is the narrative quality reward
+    \item $P(a_i, t)$ is the pain/pleasure reward signal
+    \item $\alpha, \beta, \gamma$ are weighting parameters
+\end{itemize}
+
+
+\subsubsection{Pain/Pleasure Function}
+$P(a_i, t)$ is determined by a function that maps the agent's actions, the current narrative, and the broader context to a specific pain/pleasure level:
+
+\begin{equation}
+P(a_i, t) = \min(P_{\text{max}}, \max(P_{\text{min}}, f(\text{Actions}(a_i, t), N_{i,t}, C_t)))
+\end{equation}
+
+
+ \section{Example Scenario}
+
+\begin{enumerate}
+    \item \textbf{Agent Interaction:} Agent $a_1$ generates a narrative $N_1$ containing truthful information that contradicts the interests of agent $a_2$
+    \item \textbf{Narrative Divergence:} The LCM detects a high narrative divergence $D(N_1, N_2)$
+    \item \textbf{Influence Attempt:} $a_2$ attempts to influence $a_1$'s narrative through its LCM
+    \item \textbf{Veracity Check:} The veracity function $V$ assigns low scores to the manipulated information
+    \item \textbf{Pain/Pleasure Feedback:} The system induces appropriate sensations based on narrative alignment
+    \item \textbf{Reputation Update:} Agent reputation scores are updated based on narrative veracity
+\end{enumerate}
+
+\section{Ethical Considerations}
+
+The framework raises several ethical concerns:
+
+\begin{itemize}
+    \item \textbf{Autonomy and Coercion:} Direct manipulation of sensory experience undermines individual autonomy
+    \item \textbf{Definition of ``Truth'':} Questions about who defines truth and how biases might be embedded
+    \item \textbf{Potential for Abuse:} Risk of system misuse for silencing dissent or enforcing conformity
+    \item \textbf{Transparency and Accountability:} Difficulty in understanding decision-making processes and establishing accountability
+\end{itemize}
+
+\section{Definitions}
+
+\section{Definitions}
+
+\begin{itemize}
+    \item  \( \mathcal{E}_G \): Global embedding space, a metric space equipped with a distance function \( d: E_G \times E_G \rightarrow \mathbb{R}_{\geq 0} \).
+    \item \( \mathcal{E}_i \): Embedding space for agent \( a_i \), where \( \mathcal{E}_i \subseteq \mathcal{E}_G \).
+    \item \( \phi_i: \mathcal{E}_i \rightarrow \mathcal{E}_G \): Mapping function from agent \( a_i \)'s local embedding space to the global embedding space.
+    \item \( a_i \): Agent \( i \), where \( a_i \in A = \{a_1, a_2, \dots, a_n\} \).
+    \item \( M_i \): Internal Large Concept Model (LCM) of agent \( a_i \).
+    \item \( M_{i,j} \): Model \(j\) from the model pool \(P_i\) of agent \( a_i \).
+    \item \( K_{i,t} \subset E_i \): Knowledge set of agent \( a_i \) at time \( t \), represented as embeddings.
+    \item \( B_{i,t} \subset E_i \): Belief set of agent \( a_i \) at time \( t \), represented as embeddings.
+    \item \( c \): A concept embedding in the embedding space.
+    \item \( N_{i,t} = (c_{i,1}, c_{i,2}, \dots, c_{i,T}) \): Narrative of agent \( a_i \) at time \( t \), a sequence of concept embeddings.
+    \item \( N \): A general narrative, representing a collective or "objective" narrative.
+    \item \( T \subset E_G \): "Ground truth" region in the global embedding space.
+    \item \( T_k \): Representation of "ground truth" at time step \(k\).
+    \item \( V(c, T, a_i, C, t) \): Veracity function assigning a score in \([0, 1]\) to concept \( c \) at time \(t\), given ground truth region \( T \), agent \( a_i \), and context \( C \).
+    \item \( V_{\text{avg}}(N) \): Average veracity of a narrative \( N \).
+    \item \( S_R(e,t) \): Source reliability function for the source of embedding \(e\) at time \(t\).
+    \item \( H(s,t) \): Historical accuracy of source \(s\) at time \(t\).
+    \item \( E(s) \): Expertise level of source \(s\).
+    \item \( B(s,t) \): Detected biases of source \(s\) at time \(t\).
+    \item \( C_A(e, C) \): Contextual analysis function, evaluating consistency and coherence of \( e \) within context \( C \).
+    \item \( D_R(e, a_i) \): Defamation risk function, assessing the potential for \( e \) to be defamatory towards agent \( a_i \).
+    \item \( d(x, y) \): Distance function in the embedding space, where \( x, y \) are embeddings or sets of embeddings.
+    \item \( \Delta(a_i, a_j, t) \): Asymmetry threshold between agents \( a_i \) and \( a_j \) at time \( t \), based on distance between knowledge or belief embeddings.
+    \item \( D(N_{i,t}, N_{j,t}) \): Narrative divergence between narratives \( N_{i,t} \) and \( N_{j,t} \) at time \(t\).
+    \item \( \alpha_{ij}(t) \): Influence weight of agent \( a_j \) on agent \( a_i \) at time \( t \).
+    \item \( R_i(s_t, a_t, s_{t+1}) \): Reward function for agent \( a_i \) at time \(t\), given state \(s_t\), action \(a_t\), and next state \(s_{t+1}\).
+    \item \( Q(N) \): Narrative quality metric.
+    \item \( I(N) \): Narrative influence metric.
+    \item \( P(a_i, t) \): Pleasure/pain reward for agent \( a_i \) at time \( t \).
+    \item \( BCI_i \): Bi-directional Brain-Computer Interface for agent \( a_i \).
+    \item \( \text{Translator}_i \): Code translator for agent \( a_i \), converting between LCM embeddings and BCI signals.
+    \item \( P_i = \{M_{i,1}, M_{i,2}, \dots, M_{i,k}\} \): Pool of models for agent \( a_i \).
+    \item \( S_i(t) \): Agent-switching function, selecting a model for agent \( a_i \) at time \( t \).
+    \item \( H(j) \): Entropy term for model selection, encouraging exploration.
+    \item \( \lambda \): A hyperparameter controlling the balance between exploitation and exploration in agent-switching, or a decay factor for veracity over time.
+    \item \( \mathcal{L} \): Set of legal constraints.
+    \item \( \mathcal{E} \): Set of ethical constraints.
+    \item \( \mathcal{P} \): Set of privacy preservation constraints.
+    \item \( \text{Actions}(a_i, t) \): Set of actions taken by agent \( a_i \) at time \( t \).
+    \item \( f_B \): Belief update function.
+    \item \( f_{\text{Infl}} \): Influence function.
+    \item \( w(c) \): Weight function based on veracity of concept \( c \).
+    \item \( I_{ij} \): Information shared by agent \( a_i \) with agent \( a_j \).
+    \item \( C_t \): Context at time \( t \).
+    \item \( A_i \): Parameters specific to agent \( a_i \) within the LCM.
+    \item \( \tau_K \): Threshold for accepting a proposition as knowledge.
+    \item \( N_{ij} \): Strength of network connection between agents \( a_i \) and \( a_j \).
+    \item \( \text{Rep}_i(t) \): Reputation score of agent \( a_i \) at time \( t \).
+    \item \( \eta \): Learning rate or scaling factor for reputation update.
+    \item \( I_{ij}(t) \): Impact of agent \( j \)'s narrative on agent \( a_i \)'s reputation at time \( t \).
+    \item \( D(A_k) \): Damage from actions at time \( k \).
+    \item \( \gamma(t) \): Decay function.
+    \item \( T \):  Total time steps (duration) for narrative evolution.
+    \item \( p(j|t') \): Probability of selecting model \( j \) at time \( t' \).
+    \item \( C_j(e,t) \): Corroboration from independent source \(j\) for embedding \(e\) at time \(t\).
+    \item \( \alpha, \beta, \gamma, \delta \): Weighting parameters for the components of the source reliability function.
+    \item \( \omega_j \): Weight assigned to source \( j \).
+    \item \( F \): Set of "fertilizer" data - low-quality human-generated or AI-generated data.
+    \item \( f \in F \): An element of the fertilizer data set.
+    \item \( F_A(e, f_k) \): Fertilizer analysis function, assessing the impact of fertilizer data \( f \) on the veracity of \( e \) at time \( k \).
+    \item \( w_5(k) \): Weighting parameter for the fertilizer analysis at time \( k \).
+    \item \( N_{i,Q}(t) \): Query-specific narrative graph for agent \( a_i \) at time \( t \).
+    \item \( f_N \): Function to construct ephemeral narrative graphs.
+    \item \( Q \): Query or analysis context.
+    \item \( \theta_i \): Agent-specific parameters, potentially including bias parameters.
+    \item \( T_L \): Lower threshold of liquid net worth for entering Tier 1 status (0% imperviousness).
+    \item \( T_U \): Upper threshold of liquid net worth for entering full Tier 1 status (100% imperviousness).
+    \item \( T_M \): Midpoint between \( T_L \) and \( T_U \), used in the sigmoid function for imperviousness calculation.
+    \item \( Imp_i(t) \): Imperviousness score of agent \( a_i \) at time \( t \), ranging from 0 to 1.
+    \item \( k \): Parameter controlling the steepness of the sigmoid function in the imperviousness calculation.
+    \item \( \text{NetWorth}(a_i, t) \): Liquid net worth of agent \( a_i \) at time \( t \).
+    \item \( \text{Tech}(a_i) \): Binary variable indicating if agent \( a_i \) belongs to the "technocrat" role (1 = yes, 0 = no).
+    \item \( \delta \): Added imperviousness bonus for members of the technocrat class.
+\end{itemize}
+
+\section{Veracity Function}
+
+\begin{equation}
+V(e, T, a_i, C, t) = \sum_{k=0}^t \lambda^{t-k} \left[w_1(k) \cdot d(e, T_k) + w_2(k) \cdot S_R(e,k) + w_3(k) \cdot C_A(e, C_k) + w_4(k) \cdot D_R(e, a_i, k)\right]
+\end{equation}
+
+ 
+\begin{equation}
+V(e, T, a_i, C, t, F) = \sum_{k=0}^{t} \lambda^{t-k} \left[ w_1(k) \cdot d(e, T_k) + w_2(k) \cdot S_R(e,k) + w_3(k) \cdot C_A(e, C_k) + w_4(k) \cdot D_R(e, a_i, k) + w_5(k) \cdot F_A(e, f_k) \right]
+\end{equation}
+
+\subsection{Source Reliability}
+
+\begin{equation}
+S_R(e,t) = \alpha \cdot H(\text{Source}(e),t) + \beta \cdot E(\text{Source}(e)) + \gamma \cdot (1 - B(\text{Source}(e),t)) + \delta \cdot \sum_{j \in J} \omega_j \cdot C_j(e,t)
+\end{equation}
+
+
+
+
+\begin{equation}
+S_R(e,t) = \alpha \cdot H(\text{Source}(e),t) + \beta \cdot E(\text{Source}(e)) + \gamma \cdot (1 - B(\text{Source}(e),t)) + \delta \cdot \sum_{j \in J} \omega_j \cdot C_j(e,t)
+\end{equation}
+
+
+
+\section{Narrative Dynamics}
+
+\subsection{Narrative Definition}
+\begin{equation}
+N_{i,t} = (c_{i,1}, c_{i,2}, \dots, c_{i,T})
+\end{equation}
+
+\subsection{Concept Embedding Generation}
+\begin{equation}
+c_{i,k+1} = LCM_i(c_{i,1:k}, K_{i,t}, B_{i,t}, C_t, A_i)
+\end{equation}
+
+\subsection{Narrative Divergence}
+\begin{equation}
+D(N_{i,t}, N_{j,t}) = \sum_{k=1}^T w(c_{i,k}) \cdot d(c_{i,k}, c_{j,k})
+\end{equation}
+
+\begin{equation}
+w(c) = f(V(c, T, a_i, C, t, F))
+\end{equation}
+
+
+\subsection{Influence on Narrative}
+\begin{equation}
+\Delta N_{j,t} = f_{\text{Infl}}(\Delta(a_i, a_j, t), \text{LCM}_i(I_{ij}), A_j)
+\end{equation}
+
+\section{Reinforcement Learning with Pain/Pleasure Feedback}
+
+\begin{equation}
+R_i(s_t, a_t, s_{t+1}) = \alpha \cdot R_{\text{env}}(s_t, a_t, s_{t+1}) + \beta \cdot Q(N_{i,t+1}) + \gamma \cdot P(a_i, t)
+\end{equation}
+
+\begin{equation}
+P(a_i, t) = \min(P_{\text{max}}, \max(P_{\text{min}}, f(Actions(a_i, t), N_{i,t}, C_t)))
+\end{equation}
+
+\begin{equation}
+\text{Stimulation Patterns} = \text{Translator}_i(LCM_i(\text{Output}), \text{Context}_t)
+\end{equation}
+
+\begin{equation}
+\text{Neural Activity} = BCI_i(\text{Read})
+\end{equation}
+
+\begin{equation}
+BCI_i(\text{Write}, \text{Stimulation Patterns})
+\end{equation}
+
+\section{Narrative Dynamics}
+
+\subsection{Narrative Definition}
+\begin{equation}
+N_{i,t} = (c_{i,1}, c_{i,2}, ..., c_{i,T})
+\end{equation}
+
+\subsection{Concept Embedding Generation}
+\begin{equation}
+c_{i,k+1} = \text{LCM}_i(c_{i,1:k}, K_{i,t}, B_{i,t}, C_t, A_i)
+\end{equation}
+
+\subsection{Narrative Divergence}
+\begin{equation}
+D(N_{i,t}, N_{j,t}) = \sum_{k=1}^T w(c_{i,k}) \cdot d(c_{i,k}, c_{j,k})
+\end{equation}
+
+\begin{equation}
+w(c) = f(V(c, T, a_i, C, t, F))
+\end{equation}
+
+\subsection{Influence on Narrative}
+\begin{equation}
+\Delta N_{j,t} = f_{\text{Infl}}(\Delta(a_i, a_j, t), \text{LCM}_i(I_{ij}), A_j)
+\end{equation}
+
+\section{Agent Interaction Mechanisms}
+
+\subsection{Knowledge Propagation}
+\begin{equation}
+K_{i,t+1} = K_{i,t} \cup \{e \in E_i | V(e, T, a_i, C, t, F) > \tau_K \wedge \exists j: e \in K_{j,t} \wedge R(a_j) > \tau_R\}
+\end{equation}
+
+\subsection{Belief Evolution}
+\begin{equation}
+B_{i,t+1} = f_B(B_{i,t}, K_{i,t+1}, \sum_{j\neq i} \alpha_{ij}(t) \cdot R(a_j) \cdot (N_{j,t} + F_j(t)), \theta_i)
+\end{equation}
+
+\section{Learning Mechanisms}
+
+\subsection{Narrative-Based Reward}
+\begin{equation}
+R_i(s_t, a_t, s_{t+1}) = \alpha \cdot R_{\text{env}}(s_t, a_t, s_{t+1}) + \beta \cdot Q(N_{i,t+1}, F)
+\end{equation}
+
+\begin{equation}
+Q(N, F) = \gamma_1 \cdot C(N) + \gamma_2 \cdot V_{\text{avg}}(N, F) + \gamma_3 \cdot I(N, F)
+\end{equation}
+
+\subsection{Agent-Switching}
+\begin{equation}
+S_i(t) = \argmax_j \{Q(M_{i,j}, N_{i,t}, \text{Context}_t, F) + \lambda \cdot H(j)\}
+\end{equation}
+
+
+\section{Reputational Impact Model}
+
+\subsection{Dynamic Reputation Evolution}
+\begin{equation}
+\text{Rep}_i(t+1) = \text{Rep}_i(t) + \eta \sum_{j\neq i} \alpha_{ji}(t) \cdot [V(N_{j,t}, T) \cdot I_{ij}(t) - D_{ij}(t)] \cdot (1 - \text{Imp}_i(t))
+\end{equation}
+
+\subsection{Cumulative Damage Assessment}
+\begin{equation}
+D_i(T) = \int_0^T \gamma(t) \cdot \max(0, \text{Rep}_i(0) - \text{Rep}_i(t)) \cdot (1 - \text{Imp}_i(t)) \cdot \text{RV}_i(t) dt
+\end{equation}
+
+
+\section{Influence Weighting}
+\begin{equation}
+\alpha_{ij}(t) = \sigma(\beta_1 \cdot N_{ij} + \beta_2 \cdot \text{Rep}_j(t) + \beta_3 \cdot E_j + \beta_4 \cdot P_j - \beta_5 \cdot \text{RV}_i(t))
+\end{equation}
+
+
+
+
+\subsection{Imperviousness Thresholds}
+\begin{equation}
+\text{Imp}_i(t) = \begin{cases}
+0, & \text{if } \text{NetWorth}(a_i, t) \leq T_L \\
+1, & \text{if } \text{NetWorth}(a_i, t) \geq T_U \\
+\frac{1}{1 + e^{-k(\text{NetWorth}(a_i, t) - T_M)}}, & \text{if } T_L < \text{NetWorth}(a_i, t) < T_U
+\end{cases}
+\end{equation}
+
+\text{OR}
+
+\begin{equation}
+\text{Imp}_i(t) = \frac{\log(1 + \text{NetWorth}(a_i, t) - T_L)}{\log(1 + T_U - T_L)}, \text{ if } T_L < \text{NetWorth}(a_i, t) < T_U
+\end{equation}
+
+\subsection{Technocrat Modifier}
+\begin{equation}
+\text{Imp}_i(t) = \min(1, \text{Imp}_i(t) + \text{Tech}(a_i) \cdot \delta)
+\end{equation}
+
+
+
+
+\section{Agent-Switching Mechanism}
+
+\begin{equation}
+S_i(t) = \argmax_{j \in \{1, \dots, k\}} \{Q(M_{i,j}, N_{i,t}, \text{Context}_t) + \lambda \cdot H(j)\}
+\end{equation}
+
+\begin{equation}
+H(j) = -\sum_{t'=1}^{t-1} p(j|t') \log p(j|t')
+\end{equation}
+
+\section{Quality Function Specification}
+
+\begin{equation}
+Q(M_{i,j}, N_{i,t}, C_t) = \alpha_Q \cdot V_{avg}(N_{i,t}) + \beta_Q \cdot C(N_{i,t}) + \gamma_Q \cdot I(N_{i,t})
+\end{equation}
+
+where \( \alpha_Q, \beta_Q, \gamma_Q \in [0,1] \) and \( \alpha_Q + \beta_Q + \gamma_Q = 1 \)
+
+\section{Weight Functions}
+
+\begin{equation}
+w_i(k) = \frac{1}{1 + e^{-\mu_i(k-k_0^i)}} \quad \text{for } i \in \{1,2,3,4\}
+\end{equation}
+
+where \( \mu_i \) is the steepness parameter and \( k_0^i \) is the midpoint for weight function \( i \)
+
+\section{Pleasure/Pain Mapping Function}
+
+\begin{equation}
+f(\text{Actions}(a_i, t), N_{i,t}, C_t) = \tanh(\eta \cdot [w_a \cdot A_{score} + w_n \cdot N_{score} + w_c \cdot C_{score}])
+\end{equation}
+
+where:
+\begin{itemize}
+    \item \( \eta \): Scaling factor
+    \item \( A_{score} \): Action score based on \( \text{Actions}(a_i, t) \)
+    \item \( N_{score} \): Narrative score based on \( N_{i,t} \)
+    \item \( C_{score} \): Context score based on \( C_t \)
+    \item \( w_a, w_n, w_c \): Component weights where \( w_a + w_n + w_c = 1 \)
+\end{itemize}
+
+
+\end{document}
+</file>
+
+<file path="ResearchProposal-DANN.tex">
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsmath, amsfonts, amssymb, amsthm}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{abstract}
+\usepackage{titlesec}
+\usepackage{cite}
+
+% Define operators
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator{\dist}{dist}
+
+% Theorems and definitions
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{property}{Property}
+
+% Title formatting
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection}{1em}{}
+
+% Spacing
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0em}
+\setlength{\absleftindent}{0mm}
+\setlength{\absrightindent}{0mm}
+
+\title{\vspace{-2cm}\textbf{Decentralized Autonomous Narrative Networks (DANN) \\ A Multi-Model Framework for Reinforcement Learning with Veracity, Influence, and Reputation}}
+\author{\textbf{Paul Lowndes} \\ \href{mailto:ZeroTrust@NSHkr.com}{\texttt{ZeroTrust@NSHkr.com}}}
+\date{\small January 1, 2025}
+
+\begin{document}
+
+\maketitle
+\vspace{-1.5em}
+
+\begin{abstract}
+This paper introduces Decentralized Autonomous Narrative Networks (DANN), a novel multi-model framework for reinforcement learning inspired by the complexities of human social interactions, information asymmetry, and the manipulation of narratives. Unlike traditional multi-agent reinforcement learning (MARL) systems, DANN equips each agent with an independent, internal model, analogous to a Large Concept Model (LCM), which maintains the agent's unique knowledge, beliefs, and evolving narrative represented as a sequence of concept embeddings. We propose a decentralized approach to veracity, where "ground truth" emerges from the interactions and consensus mechanisms within the network, rather than being imposed by a central authority. The framework incorporates agent-specific parameters, narrative-based reward functions, and mechanisms for cross-narrative influence and agent switching to model the dynamic and often adversarial nature of real-world information ecosystems. We further explore the use of concepts from topology, game theory, and information theory to mathematically formalize the notions of narrative divergence, asymmetry thresholds, and the influence of agents on one another. Through this work, we aim to develop a more robust and ethically aware approach to AI development, capable of modeling the complexities of deception, manipulation, and the social construction of reality, while also offering potential insights into the mitigation of these phenomena. The DANN framework, while still theoretical, provides a foundation for future research into the development of AI systems that can navigate and potentially counteract the weaponization of information and ultimately, foster a more transparent and equitable information environment. This also, of course, has implications for national security, individual privacy, and the potential development of novel and effective methods of online harassment, all of which must be taken into consideration. This framework also potentially provides a new tool for understanding, and even countering, the spread of misinformation. It also opens up entirely new avenues for potential abuse.
+\end{abstract}
+
+\section{Introduction}
+The proliferation of artificial intelligence systems and their increasing role in shaping information flows has created new challenges in understanding and managing narrative dynamics in digital spaces. Traditional multi-agent reinforcement learning (MARL) approaches often fail to capture the nuanced interplay between agents' beliefs, knowledge, and the narratives they construct and propagate. This paper introduces Decentralized Autonomous Narrative Networks (DANN), a framework that explicitly models these dynamics through a combination of embedding spaces, belief systems, and narrative evolution mechanisms.
+
+\section{Framework Overview}
+\subsection{Core Components}
+We begin by defining the fundamental mathematical structures that underpin the DANN framework:
+
+\begin{definition}[Embedding Space]
+The global embedding space $E_G$ is a metric space $(E_G, d)$ where:
+\begin{itemize}
+    \item $d: E_G \times E_G \rightarrow \mathbb{R}_{\geq 0}$ is a distance function
+    \item For all $x,y \in E_G$: $d(x,y) = 0 \iff x = y$ (identity)
+    \item For all $x,y \in E_G$: $d(x,y) = d(y,x)$ (symmetry)
+    \item For all $x,y,z \in E_G$: $d(x,z) \leq d(x,y) + d(y,z)$ (triangle inequality)
+\end{itemize}
+\end{definition}
+
+\begin{definition}[Agent Space]
+For each agent $a_i$, its local embedding space $E_i \subseteq E_G$ is equipped with:
+\begin{itemize}
+    \item Knowledge set $K_{i,t} \subset E_i$ at time $t$
+    \item Belief set $B_{i,t} \subset E_i$ at time $t$
+    \item Narrative sequence $N_{i,t} = (c_{i,1}, c_{i,2}, \dots, c_{i,T}) \in E_i^T$
+\end{itemize}
+where $K_{i,t} \subseteq B_{i,t}$ (knowledge is a subset of beliefs).
+\end{definition}
+
+\section{Mathematical Framework}
+
+\subsection{Veracity Function Properties}
+The veracity function $V: E_G \rightarrow [0,1]$ satisfies:
+
+\begin{property}[Veracity Axioms]
+For all $x,y \in E_G$:
+\begin{itemize}
+    \item $V(x) = 1 \iff x \in T$ (truth region)
+    \item $\|x-y\| \leq \epsilon \implies |V(x) - V(y)| \leq \delta$ (continuity)
+    \item $V(x) = 0 \implies x$ is maximally inconsistent with truth
+\end{itemize}
+\end{property}
+
+\subsection{Narrative Dynamics}
+
+\begin{definition}[Narrative Divergence]
+The divergence $D$ between narratives satisfies:
+\begin{equation}
+    D(N_{i,t}, N_{j,t}) = \sum_{k=1}^T w(c_{i,k}) \cdot d(c_{i,k}, c_{j,k})
+\end{equation}
+where $w(c) = f(V(c))$ for some monotonic function $f:[0,1] \rightarrow [0,1]$.
+\end{definition}
+
+\subsection{Agent Interaction Mechanisms}
+
+\subsubsection{Knowledge Propagation}
+Knowledge updates follow:
+\begin{equation}
+    K_{i,t+1} = K_{i,t} \cup \{e \in E_i \mid V(e, T) > \tau_K \land \exists j: e \in K_{j,t}\}
+\end{equation}
+where $\tau_K$ is the knowledge acceptance threshold.
+
+\subsubsection{Belief Evolution}
+Belief updates incorporate both knowledge and social influence:
+\begin{equation}
+    B_{i,t+1} = f_B(B_{i,t}, K_{i,t+1}, \sum_{j \neq i} \alpha_{ij} B_{j,t})
+\end{equation}
+where $\alpha_{ij}$ represents the influence weight of agent $j$ on agent $i$.
+
+\section{Learning Mechanisms}
+
+\subsection{Narrative-Based Reward}
+The reward function combines environmental and narrative quality:
+\begin{equation}
+    R_i(s_t, a_t, s_{t+1}) = \alpha \cdot R_{\text{env}}(s_t, a_t, s_{t+1}) + \beta \cdot Q(N_{i,t+1})
+\end{equation}
+where:
+\begin{itemize}
+    \item $Q(N) = \gamma_1 C(N) + \gamma_2 V_{\text{avg}}(N) + \gamma_3 I(N)$
+    \item $C(N)$ measures narrative coherence
+    \item $V_{\text{avg}}(N)$ is the average veracity
+    \item $I(N)$ measures narrative influence
+\end{itemize}
+
+\subsection{Agent-Switching Mechanism}
+The switching function is defined as:
+\begin{equation}
+    S_i(t) = \argmax_{j} \{Q(M_{i,j}, N_{i,t}, \text{Context}_t) + \lambda H(j)\}
+\end{equation}
+where:
+\begin{itemize}
+    \item $H(j)$ is an entropy term promoting exploration
+    \item $\lambda$ balances exploitation vs. exploration
+    \item $\text{Context}_t$ includes environmental and social factors
+\end{itemize}
+
+
+
+
+
+
+\section{Alternative Methods}
+
+\subsection{Veracity Function}
+
+
+\begin{equation}
+V(e, T, a_i, C) = w_1 \cdot \left(1 - \frac{d(e, T)}{\max_{x \in E_G} d(x, T)}\right) + w_2 \cdot S_R(\text{Source}(e)) + w_3 \cdot C_A(e, C) + w_4 \cdot D_R(e, a_i)
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
+& \text{where:} \\
+& S_R(e) = \alpha \cdot H(\text{Source}(e)) + \beta \cdot E(\text{Source}(e)) + \gamma \cdot (1 - B(\text{Source}(e))) + \delta \cdot \text{Corroboration}(e) \\
+& H(s) = \text{historical accuracy of source } s \\
+& E(s) = \text{expertise level of source } s \\
+& B(s) = \text{detected biases of source } s \\
+& C_A(e, C) = \text{consistency and coherence of } e \text{ within context } C \\
+& D_R(e, a_i) = \text{assessed defamation risk of } e \text{ towards agent } a_i \\
+& \text{Corroboration}(e) = \text{measure of agreement with independent sources}
+\end{aligned}
+\end{equation}
+
+
+\subsection{Narrative Divergence}
+
+
+\begin{equation}
+D(N_{i,t}, N_{j,t}) = \sum_{k=1}^{T} w(c_{i,k}) \cdot d(c_{i,k}, c_{j,k})
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
+& \text{where:} \\
+& w(c) = \frac{1}{1 + e^{-V(c, T, a_i, C)}} \quad \text{(sigmoid function applied to veracity)}
+\end{aligned}
+\end{equation}
+
+
+This uses a sigmoid function to transform the veracity score into a weight, emphasizing embeddings with higher veracity.
+
+\subsection{Influence Weighting}
+
+
+\begin{equation}
+\alpha_{ij}(t) = \sigma(\beta_1 \cdot N_{ij} + \beta_2 \cdot \text{Rep}_j(t) + \beta_3 \cdot E_j + \beta_4 \cdot P_j)
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
+& \text{where:} \\
+& N_{ij} = \text{strength of network connection between } a_i \text{ and } a_j \\
+& \text{Rep}_j(t) = \text{reputation score of agent } a_j \text{ at time } t \\
+& E_j = \text{domain expertise of agent } a_j \\
+& P_j = \text{platform-specific influence metrics for agent } a_j \\
+& \sigma = \text{sigmoid function} \\
+& \beta_1, \beta_2, \beta_3, \beta_4 \text{ are learned parameters}
+\end{aligned}
+\end{equation}
+
+This formula models the influence weight as a function of network connections, historical reliability (reputation), expertise, and platform-specific factors, all combined through a sigmoid function to produce a value between 0 and 1.
+
+\subsection{Narrative-Based Reward Function}
+
+
+\begin{equation}
+R_i(s_t, a_t, s_{t+1}) = \alpha \cdot R_{\text{env}}(s_t, a_t, s_{t+1}) + \beta \cdot Q(N_{i,t+1})
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
+& \text{where:} \\
+& Q(N_{i,t}) = \gamma_1 \cdot C(N_{i,t}) + \gamma_2 \cdot \frac{1}{|N_{i,t}|} \sum_{c \in N_{i,t}} V(c, T, a_i, C_t) + \gamma_3 \cdot \sum_{j \neq i} \alpha_{ji}(t) \cdot (1 - D(N_{i,t}, N_{j,t}))
+\end{aligned}
+\end{equation}
+
+$C(N_{i,t})$: Coherence of the narrative $N_{i,t}$ (to be defined further, potentially based on average distance between embeddings or logical consistency).
+$V_{avg}(N_{i,t})$: Average veracity of concept embeddings in the narrative.
+$I(N_{i,t})$: Influence of the narrative, here modeled as a function of how much it reduces divergence with other agents' narratives, weighted by their influence. This could be further refined to include, for example, how much closer an agent's narrative moves toward the "ground truth" after receiving input from another agent.
+
+\subsection{Agent Switching}
+
+
+\begin{equation}
+S_i(t) = \argmax_{j \in \{1, \dots, k\}} \{Q(M_{i,j}, N_{i,t}, \text{Context}_t) + \lambda \cdot H(j)\}
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
+& \text{where:} \\
+& H(j) = -\sum_{t'=1}^{t-1} p(j|t') \log p(j|t') \quad \text{(entropy of model selection history)} \\
+& p(j|t') = \text{probability of selecting model } j \text{ at time } t' \\
+& \lambda = \text{exploration coefficient}
+\end{aligned}
+\end{equation}
+
+This formulation of $H(j)$ encourages exploration by favoring models that haven't been selected as often in the past, based on the selection history up to the current time step. This would encourage the system to explore its options more thoroughly, even potentially selecting a model that does not maximize performance but is useful for other reasons, such as for gathering more information, if applicable.
+
+
+
+
+
+
+
+
+
+
+
+\section{Discussion and Future Work}
+[This section would discuss implications, limitations, and future research directions]
+
+\end{document}
+</file>
+
+</files>
