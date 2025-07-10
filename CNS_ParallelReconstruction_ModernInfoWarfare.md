@@ -140,7 +140,7 @@ Ellsberg, D. (1971). *The Pentagon Papers*. Beacon Press.
 
 Greenwald, G. (2014). *No Place to Hide: Edward Snowden, the NSA, and the U.S. Surveillance State*. Metropolitan Books.
 
-Lowndes, P. (2025). *CNS 2.0: A Practical Blueprint for Chiral Narrative Synthesis*. Conceptual AI Laboratory.
+Lowndes, P. (2025). *CNS 2.0: A Practical Blueprint for Chiral Narrative Synthesis*. Available at: https://github.com/nshkrdotcom/research_papers/blob/main/ResearchProposal-ChiralNarrativeSynthesis_20250617.pdf
 
 Orwell, G. (1949). *Nineteen Eighty-Four*. Secker & Warburg.
 
