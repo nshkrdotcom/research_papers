@@ -29,43 +29,43 @@ This paper is organized as follows. Section 2 reviews related work in argumentat
 
 ### 2.1 Argumentation Mining and Structured Reasoning
 
-Argumentation mining has emerged as a critical research area focused on automatically identifying and extracting argumentative structures from natural language text [1]. Early work by Mochales and Moens [2] established foundational approaches for identifying claims and premises in legal documents. Subsequent research by Lippi and Torroni [3] expanded these techniques across multiple domains, demonstrating the generalizability of argumentation mining approaches.
+Argumentation mining has emerged as a critical research area focused on automatically identifying and extracting argumentative structures from natural language text [[1]](#ref1). Early work by Mochales and Moens [[2]](#ref2) established foundational approaches for identifying claims and premises in legal documents. Subsequent research by Lippi and Torroni [[3]](#ref3) expanded these techniques across multiple domains, demonstrating the generalizability of argumentation mining approaches.
 
-Recent advances have focused on graph-based representations of argumentative structure. Wachsmuth et al. [4] introduced argument quality assessment using graph neural networks, while Skeppstedt et al. [5] developed methods for extracting implicit argumentative relations. However, these approaches typically focus on structure extraction rather than synthesis of conflicting arguments.
+Recent advances have focused on graph-based representations of argumentative structure. Wachsmuth et al. [[4]](#ref4) introduced argument quality assessment using graph neural networks, while Skeppstedt et al. [[5]](#ref5) developed methods for extracting implicit argumentative relations. However, these approaches typically focus on structure extraction rather than synthesis of conflicting arguments.
 
 Critical limitations in current argumentation mining include: (1) difficulty in extracting complex multi-hop reasoning chains, (2) sensitivity to domain-specific terminology and structures, and (3) limited ability to handle implicit argumentative relationships. Our work addresses these limitations through enhanced LLM-based extraction with verification protocols.
 
 ### 2.2 Knowledge Synthesis and Information Integration
 
-Traditional knowledge synthesis approaches in AI rely heavily on vector space models and similarity metrics. Mikolov et al. [6] demonstrated the power of word embeddings for capturing semantic relationships, while subsequent work by Devlin et al. [7] showed how contextual embeddings could improve representation quality.
+Traditional knowledge synthesis approaches in AI rely heavily on vector space models and similarity metrics. Mikolov et al. [[6]](#ref6) demonstrated the power of word embeddings for capturing semantic relationships, while subsequent work by Devlin et al. [[7]](#ref7) showed how contextual embeddings could improve representation quality.
 
-However, vector-based approaches suffer from information loss when dealing with complex argumentative structures. Wang et al. [8] identified this limitation in their analysis of reasoning tasks, demonstrating that structural information is critical for coherent synthesis. Recent work by Chen et al. [9] explored graph-based knowledge integration, but focused primarily on factual knowledge rather than argumentative synthesis.
+However, vector-based approaches suffer from information loss when dealing with complex argumentative structures. Wang et al. [[8]](#ref8) identified this limitation in their analysis of reasoning tasks, demonstrating that structural information is critical for coherent synthesis. Recent work by Chen et al. [[9]](#ref9) explored graph-based knowledge integration, but focused primarily on factual knowledge rather than argumentative synthesis.
 
 ### 2.3 Multi-Agent Systems for Reasoning
 
-Multi-agent systems have shown promise for complex reasoning tasks. Stone and Veloso [10] established foundational frameworks for collaborative problem-solving, while more recent work by Tampuu et al. [11] demonstrated emergent behaviors in competitive multi-agent environments.
+Multi-agent systems have shown promise for complex reasoning tasks. Stone and Veloso [[10]](#ref10) established foundational frameworks for collaborative problem-solving, while more recent work by Tampuu et al. [[11]](#ref11) demonstrated emergent behaviors in competitive multi-agent environments.
 
-Particularly relevant is research on dialectical reasoning systems. Rahwan and Simari [12] provided comprehensive coverage of argumentation frameworks in AI, while Chesñevar et al. [13] explored computational models of debate and argumentation. Recent work by Du et al. [14] introduced multi-agent debate systems using LLMs, demonstrating improved reasoning capabilities through adversarial dialogue.
+Particularly relevant is research on dialectical reasoning systems. Rahwan and Simari [[12]](#ref12) provided comprehensive coverage of argumentation frameworks in AI, while Chesñevar et al. [[13]](#ref13) explored computational models of debate and argumentation. Recent work by Du et al. [[14]](#ref14) introduced multi-agent debate systems using LLMs, demonstrating improved reasoning capabilities through adversarial dialogue.
 
 Our work extends these foundations by introducing structured narrative objects and implementing formal dialectical protocols with evidence verification.
 
 ### 2.4 Trust and Credibility Assessment
 
-Trust assessment in information systems has received significant attention. Josang [15] developed subjective logic frameworks for uncertainty and trust modeling, while Castelfranchi and Falcone [16] explored trust in multi-agent systems. However, most approaches treat trust as a monolithic concept rather than decomposing it into interpretable components.
+Trust assessment in information systems has received significant attention. Josang [[15]](#ref15) developed subjective logic frameworks for uncertainty and trust modeling, while Castelfranchi and Falcone [[16]](#ref16) explored trust in multi-agent systems. However, most approaches treat trust as a monolithic concept rather than decomposing it into interpretable components.
 
-Recent work by Kumar and Shah [17] introduced multi-faceted trust assessment for information sources, while Zhang et al. [18] developed neural approaches to credibility assessment. Our approach extends this work by introducing specialized critics for grounding, logical coherence, and novelty assessment with adaptive weighting mechanisms.
+Recent work by Kumar and Shah [[17]](#ref17) introduced multi-faceted trust assessment for information sources, while Zhang et al. [[18]](#ref18) developed neural approaches to credibility assessment. Our approach extends this work by introducing specialized critics for grounding, logical coherence, and novelty assessment with adaptive weighting mechanisms.
 
 ### 2.5 Evidence Verification and Fact-Checking
 
-Automated fact-checking has emerged as a critical research area. Thorne et al. [19] introduced the FEVER dataset for fact extraction and verification, while Augenstein et al. [20] provided comprehensive surveys of automated fact-checking approaches.
+Automated fact-checking has emerged as a critical research area. Thorne et al. [[19]](#ref19) introduced the FEVER dataset for fact extraction and verification, while Augenstein et al. [[20]](#ref20) provided comprehensive surveys of automated fact-checking approaches.
 
 Current limitations include: (1) difficulty verifying complex claims requiring multi-step reasoning, (2) challenges in assessing evidence quality rather than mere relevance, and (3) limited ability to handle evolving or contextual information. Our work addresses these through multi-stage evidence verification protocols.
 
 ### 2.6 Large Language Models for Complex Reasoning
 
-The emergence of large language models has transformed complex reasoning capabilities. Brown et al. [21] demonstrated few-shot reasoning in GPT-3, while Wei et al. [22] introduced chain-of-thought prompting for multi-step reasoning. Recent work by Yao et al. [23] explored tree-of-thought reasoning for complex problem solving.
+The emergence of large language models has transformed complex reasoning capabilities. Brown et al. [[21]](#ref21) demonstrated few-shot reasoning in GPT-3, while Wei et al. [[22]](#ref22) introduced chain-of-thought prompting for multi-step reasoning. Recent work by Yao et al. [[23]](#ref23) explored tree-of-thought reasoning for complex problem solving.
 
-However, LLMs face challenges with hallucination, logical inconsistency, and bias propagation [24]. Our framework addresses these through structured reasoning protocols, multi-stage verification, and ensemble approaches that reduce reliance on single LLM outputs.
+However, LLMs face challenges with hallucination, logical inconsistency, and bias propagation [[24]](#ref24). Our framework addresses these through structured reasoning protocols, multi-stage verification, and ensemble approaches that reduce reliance on single LLM outputs.
 
 ## 3. Theoretical Framework
 
@@ -1689,50 +1689,50 @@ CNS 2.0 thus represents not merely a technical achievement, but a foundational c
 
 ## References
 
-[1] Lippi, M., & Torroni, P. (2016). Argumentation mining: State of the art and emerging trends. *ACM Transactions on Internet Technology*, 16(2), 1-25.
+<a id="ref1"></a>[1] Lippi, M., & Torroni, P. (2016). Argumentation mining: State of the art and emerging trends. *ACM Transactions on Internet Technology*, 16(2), 1-25.
 
-[2] Mochales, R., & Moens, M. F. (2011). Argumentation mining. *Artificial Intelligence and Law*, 19(1), 1-22.
+<a id="ref2"></a>[2] Mochales, R., & Moens, M. F. (2011). Argumentation mining. *Artificial Intelligence and Law*, 19(1), 1-22.
 
-[3] Lippi, M., & Torroni, P. (2015). Context-independent claim detection for argument mining. In *Proceedings of the 24th International Conference on Artificial Intelligence* (pp. 185-191).
+<a id="ref3"></a>[3] Lippi, M., & Torroni, P. (2015). Context-independent claim detection for argument mining. In *Proceedings of the 24th International Conference on Artificial Intelligence* (pp. 185-191).
 
-[4] Wachsmuth, H., Potthast, M., Al-Khatib, K., Ajjour, Y., Puschmann, J., Qu, J., ... & Stein, B. (2017). Building an argument search engine for the web. In *Proceedings of the 4th Workshop on Argument Mining* (pp. 49-59).
+<a id="ref4"></a>[4] Wachsmuth, H., Potthast, M., Al-Khatib, K., Ajjour, Y., Puschmann, J., Qu, J., ... & Stein, B. (2017). Building an argument search engine for the web. In *Proceedings of the 4th Workshop on Argument Mining* (pp. 49-59).
 
-[5] Skeppstedt, M., Peldszus, A., & Stede, M. (2018). More or less controlled elicitation of argumentative text: Enlarging a microtext corpus via crowdsourcing. In *Proceedings of the 5th Workshop on Argument Mining* (pp. 155-163).
+<a id="ref5"></a>[5] Skeppstedt, M., Peldszus, A., & Stede, M. (2018). More or less controlled elicitation of argumentative text: Enlarging a microtext corpus via crowdsourcing. In *Proceedings of the 5th Workshop on Argument Mining* (pp. 155-163).
 
-[6] Mikolov, T., Chen, K., Corrado, G., & Dean, J. (2013). Efficient estimation of word representations in vector space. *arXiv preprint arXiv:1301.3781*.
+<a id="ref6"></a>[6] Mikolov, T., Chen, K., Corrado, G., & Dean, J. (2013). Efficient estimation of word representations in vector space. *arXiv preprint arXiv:1301.3781*.
 
-[7] Devlin, J., Chang, M. W., Lee, K., & Toutanova, K. (2018). BERT: Pre-training of deep bidirectional transformers for language understanding. *arXiv preprint arXiv:1810.04805*.
+<a id="ref7"></a>[7] Devlin, J., Chang, M. W., Lee, K., & Toutanova, K. (2018). BERT: Pre-training of deep bidirectional transformers for language understanding. *arXiv preprint arXiv:1810.04805*.
 
-[8] Wang, A., Singh, A., Michael, J., Hill, F., Levy, O., & Bowman, S. R. (2018). GLUE: A multi-task benchmark and analysis platform for natural language understanding. *arXiv preprint arXiv:1804.07461*.
+<a id="ref8"></a>[8] Wang, A., Singh, A., Michael, J., Hill, F., Levy, O., & Bowman, S. R. (2018). GLUE: A multi-task benchmark and analysis platform for natural language understanding. *arXiv preprint arXiv:1804.07461*.
 
-[9] Chen, X., Jia, S., & Xiang, Y. (2020). A review: Knowledge reasoning over knowledge graph. *Expert Systems with Applications*, 141, 112948.
+<a id="ref9"></a>[9] Chen, X., Jia, S., & Xiang, Y. (2020). A review: Knowledge reasoning over knowledge graph. *Expert Systems with Applications*, 141, 112948.
 
-[10] Stone, P., & Veloso, M. (2000). Multiagent systems: A survey from a machine learning perspective. *Autonomous Robots*, 8(3), 345-383.
+<a id="ref10"></a>[10] Stone, P., & Veloso, M. (2000). Multiagent systems: A survey from a machine learning perspective. *Autonomous Robots*, 8(3), 345-383.
 
-[11] Tampuu, A., Matiisen, T., Kodelja, D., Kuzovkin, I., Korjus, K., Aru, J., ... & Vicente, R. (2017). Multiagent cooperation and competition with deep reinforcement learning. *PLoS One*, 12(4), e0172395.
+<a id="ref11"></a>[11] Tampuu, A., Matiisen, T., Kodelja, D., Kuzovkin, I., Korjus, K., Aru, J., ... & Vicente, R. (2017). Multiagent cooperation and competition with deep reinforcement learning. *PLoS One*, 12(4), e0172395.
 
-[12] Rahwan, I., & Simari, G. R. (Eds.). (2009). *Argumentation in artificial intelligence*. Springer.
+<a id="ref12"></a>[12] Rahwan, I., & Simari, G. R. (Eds.). (2009). *Argumentation in artificial intelligence*. Springer.
 
-[13] Chesñevar, C., Maguitman, A., & Loui, R. (2000). Logical models of argument. *ACM Computing Surveys*, 32(4), 337-383.
+<a id="ref13"></a>[13] Chesñevar, C., Maguitman, A., & Loui, R. (2000). Logical models of argument. *ACM Computing Surveys*, 32(4), 337-383.
 
-[14] Du, Y., Li, S., Torralba, A., Tenenbaum, J. B., & Mordatch, I. (2023). Improving factuality and reasoning in language models through multiagent debate. *arXiv preprint arXiv:2305.14325*.
+<a id="ref14"></a>[14] Du, Y., Li, S., Torralba, A., Tenenbaum, J. B., & Mordatch, I. (2023). Improving factuality and reasoning in language models through multiagent debate. *arXiv preprint arXiv:2305.14325*.
 
-[15] Jøsang, A. (2001). A logic for uncertain probabilities. *International Journal of Uncertainty, Fuzziness and Knowledge-Based Systems*, 9(3), 279-311.
+<a id="ref15"></a>[15] Jøsang, A. (2001). A logic for uncertain probabilities. *International Journal of Uncertainty, Fuzziness and Knowledge-Based Systems*, 9(3), 279-311.
 
-[16] Castelfranchi, C., & Falcone, R. (2010). *Trust theory: A socio-cognitive and computational model*. John Wiley & Sons.
+<a id="ref16"></a>[16] Castelfranchi, C., & Falcone, R. (2010). *Trust theory: A socio-cognitive and computational model*. John Wiley & Sons.
 
-[17] Kumar, S., & Shah, N. (2018). False information on web and social media: A survey. *arXiv preprint arXiv:1804.08559*.
+<a id="ref17"></a>[17] Kumar, S., & Shah, N. (2018). False information on web and social media: A survey. *arXiv preprint arXiv:1804.08559*.
 
-[18] Zhang, X., Ghorbani, A. A., & Fu, X. (2019). A comprehensive survey on adversarial examples in machine learning. *IEEE Transactions on Knowledge and Data Engineering*, 33(2), 448-466.
+<a id="ref18"></a>[18] Zhang, X., Ghorbani, A. A., & Fu, X. (2019). A comprehensive survey on adversarial examples in machine learning. *IEEE Transactions on Knowledge and Data Engineering*, 33(2), 448-466.
 
-[19] Thorne, J., Vlachos, A., Christodoulopoulos, C., & Mittal, A. (2018). FEVER: a large-scale dataset for fact extraction and verification. In *Proceedings of the 2018 Conference of the North American Chapter of the Association for Computational Linguistics* (pp. 809-819).
+<a id="ref19"></a>[19] Thorne, J., Vlachos, A., Christodoulopoulos, C., & Mittal, A. (2018). FEVER: a large-scale dataset for fact extraction and verification. In *Proceedings of the 2018 Conference of the North American Chapter of the Association for Computational Linguistics* (pp. 809-819).
 
-[20] Augenstein, I., Lioma, C., Wang, D., Lima, L. C., Hansen, C., Hansen, C., & Simonsen, J. G. (2019). MultiFC: A real-world multi-domain dataset for evidence-based fact checking of claims. In *Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing* (pp. 4685-4697).
+<a id="ref20"></a>[20] Augenstein, I., Lioma, C., Wang, D., Lima, L. C., Hansen, C., Hansen, C., & Simonsen, J. G. (2019). MultiFC: A real-world multi-domain dataset for evidence-based fact checking of claims. In *Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing* (pp. 4685-4697).
 
-[21] Brown, T. B., Mann, B., Ryder, N., Subbiah, M., Kaplan, J., Dhariwal, P., ... & Amodei, D. (2020). Language models are few-shot learners. *arXiv preprint arXiv:2005.14165*.
+<a id="ref21"></a>[21] Brown, T. B., Mann, B., Ryder, N., Subbiah, M., Kaplan, J., Dhariwal, P., ... & Amodei, D. (2020). Language models are few-shot learners. *arXiv preprint arXiv:2005.14165*.
 
-[22] Wei, J., Wang, X., Schuurmans, D., Bosma, M., Chi, E., Le, Q., & Zhou, D. (2022). Chain of thought prompting elicits reasoning in large language models. *arXiv preprint arXiv:2201.11903*.
+<a id="ref22"></a>[22] Wei, J., Wang, X., Schuurmans, D., Bosma, M., Chi, E., Le, Q., & Zhou, D. (2022). Chain of thought prompting elicits reasoning in large language models. *arXiv preprint arXiv:2201.11903*.
 
-[23] Yao, S., Yu, D., Zhao, J., Shafran, I., Griffiths, T. L., Cao, Y., & Narasimhan, K. (2023). Tree of thoughts: Deliberate problem solving with large language models. *arXiv preprint arXiv:2305.10601*.
+<a id="ref23"></a>[23] Yao, S., Yu, D., Zhao, J., Shafran, I., Griffiths, T. L., Cao, Y., & Narasimhan, K. (2023). Tree of thoughts: Deliberate problem solving with large language models. *arXiv preprint arXiv:2305.10601*.
 
-[24] Zhang, Y., Li, Y., Cui, L., Cai, D., Liu, L., Fu, T., ... & Shi, S. (2023). Siren's song in the AI ocean: A survey on hallucination in large language models. *arXiv preprint arXiv:2309.01219*.
+<a id="ref24"></a>[24] Zhang, Y., Li, Y., Cui, L., Cai, D., Liu, L., Fu, T., ... & Shi, S. (2023). Siren's song in the AI ocean: A survey on hallucination in large language models. *arXiv preprint arXiv:2309.01219*.
