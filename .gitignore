@@ -6,3 +6,5 @@
 *.gz
 *.syntex
 *.syntex(busy)
+*.fdb_latexmk
+*.fls
