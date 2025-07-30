@@ -1,0 +1,35 @@
+\begin{thebibliography}{5}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Boström(2017)]{Boström2017}
+Nick Boström.
+\newblock \emph{Superintelligence: Paths, Dangers, Strategies}.
+\newblock Oxford University Press, 2017.
+
+\bibitem[Indyk and Motwani(1998)]{Indyk1998LSH}
+Piotr Indyk and Rajeev Motwani.
+\newblock Approximate nearest neighbors: Towards removing the curse of dimensionality.
+\newblock In \emph{Proceedings of the 30th Annual ACM Symposium on Theory of Computing}, pages 604--613, 1998.
+\newblock \doi{10.1145/276698.276876}.
+
+\bibitem[Kuhn(1962)]{Kuhn1962}
+Thomas~S. Kuhn.
+\newblock \emph{The Structure of Scientific Revolutions}.
+\newblock University of Chicago Press, 1962.
+
+\bibitem[Lippi and Torroni(2016)]{Lippi2016ArgMining}
+Marco Lippi and Paolo Torroni.
+\newblock Argumentation mining: State of the art and emerging trends.
+\newblock \emph{ACM Transactions on Internet Technology}, 16\penalty0 (2):\penalty0 10:1--10:25, 2016.
+\newblock \doi{10.1145/2897213}.
+
+\bibitem[Toulmin(2003)]{Toulmin2003}
+Stephen~E. Toulmin.
+\newblock \emph{The Uses of Argument}.
+\newblock Cambridge University Press, updated ed. edition, 2003.
+
+\end{thebibliography}
