@@ -399,35 +399,47 @@ OUTPUT_FORMAT: [Structured synthesis with explicit reasoning chains]
 
 **Comprehensive Multi-Level Verification Protocol**:
 
-1. **Source Credibility Assessment with Authority Networks**:
-   $$\text{SourceScore}(e) = \alpha \cdot \text{AuthorityScore}(e) + \beta \cdot \text{PublicationScore}(e) + \gamma \cdot \text{CitationScore}(e) + \delta \cdot \text{RecencyScore}(e)$$
+1.  **Source Credibility Assessment with Authority Networks**:
+    ```math
+    \text{SourceScore}(e) = \alpha \cdot \text{AuthorityScore}(e) + \beta \cdot \text{PublicationScore}(e) + \gamma \cdot \text{CitationScore}(e) + \delta \cdot \text{RecencyScore}(e)
+    ```
 
-   Where authority scoring incorporates:
-   - Academic institutional affiliations
-   - Publication venue impact factors
-   - Author citation networks and h-index
-   - Editorial board memberships
+    Where authority scoring incorporates:
+    -   Academic institutional affiliations
+    -   Publication venue impact factors
+    -   Author citation networks and h-index
+    -   Editorial board memberships
 
-2. **Content Quality Analysis with Factual Verification**:
-   $$\text{ContentScore}(e) = f_{\text{NLI}}(\text{evidenceText}) \cdot \text{FactualityScore}(e) \cdot \text{MethodologicalRigor}(e)$$
+2.  **Content Quality Analysis with Factual Verification**:
+    ```math
+    \text{ContentScore}(e) = f_{\text{NLI}}(\text{evidenceText}) \cdot \text{FactualityScore}(e) \cdot \text{MethodologicalRigor}(e)
+    ```
 
-   Including:
-   - Natural language inference for claim support
-   - Cross-reference with fact-checking databases
-   - Methodological quality assessment for empirical claims
-   - Statistical significance and effect size evaluation
+    Including:
+    -   Natural language inference for claim support
+    -   Cross-reference with fact-checking databases
+    -   Methodological quality assessment for empirical claims
+    -   Statistical significance and effect size evaluation
 
-3. **Temporal Relevance with Context Awareness**:
-   $$\text{TemporalScore}(e) = \exp(-\lambda \cdot \text{age}(e)) \cdot \text{CurrencyBonus}(e) \cdot \text{ContextualRelevance}(e)$$
+3.  **Temporal Relevance with Context Awareness**:
+    ```math
+    \text{TemporalScore}(e) = \exp(-\lambda \cdot \text{age}(e)) \cdot \text{CurrencyBonus}(e) \cdot \text{ContextualRelevance}(e)
+    ```
 
-4. **Cross-Reference Validation with Network Analysis**:
-   $$\text{CrossRefScore}(e) = \frac{|\text{independentConfirmations}(e)|}{|\text{totalReferences}(e)|} \cdot \text{DiversityScore}(e)$$
-   
-5. **Bias and Reliability Assessment**:
-   $$\text{BiasScore}(e) = 1 - \text{DetectedBias}(e) \cdot \text{SourceReliability}(e)$$
+4.  **Cross-Reference Validation with Network Analysis**:
+    ```math
+    \text{CrossRefScore}(e) = \frac{|\text{independentConfirmations}(e)|}{|\text{totalReferences}(e)|} \cdot \text{DiversityScore}(e)
+    ```
+
+5.  **Bias and Reliability Assessment**:
+    ```math
+    \text{BiasScore}(e) = 1 - \text{DetectedBias}(e) \cdot \text{SourceReliability}(e)
+    ```
 
 Final evidence quality with uncertainty quantification:
-$$w_{\text{quality}}(e) = \text{BayesianAverage}(\text{SourceScore}, \text{ContentScore}, \text{TemporalScore}, \text{CrossRefScore}, \text{BiasScore})$$
+```math
+w_{\text{quality}}(e) = \text{BayesianAverage}(\text{SourceScore}, \text{ContentScore}, \text{TemporalScore}, \text{CrossRefScore}, \text{BiasScore})
+```
 
 ### 4.6 LLM Reliability Enhancement Strategies
 
