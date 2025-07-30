@@ -122,27 +122,45 @@ $$P(\mathcal{L}(\mathcal{S}_C) = \text{true}) \geq 1 - \epsilon$$
 
 where $\epsilon$ is bounded by the error rates of the evidence verification and logical validation components.
 
+
+
+
 ### 3.3 Enhanced Critic Pipeline Formalization
 
 The trust score emerges from an adaptive weighted combination of specialized critics with learned weighting:
 
-$$T(\mathcal{S}) = \text{softmax}(f_{\text{weight}}(\mathcal{S}; \theta_w))^T \cdot \begin{bmatrix} \text{Score}_G(\mathcal{S}) \\ \text{Score}_L(\mathcal{S}) \\ \text{Score}_N(\mathcal{S}) \\ \text{Score}_V(\mathcal{S}) \end{bmatrix}$$
+```math
+T(\mathcal{S}) = \text{softmax}(f_{\text{weight}}(\mathcal{S}; \theta_w))^T \cdot \begin{bmatrix} \text{Score}_G(\mathcal{S}) \\ \text{Score}_L(\mathcal{S}) \\ \text{Score}_N(\mathcal{S}) \\ \text{Score}_V(\mathcal{S}) \end{bmatrix}
+```
 
 where $f_{\text{weight}}$ is a learned weighting function and the component scores are:
 
-**Enhanced Grounding Critic**: 
-$$\text{Score}_G(\mathcal{S}) = \frac{1}{|V|}\sum_{v \in V} \max_{e \in \mathcal{E}} P_{\text{NLI}}(\text{entailment}|v, e) \cdot w_{\text{quality}}(e)$$
+**Enhanced Grounding Critic**:
+```math
+\text{Score}_G(\mathcal{S}) = \frac{1}{|V|}\sum_{v \in V} \max_{e \in \mathcal{E}} P_{\text{NLI}}(\text{entailment}|v, e) \cdot w_{\text{quality}}(e)
+```
 
 **Enhanced Logic Critic**:
-$$\text{Score}_L(\mathcal{S}) = f_{\text{GNN}}(G, \tau; \theta_L) \cdot \text{ConsistencyCheck}(G)$$
+```math
+\text{Score}_L(\mathcal{S}) = f_{\text{GNN}}(G, \tau; \theta_L) \cdot \text{ConsistencyCheck}(G)
+```
 
-where $f_{\text{GNN}}$ includes confidence scores $\tau$ and $\text{ConsistencyCheck}$ performs formal logical validation.
+where $f_{\text{GNN}}$ includes confidence scores $\tau$ and `ConsistencyCheck` performs formal logical validation.
 
 **Novelty-Parsimony Critic**:
-$$\text{Score}_N(\mathcal{S}) = \alpha \cdot \text{Novelty}(\mathcal{S}) - \beta \cdot \text{Complexity}(\mathcal{S}) + \gamma \cdot \text{Insight}(\mathcal{S})$$
+```math
+\text{Score}_N(\mathcal{S}) = \alpha \cdot \text{Novelty}(\mathcal{S}) - \beta \cdot \text{Complexity}(\mathcal{S}) + \gamma \cdot \text{Insight}(\mathcal{S})
+```
 
 **Evidence Verification Critic**:
-$$\text{Score}_V(\mathcal{S}) = \frac{1}{|\mathcal{E}|}\sum_{e \in \mathcal{E}} \text{VerificationScore}(e)$$
+```math
+\text{Score}_V(\mathcal{S}) = \frac{1}{|\mathcal{E}|}\sum_{e \in \mathcal{E}} \text{VerificationScore}(e)
+```
+
+
+
+
+ 
 
 ### 3.4 Complexity Analysis
 
