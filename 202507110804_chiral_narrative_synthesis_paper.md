@@ -69,8 +69,6 @@ However, LLMs face challenges with hallucination, logical inconsistency, and bia
 
 ## 3. Theoretical Framework
 
-
- 
 ### 3.1 Formal Definitions
 
 We begin by establishing formal definitions for the core components of CNS 2.0.
@@ -132,8 +130,6 @@ P(\mathcal{L}(\mathcal{S}_C) = \text{true}) \geq 1 - \epsilon
 
 where $\epsilon$ is bounded by the error rates of the evidence verification and logical validation components.
 
-
-
 ### 3.3 Enhanced Critic Pipeline Formalization
 
 The trust score emerges from an adaptive weighted combination of specialized critics with learned weighting:
@@ -165,11 +161,6 @@ where $f_{\text{GNN}}$ includes confidence scores $\tau$ and `ConsistencyCheck` 
 ```math
 \text{Score}_V(\mathcal{S}) = \frac{1}{|\mathcal{E}|}\sum_{e \in \mathcal{E}} \text{VerificationScore}(e)
 ```
-
-
-
-
- 
 
 ### 3.4 Complexity Analysis
 
@@ -813,32 +804,38 @@ Based on component-level validation, theoretical analysis, and empirical evidenc
   - *Rationale*: Higher uncertainty and incomplete evidence in operational contexts
   - *Human Expert Comparison*: Expected parity or slight improvement in consistency
   - *Baseline Comparison*: 20-30% improvement over simple aggregation methods
-
+ 
 **Statistical Power Analysis**:
-$$\text{Power} = P(\text{reject } H_0 | H_1 \text{ true}) = \Phi\left(\frac{\mu_1 - \mu_0}{\sigma/\sqrt{n}} - z_{\alpha/2}\right) = 0.85$$
+```math
+\text{Power} = P(\text{reject } H_0 | H_1 \text{ true}) = \Phi\left(\frac{\mu_1 - \mu_0}{\sigma/\sqrt{n}} - z_{\alpha/2}\right) = 0.85
+```
 
 For detecting a medium effect size (Cohen's d = 0.5) with α = 0.05, we require n = 64 per condition.
 
 **Computational Efficiency Projections**:
 
-- **Expected Scaling**: O(N log N) with optimized indexing and caching
-  - *Processing Time*: 2-6 seconds per synthesis on standard hardware (16GB RAM, 8-core CPU)
-  - *Memory Requirements*: Linear scaling with evidence set size (~50MB per 1000 SNOs)
-  - *Throughput*: 500-1500 syntheses per hour depending on complexity
+-   **Expected Scaling**: O(N log N) with optimized indexing and caching
+    -   *Processing Time*: 2-6 seconds per synthesis on standard hardware (16GB RAM, 8-core CPU)
+    -   *Memory Requirements*: Linear scaling with evidence set size (~50MB per 1000 SNOs)
+    -   *Throughput*: 500-1500 syntheses per hour depending on complexity
 
-- **Scalability Analysis**:
-  $$\text{Time}(N) = \alpha \cdot N \log N + \beta \cdot N + \gamma$$
-  where α captures indexing overhead, β represents linear processing, and γ is constant initialization cost.
+-   **Scalability Analysis**:
+    ```math
+    \text{Time}(N) = \alpha \cdot N \log N + \beta \cdot N + \gamma
+    ```
+    where α captures indexing overhead, β represents linear processing, and γ is constant initialization cost.
 
 **Interpretability Performance with Validation**:
 
-- **Expected Transparency Scores**: >92% on clarity and traceability metrics
-  - *Evidence Traceability*: 95% of synthesis claims linked to source evidence
-  - *Reasoning Chain Clarity*: 89% of logical steps explicitly documented
-  - *Decision Audit Trail*: 100% of trust score components explainable
+-   **Expected Transparency Scores**: >92% on clarity and traceability metrics
+    -   *Evidence Traceability*: 95% of synthesis claims linked to source evidence
+    -   *Reasoning Chain Clarity*: 89% of logical steps explicitly documented
+    -   *Decision Audit Trail*: 100% of trust score components explainable
 
-- **Trust Calibration Performance**:
-  $$\text{Calibration Error} = \sum_{i=1}^{M} \frac{|B_i|}{N} |\text{Accuracy}(B_i) - \text{Confidence}(B_i)| < 0.08$$
+-   **Trust Calibration Performance**:
+    ```math
+    \text{Calibration Error} = \sum_{i=1}^{M} \frac{|B_i|}{N} |\text{Accuracy}(B_i) - \text{Confidence}(B_i)| < 0.08
+    ```
 
 ### 6.2 Comprehensive Sensitivity Analysis and Robustness Assessment
 
@@ -998,10 +995,12 @@ Expected performance degradation under systematically introduced challenges:
    ```
 
 ### 6.4 Comparative Analysis with Detailed Performance Modeling
-
+ 
 **Quantitative Comparison Framework**:
 
-$$\text{Performance Ratio} = \frac{\text{CNS}_{\text{accuracy}} \times \text{CNS}_{\text{interpretability}}}{\text{Baseline}_{\text{accuracy}} \times \text{Baseline}_{\text{interpretability}}}$$
+```math
+\text{Performance Ratio} = \frac{\text{CNS}_{\text{accuracy}} \times \text{CNS}_{\text{interpretability}}}{\text{Baseline}_{\text{accuracy}} \times \text{Baseline}_{\text{interpretability}}}
+```
 
 **Expected Performance vs. Primary Baselines**:
 
@@ -1029,20 +1028,24 @@ $$\text{Performance Ratio} = \frac{\text{CNS}_{\text{accuracy}} \times \text{CNS
    - **Speed Advantage**: 10-20x faster processing time
    - **Bias Reduction**: 30% reduction in systematic biases
    - **Limitations**: Lower performance on novel domains and creative insight
-
+ 
 **Cost-Benefit Analysis**:
 
-$$\text{Cost-Effectiveness} = \frac{\text{Quality}_{\text{improvement}} \times \text{Speed}_{\text{improvement}}}{\text{Development}_{\text{cost}} + \text{Operational}_{\text{cost}}}$$
+```math
+\text{Cost-Effectiveness} = \frac{\text{Quality}_{\text{improvement}} \times \text{Speed}_{\text{improvement}}}{\text{Development}_{\text{cost}} + \text{Operational}_{\text{cost}}}
+```
 
 **Expected Economic Impact**:
 - **Development Cost**: $2-3M for initial implementation and validation
 - **Operational Cost**: $0.10-0.50 per synthesis (including compute and verification)
 - **Value Generation**: 25-40% improvement in decision quality for supported domains
 - **ROI Timeline**: 12-18 months for high-volume applications
-
+ 
 **Scalability Performance Modeling**:
 
-$$\text{Throughput}(N) = \frac{\alpha \cdot \text{Parallel}_{\text{units}}}{1 + \beta \cdot \log(N) + \gamma \cdot N^{0.5}}$$
+```math
+\text{Throughput}(N) = \frac{\alpha \cdot \text{Parallel}_{\text{units}}}{1 + \beta \cdot \log(N) + \gamma \cdot N^{0.5}}
+```
 
 Where N represents SNO population size, and the denominators capture indexing and memory overhead.
 
@@ -1320,7 +1323,9 @@ CNS 2.0's output quality is fundamentally bounded by the quality and completenes
 - **Creative Insight Limitations**: Bounded by recombination of existing information patterns
 
 *Theoretical Framework for Quality Bounds*:
-$$\text{Synthesis Quality} \leq \min(\text{Evidence Quality}, \text{Reasoning Capability}, \text{Domain Fit})$$
+```math
+\text{Synthesis Quality} \leq \min(\text{Evidence Quality}, \text{Reasoning Capability}, \text{Domain Fit})
+```
 
 **Context and Cultural Dependency**:
 
