@@ -645,29 +645,43 @@ Dataset Specifications:
 
 **Primary Quantitative Metrics with Uncertainty Quantification**:
 
-- **Synthesis Accuracy with Confidence Intervals**:
-  $$\text{Accuracy} = \frac{1}{N} \sum_{i=1}^{N} \text{Similarity}(\text{Generated}_i, \text{Gold}_i) \pm \frac{1.96\sigma}{\sqrt{N}}$$
+-   **Synthesis Accuracy with Confidence Intervals**:
+    ```math
+    \text{Accuracy} = \frac{1}{N} \sum_{i=1}^{N} \text{Similarity}(\text{Generated}_i, \text{Gold}_i) \pm \frac{1.96\sigma}{\sqrt{N}}
+    ```
 
-- **Coherence Score with Inter-Rater Reliability**:
-  $$\text{Coherence} = \frac{1}{M} \sum_{j=1}^{M} \text{LogicalConsistency}(\text{Synthesis}_j), \quad \text{IRR} = \frac{\sigma_{\text{between}}^2}{\sigma_{\text{total}}^2}$$
+-   **Coherence Score with Inter-Rater Reliability**:
+    ```math
+    \text{Coherence} = \frac{1}{M} \sum_{j=1}^{M} \text{LogicalConsistency}(\text{Synthesis}_j), \quad \text{IRR} = \frac{\sigma_{\text{between}}^2}{\sigma_{\text{total}}^2}
+    ```
 
-- **Evidence Preservation with Statistical Significance**:
-  $$\text{Preservation} = \frac{|\text{Evidence}_{\text{synthesis}} \cap \text{Evidence}_{\text{gold}}|}{|\text{Evidence}_{\text{gold}}|}, \quad p < 0.05$$
+-   **Evidence Preservation with Statistical Significance**:
+    ```math
+    \text{Preservation} = \frac{|\text{Evidence}_{\text{synthesis}} \cap \text{Evidence}_{\text{gold}}|}{|\text{Evidence}_{\text{gold}}|}, \quad p < 0.05
+    ```
 
-- **Interpretability Index with Cognitive Load Assessment**:
-  $$\text{Interpretability} = \alpha \cdot \text{Clarity} + \beta \cdot \text{Traceability} + \gamma \cdot \text{Justification}$$
+-   **Interpretability Index with Cognitive Load Assessment**:
+    ```math
+    \text{Interpretability} = \alpha \cdot \text{Clarity} + \beta \cdot \text{Traceability} + \gamma \cdot \text{Justification}
+    ```
 
 **Secondary Performance Metrics**:
 
-- **Computational Efficiency with Scalability Analysis**:
-  $$\text{Efficiency}(N) = \frac{\text{Quality}(N)}{\text{Time}(N) \cdot \text{Memory}(N)}, \quad \text{Scaling} = \frac{\log(\text{Time}(10N))}{\log(\text{Time}(N))}$$
+-   **Computational Efficiency with Scalability Analysis**:
+    ```math
+    \text{Efficiency}(N) = \frac{\text{Quality}(N)}{\text{Time}(N) \cdot \text{Memory}(N)}, \quad \text{Scaling} = \frac{\log(\text{Time}(10N))}{\log(\text{Time}(N))}
+    ```
 
-- **Robustness Score with Adversarial Testing**:
-  $$\text{Robustness} = 1 - \frac{\sum_{i=1}^{K} |\text{Performance}_{\text{clean}} - \text{Performance}_{\text{adversarial}_i}|}{K}$$
+-   **Robustness Score with Adversarial Testing**:
+    ```math
+    \text{Robustness} = 1 - \frac{\sum_{i=1}^{K} |\text{Performance}_{\text{clean}} - \text{Performance}_{\text{adversarial}_i}|}{K}
+    ```
 
-- **Trust Calibration with Reliability Analysis**:
-  $$\text{Calibration} = 1 - \text{ECE}, \quad \text{ECE} = \sum_{m=1}^{M} \frac{|B_m|}{N} |\text{acc}(B_m) - \text{conf}(B_m)|$$
-
+-   **Trust Calibration with Reliability Analysis**:
+    ```math
+    \text{Calibration} = 1 - \text{ECE}, \quad \text{ECE} = \sum_{m=1}^{M} \frac{|B_m|}{N} |\text{acc}(B_m) - \text{conf}(B_m)|
+    ```
+    
 **Statistical Testing Protocols**:
 
 1. **Power Analysis and Sample Size Determination**:
