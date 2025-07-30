@@ -69,29 +69,37 @@ However, LLMs face challenges with hallucination, logical inconsistency, and bia
 
 ## 3. Theoretical Framework
 
+
+ 
 ### 3.1 Formal Definitions
 
 We begin by establishing formal definitions for the core components of CNS 2.0.
 
 **Definition 3.1 (Structured Narrative Object)**: A Structured Narrative Object (SNO) is a 5-tuple $\mathcal{S} = (H, G, \mathcal{E}, T, \mathcal{M})$ where:
 
-- **Hypothesis Embedding** $H \in \mathbb{R}^d$: A $d$-dimensional dense vector encoding the narrative's central claim
-- **Reasoning Graph** $G = (V, E_G, \tau)$: A directed acyclic graph with vertices $V$ representing sub-claims, edges $E_G \subseteq V \times V \times \mathcal{R}$ encoding typed logical relationships from relation set $\mathcal{R} = \{\text{supports}, \text{contradicts}, \text{implies}, \text{equivalent}, \text{refines}\}$, and confidence scores $\tau: E_G \rightarrow [0,1]$
-- **Evidence Set** $\mathcal{E} = \{e_1, e_2, \ldots, e_n\}$: Persistent identifiers linking to verifiable data sources with provenance tracking
-- **Trust Score** $T \in [0, 1]$: A derived confidence measure computed by the critic pipeline
-- **Metadata** $\mathcal{M}$: Source attribution, temporal information, and verification status
+-   **Hypothesis Embedding** $H \in \mathbb{R}^d$: A $d$-dimensional dense vector encoding the narrative's central claim
+-   **Reasoning Graph** $G = (V, E_G, \tau)$: A directed acyclic graph with vertices $V$ representing sub-claims, edges $E_G \subseteq V \times V \times \mathcal{R}$ encoding typed logical relationships from relation set $\mathcal{R} = \{\text{supports}, \text{contradicts}, \text{implies}, \text{equivalent}, \text{refines}\}$, and confidence scores $\tau: E_G \rightarrow [0,1]$
+-   **Evidence Set** $\mathcal{E} = \{e_1, e_2, \ldots, e_n\}$: Persistent identifiers linking to verifiable data sources with provenance tracking
+-   **Trust Score** $T \in [0, 1]$: A derived confidence measure computed by the critic pipeline
+-   **Metadata** $\mathcal{M}$: Source attribution, temporal information, and verification status
 
 **Definition 3.2 (Enhanced Chirality Score)**: For two SNOs $\mathcal{S}_i$ and $\mathcal{S}_j$, the Enhanced Chirality Score incorporates both semantic opposition and structural conflict:
 
-$$\text{CScore}(\mathcal{S}_i, \mathcal{S}_j) = \alpha \cdot (1 - \cos(H_i, H_j)) \cdot (T_i \cdot T_j) + \beta \cdot \text{GraphConflict}(G_i, G_j)$$
+```math
+\text{CScore}(\mathcal{S}_i, \mathcal{S}_j) = \alpha \cdot (1 - \cos(H_i, H_j)) \cdot (T_i \cdot T_j) + \beta \cdot \text{GraphConflict}(G_i, G_j)
+```
 
 where $\cos(H_i, H_j) = \frac{H_i \cdot H_j}{\|H_i\| \|H_j\|}$ is the cosine similarity between hypothesis embeddings, and:
 
-$$\text{GraphConflict}(G_i, G_j) = \frac{1}{|V_i| \cdot |V_j|} \sum_{v_i \in V_i, v_j \in V_j} \mathbb{I}[\text{contradicts}(v_i, v_j)]$$
+```math
+\text{GraphConflict}(G_i, G_j) = \frac{1}{|V_i| \cdot |V_j|} \sum_{v_i \in V_i, v_j \in V_j} \mathbb{I}[\text{contradicts}(v_i, v_j)]
+```
 
 **Definition 3.3 (Evidential Entanglement with Quality Weighting)**: The Enhanced Evidential Entanglement Score incorporates evidence quality and verification status:
 
-$$\text{EScore}(\mathcal{S}_i, \mathcal{S}_j) = \frac{\sum_{e \in \mathcal{E}_i \cap \mathcal{E}_j} w_{\text{quality}}(e)}{\sum_{e \in \mathcal{E}_i \cup \mathcal{E}_j} w_{\text{quality}}(e)}$$
+```math
+\text{EScore}(\mathcal{S}_i, \mathcal{S}_j) = \frac{\sum_{e \in \mathcal{E}_i \cap \mathcal{E}_j} w_{\text{quality}}(e)}{\sum_{e \in \mathcal{E}_i \cup \mathcal{E}_j} w_{\text{quality}}(e)}
+```
 
 where $w_{\text{quality}}(e)$ represents the verified quality score of evidence $e$.
 
@@ -101,27 +109,28 @@ The synthesis process operates through a structured dialectical framework that f
 
 **Definition 3.4 (Dialectical Synthesis Protocol)**: Given two SNOs $\mathcal{S}_A$ and $\mathcal{S}_B$ with high chirality and evidential entanglement, the dialectical synthesis follows a four-stage protocol:
 
-1. **Thesis-Antithesis Identification**: Extract core opposing claims $\theta_A$ and $\theta_B$
-2. **Evidence Reconciliation**: Identify shared evidence $\mathcal{E}_{\text{shared}} = \mathcal{E}_A \cap \mathcal{E}_B$ and conflicting interpretations
-3. **Dialectical Reasoning**: Apply structured reasoning protocol $\Pi_{\text{dialectical}}$ to generate synthesis hypothesis $\theta_C$
-4. **Validation**: Verify logical consistency and evidence support for $\theta_C$
+1.  **Thesis-Antithesis Identification**: Extract core opposing claims $\theta_A$ and $\theta_B$
+2.  **Evidence Reconciliation**: Identify shared evidence $\mathcal{E}_{\text{shared}} = \mathcal{E}_A \cap \mathcal{E}_B$ and conflicting interpretations
+3.  **Dialectical Reasoning**: Apply structured reasoning protocol $\Pi_{\text{dialectical}}$ to generate synthesis hypothesis $\theta_C$
+4.  **Validation**: Verify logical consistency and evidence support for $\theta_C$
 
 **Theorem 3.1 (Synthesis Coherence)**: For any synthesis operation $\mathcal{S}_C = \Phi(\mathcal{S}_A, \mathcal{S}_B; \Pi_{\text{dialectical}})$, if both input SNOs satisfy logical consistency constraints and share sufficient high-quality evidence ($|\mathcal{E}_{\text{shared}}| \geq k$ for threshold $k$), then the resulting synthesis maintains logical coherence with probability $\geq 1 - \epsilon$ for bounded error $\epsilon$.
 
 *Proof*: The proof follows from three key properties of the dialectical reasoning protocol:
 
-1. **Evidence Conservation**: The protocol enforces that all high-quality shared evidence $e \in \mathcal{E}_{\text{shared}}$ with $w_{\text{quality}}(e) > \tau_{\text{min}}$ must be accounted for in the synthesis.
+1.  **Evidence Conservation**: The protocol enforces that all high-quality shared evidence $e \in \mathcal{E}_{\text{shared}}$ with $w_{\text{quality}}(e) > \tau_{\text{min}}$ must be accounted for in the synthesis.
 
-2. **Logical Consistency Checking**: At each stage, the protocol applies formal logical validation using automated theorem proving to ensure no contradictions are introduced.
+2.  **Logical Consistency Checking**: At each stage, the protocol applies formal logical validation using automated theorem proving to ensure no contradictions are introduced.
 
-3. **Bounded Synthesis Space**: The synthesis space is constrained by the union of logical structures from input SNOs, preventing arbitrary generation.
+3.  **Bounded Synthesis Space**: The synthesis space is constrained by the union of logical structures from input SNOs, preventing arbitrary generation.
 
 Formally, let $\mathcal{L}(\mathcal{S})$ denote the logical consistency of SNO $\mathcal{S}$. If $\mathcal{L}(\mathcal{S}_A) = \mathcal{L}(\mathcal{S}_B) = \text{true}$ and $|\mathcal{E}_{\text{shared}}| \geq k$, then:
 
-$$P(\mathcal{L}(\mathcal{S}_C) = \text{true}) \geq 1 - \epsilon$$
+```math
+P(\mathcal{L}(\mathcal{S}_C) = \text{true}) \geq 1 - \epsilon
+```
 
 where $\epsilon$ is bounded by the error rates of the evidence verification and logical validation components.
-
 
 
 
