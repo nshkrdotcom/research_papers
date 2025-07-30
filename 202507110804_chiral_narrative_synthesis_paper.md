@@ -382,7 +382,7 @@ OUTPUT_FORMAT: [Structured synthesis with explicit reasoning chains]
    - Editorial board memberships
 
 2. **Content Quality Analysis with Factual Verification**:
-   $$\text{ContentScore}(e) = f_{\text{NLI}}(\text{evidence\_text}) \cdot \text{FactualityScore}(e) \cdot \text{MethodologicalRigor}(e)$$
+   $$\text{ContentScore}(e) = f_{\text{NLI}}(\text{evidenceText}) \cdot \text{FactualityScore}(e) \cdot \text{MethodologicalRigor}(e)$$
 
    Including:
    - Natural language inference for claim support
@@ -394,8 +394,8 @@ OUTPUT_FORMAT: [Structured synthesis with explicit reasoning chains]
    $$\text{TemporalScore}(e) = \exp(-\lambda \cdot \text{age}(e)) \cdot \text{CurrencyBonus}(e) \cdot \text{ContextualRelevance}(e)$$
 
 4. **Cross-Reference Validation with Network Analysis**:
-   $$\text{CrossRefScore}(e) = \frac{|\text{independent\_confirmations}(e)|}{|\text{total\_references}(e)|} \cdot \text{DiversityScore}(e)$$
-
+   $$\text{CrossRefScore}(e) = \frac{|\text{independentConfirmations}(e)|}{|\text{totalReferences}(e)|} \cdot \text{DiversityScore}(e)$$
+   
 5. **Bias and Reliability Assessment**:
    $$\text{BiasScore}(e) = 1 - \text{DetectedBias}(e) \cdot \text{SourceReliability}(e)$$
 
