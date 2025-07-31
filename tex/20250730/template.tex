@@ -1,0 +1,159 @@
+% =================================================================
+% A Generic Academic Paper Template for AI/CS Research
+% =================================================================
+% This template uses the standard 'article' class with options to
+% mimic a typical two-column conference paper format.
+
+% --- DOCUMENTCLASS ----------------------------------------------
+% When you choose a real conference (e.g., NeurIPS), you will
+% change this line to something like: \documentclass{neurips_2024}
+\documentclass[twocolumn, 10pt]{article}
+
+% --- PACKAGES ---------------------------------------------------
+% These are common packages used in academic papers.
+
+\usepackage[utf8]{inputenc} % For UTF-8 input
+\usepackage[T1]{fontenc}    % For font encoding
+\usepackage{times}          % Use Times font, common in academic papers
+\usepackage{graphicx}       % For including images
+\usepackage{amsmath}        % For advanced math environments
+\usepackage{amsfonts}       % For math fonts
+\usepackage{amssymb}        % For math symbols
+\usepackage{booktabs}       % For professional-looking tables
+\usepackage[
+    backend=bibtex,         % Use BibTeX for bibliography
+    style=numeric,          % Use numeric citation style [1]
+    sorting=none            % Do not sort citations, list in order of appearance
+]{biblatex}
+\addbibresource{references.bib} % Link to your bibliography file
+\usepackage{hyperref}       % For clickable links and references
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+    citecolor=blue,
+}
+\usepackage[margin=0.8in]{geometry} % Adjust margins to be tighter, like a conference paper
+
+% --- TITLE, AUTHOR, DATE ----------------------------------------
+\title{\textbf{Generating Novel Hypotheses through LLM-Powered Dialectical Synthesis}}
+
+\author{
+    Paul Lowndes\\
+    Conceptual AI Laboratory\\
+    \texttt{ZeroTrust@NSHkr.com}
+    % For multiple authors:
+    % \and % use \and to separate authors
+    % Co-Author Name \\
+    % University/Affiliation \\
+    % \texttt{coauthor@email.com}
+}
+
+% Use a specific date or \today for the current date.
+% For anonymous submissions, you would comment this out.
+\date{\today}
+
+% --- DOCUMENT START ---------------------------------------------
+\begin{document}
+
+\maketitle
+
+% --- ABSTRACT ----------------------------------------------------
+\begin{abstract}
+    The reconciliation of conflicting information is a fundamental challenge in artificial intelligence. We introduce and evaluate the core component of Chiral Narrative Synthesis (CNS), a framework for automated knowledge discovery. Our Dialectical Synthesis Engine, powered by a Large Language Model (LLM), is designed to resolve contradictions between structured arguments. In a case study on the historical scientific debate between plate tectonics and geosyncline theory, we demonstrate that our system can generate a novel, coherent narrative that aligns with the modern scientific consensus. Our results validate the use of structured dialectical reasoning as a promising path toward automated hypothesis generation.
+\end{abstract}
+
+% ================================================================
+% --- SECTIONS ---------------------------------------------------
+% ================================================================
+
+\section{Introduction}
+\label{sec:intro}
+
+The exponential growth of information...
+Our primary contribution in this paper is the implementation and empirical evaluation of the CNS Dialectical Synthesis Engine. We test the hypothesis that...
+
+This paper is structured as follows: Section~\ref{sec:related} reviews prior work...
+
+\section{Related Work}
+\label{sec:related}
+
+Our work builds on several established fields within AI and NLP.
+
+\subsection{Argumentation Mining}
+Argumentation mining seeks to automatically extract structured arguments from unstructured text~\cite{lippi2016argumentation}. For example, Mochales and Moens developed foundational methods for this task~\cite{mochales2011argumentation}.
+
+\subsection{Multi-Agent Debate}
+Recently, multi-agent systems using LLMs have shown promise in improving reasoning through debate. Du et al. demonstrated...~\cite{du2023improving}.
+
+\section{Methodology}
+\label{sec:method}
+
+Our methodology consists of three main parts: the data structure for representing narratives, the engine for synthesizing them, and the protocol for evaluating the output.
+
+\subsection{Structured Narrative Objects (SNOs)}
+We represent arguments using Structured Narrative Objects (SNOs), a tuple $\mathcal{S} = (H, G, \mathcal{E}, T)$. Here, $H$ is a hypothesis embedding...
+
+\subsection{The Dialectical Synthesis Engine}
+The engine receives two "chiral" SNOs, $\mathcal{S}_A$ and $\mathcal{S}_B$, and generates a new synthesis $\mathcal{S}_C$. The core of the engine is a structured prompt provided to an LLM, based on a Hegelian dialectical template...
+
+As shown in Equation~\ref{eq:example}, we can model...
+\begin{equation}
+    E = mc^2
+    \label{eq:example}
+\end{equation}
+
+\subsection{Experimental Protocol}
+We conducted a case study using the historical debate between plate tectonics and geosyncline theory...
+
+\section{Results}
+\label{sec:results}
+
+Our experiment produced a synthesized narrative, $\mathcal{S}_{synthesis}$, from the parent SNOs $\mathcal{S}_{tectonics}$ and $\mathcal{S}_{geosyncline}$.
+
+\subsection{Quantitative Analysis}
+The synthesized SNO was evaluated by our heuristic critic pipeline. The results are shown in Table~\ref{tab:results}.
+
+\begin{table}[h]
+    \centering
+    \caption{Critic scores for the synthesized SNO.}
+    \label{tab:results}
+    \begin{tabular}{lc}
+        \toprule
+        Critic Metric & Score \\
+        \midrule
+        Grounding Score     & 0.85 \\
+        Logic Score (Heuristic) & 0.91 \\
+        Novelty Score       & 0.78 \\
+        \midrule
+        \textbf{Final Trust Score} & \textbf{0.84} \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\subsection{Qualitative Analysis}
+The central hypothesis generated for $\mathcal{S}_{synthesis}$ was: "The Earth's lithosphere is divided into rigid plates that move over the asthenosphere, with their interactions at boundaries driving geological phenomena previously attributed to vertical crustal movements." This statement successfully reconciles...
+
+Figure~\ref{fig:example} shows the simplified reasoning graph of the synthesized SNO.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\columnwidth]{figure_placeholder.png} % Replace with your image file
+    \caption{The reasoning graph of the synthesized SNO, showing the integration of claims from both parent theories.}
+    \label{fig:example}
+\end{figure}
+
+\section{Discussion}
+The results strongly support our initial hypothesis. The qualitative analysis, in particular, demonstrates that the dialectical approach is superior to simple vector averaging...
+
+A key limitation of this study is the manual creation of the initial SNOs. Future work will focus on automating this ingestion pipeline...
+
+\section{Conclusion}
+\label{sec:conclusion}
+We presented and evaluated an LLM-powered Dialectical Synthesis Engine. Our case study demonstrated its ability to generate a high-quality, scientifically accurate synthesis from conflicting historical theories. This work serves as a successful proof-of-concept for the Chiral Narrative Synthesis framework and a promising step toward robust, automated knowledge discovery.
+
+% --- BIBLIOGRAPHY -----------------------------------------------
+\printbibliography
+
+\end{document}
