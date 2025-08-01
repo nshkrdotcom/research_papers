@@ -25,7 +25,7 @@ The Prometheus architecture is built on a foundation of principles designed to f
 
 Prometheus operates as a continuous, looping process that integrates with the natural flow of development.
 
-```
+```mermaid
 graph TD
     %% ---- Main Node for the Central Human Agent ----
     DeveloperBlock["Human Developer"]
