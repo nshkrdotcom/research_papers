@@ -25,9 +25,60 @@ The Prometheus architecture is built on a foundation of principles designed to f
 
 Prometheus operates as a continuous, looping process that integrates with the natural flow of development.
 
-<p align="center">
-  <img src="httpsa://storage.googleapis.com/bigscreenshots/project-prometheus-flow-v2.png" alt="A diagram of the Prometheus Symbiotic Loop showing the flow from Sense to Model, Anticipate, Simulate, Propose/Act, and Learn, with a central developer interacting."/>
-</p>
+```
+graph TD
+    %% ---- Main Node for the Central Human Agent ----
+    DeveloperBlock["Human Developer"]
+
+    %% ---- Subgraphs for Each Phase of the Symbiotic Loop ----
+    subgraph SenseBlock["1. Sense"]
+        SenseNode["Ingest Multi-Modal Data<br/>(Codebase, IDE Activity, Jira, Slack)"]
+    end
+
+    subgraph ModelBlock["2. Model"]
+        ModelNode["Create Dynamic World Model (DWM)<br/>(Code Graph, History, Intent)"]
+    end
+
+    subgraph AnticipateBlock["3. Anticipate"]
+        AnticipateNode["Predictive Goal Decomposer (PGD)<br/>Forecasts Intent & Generates Action Graphs"]
+    end
+
+    subgraph SimulateBlock["4. Simulate"]
+        SimulateNode["Generative Simulation Environment (GSE)<br/>Tests & Verifies Action Graphs"]
+    end
+
+    subgraph ProposeActBlock["5. Propose & Act"]
+        ProposeActNode["Present Verified Future State<br/>Execute upon User Approval"]
+    end
+
+    subgraph LearnBlock["6. Learn"]
+        LearnNode["Metabolic Feedback Loop<br/>Processes 'Cache Misses' to Improve Model"]
+    end
+
+
+    %% ---- Define the Primary Process Flow ----
+    SenseBlock --> ModelBlock
+    ModelBlock --> AnticipateBlock
+    AnticipateBlock --> SimulateBlock
+    SimulateBlock --> ProposeActBlock
+
+
+    %% ---- Define the Interaction and Learning Feedback Loops ----
+    ProposeActBlock <--"Proposes Solution & Awaits Input"--> DeveloperBlock
+    DeveloperBlock --"Submits Novel Goal<br/>(Cache Miss)"--> LearnBlock
+    LearnBlock --"Updates & Refines"--> ModelBlock
+
+
+    %% ---- Styling Section for all Nodes and Subgraphs ----
+    style DeveloperBlock fill:#CFD8DC,stroke:#455A64,stroke-width:4px,color:#000
+    style SenseNode fill:#E1F5FE,stroke:#0277BD,stroke-width:2px,color:#000
+    style ModelNode fill:#D1C4E9,stroke:#4527A0,stroke-width:2px,color:#000
+    style AnticipateNode fill:#C8E6C9,stroke:#2E7D32,stroke-width:2px,color:#000
+    style SimulateNode fill:#FFF9C4,stroke:#F9A825,stroke-width:2px,color:#000
+    style ProposeActNode fill:#FFCCBC,stroke:#D84315,stroke-width:2px,color:#000
+    style LearnNode fill:#F8BBD0,stroke:#AD1457,stroke-width:2px,color:#000
+```
+
 
 1.  **Sense**: The system continuously ingests multi-modal data far beyond the codebase. This includes IDE activity, terminal usage, issue trackers (Jira), communication platforms (Slack), and even design specifications (Figma) to build a holistic understanding of the project's state and the developer's focus.
 2.  **Model**: The ingested data feeds into a **Dynamic World Model (DWM)**. This is a living, multi-dimensional representation of the project, encompassing the codebase's Abstract Syntax Tree (AST), dependency graphs, version history, architectural patterns, and real-time developer activity.
