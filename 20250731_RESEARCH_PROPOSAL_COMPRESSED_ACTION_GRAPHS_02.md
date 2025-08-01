@@ -31,27 +31,27 @@ graph TD
     DeveloperBlock["Human Developer"]
 
     %% ---- Subgraphs for Each Phase of the Symbiotic Loop ----
-    subgraph SenseBlock["1. Sense"]
+    subgraph SenseBlock["1\. Sense"]
         SenseNode["Ingest Multi-Modal Data<br/>(Codebase, IDE Activity, Jira, Slack)"]
     end
 
-    subgraph ModelBlock["2. Model"]
+    subgraph ModelBlock["2\. Model"]
         ModelNode["Create Dynamic World Model (DWM)<br/>(Code Graph, History, Intent)"]
     end
 
-    subgraph AnticipateBlock["3. Anticipate"]
+    subgraph AnticipateBlock["3\. Anticipate"]
         AnticipateNode["Predictive Goal Decomposer (PGD)<br/>Forecasts Intent & Generates Action Graphs"]
     end
 
-    subgraph SimulateBlock["4. Simulate"]
+    subgraph SimulateBlock["4\. Simulate"]
         SimulateNode["Generative Simulation Environment (GSE)<br/>Tests & Verifies Action Graphs"]
     end
 
-    subgraph ProposeActBlock["5. Propose & Act"]
+    subgraph ProposeActBlock["5\. Propose & Act"]
         ProposeActNode["Present Verified Future State<br/>Execute upon User Approval"]
     end
 
-    subgraph LearnBlock["6. Learn"]
+    subgraph LearnBlock["6\. Learn"]
         LearnNode["Metabolic Feedback Loop<br/>Processes 'Cache Misses' to Improve Model"]
     end
 
