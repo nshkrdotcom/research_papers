@@ -8,3 +8,4 @@
 *.syntex(busy)
 *.fdb_latexmk
 *.fls
+/l/
